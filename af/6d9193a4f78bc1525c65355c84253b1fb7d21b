@@ -1,0 +1,23 @@
+dist/styles.css
+  s_eca4bc1dc8f1fb::t_8a8e6da1b43163 6
+  s_eca4bc1dc8f1fb::t_c7b806720e6a7c 7
+  s_eca4bc1dc8f1fb::t_2236b0a6c9c7af 1-5,8-11
+.openai/hosting.json
+  s_eca4bc1dc8f1fb::t_7d6f12c3c584b2 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "af6d9193a4f78bc1525c65355c84253b1fb7d21b",
+  "prompts": {},
+  "sessions": {
+    "s_eca4bc1dc8f1fb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1646e-dd61-7571-acba-b7e9e10e3ee6",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
