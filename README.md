@@ -1,26 +1,48 @@
-# UltiCode institutional website
+# UltiCode project website
 
-A buildless English marketing website for the open-source [UltiCode project](https://github.com/DavidHLP/UltiCode). Published with Sites. The hosting identity is retained in `.openai/hosting.json`; static source lives in `dist/`.
+An institution-first project website for [UltiCode](https://github.com/DavidHLP/UltiCode), published with Sites. It retains the navy, ivory and oxblood design, product illustration, keyboard access and light/dark themes while adding documentation, getting started, project participation and operational information.
 
-## Preview
+The server uses the supported Sites Vinext starter. Content is generated into a route map and served as HTML; the browser does not need a React application to navigate it. The hosting identity remains in `.openai/hosting.json`. `dist/` is now generated deployment output; authored styles, scripts and images live in `public/`.
 
-Serve `dist/` with a static HTTP server. No dependency installation or build is needed.
+## Content and provenance
+
+- `content/guides.mjs`: English getting started, first submission, troubleshooting and documentation paths.
+- `content/project.mjs`: product, institutions, deployment, security, contribution, licensing, costs and contact.
+- `content/home.html`: retained homepage source. The content builder supplies the current navigation, resource download and calls to action.
+- `content/upstream/` and `content/upstream.json`: public documentation, release status and provenance pinned at `638483a96a0b1dbc102aba14065d98bcea76b2cd`.
+- `scripts/build-content.mjs`: readable source documents, section search, metadata, sitemap, robots, `llms.txt`, update information and the downloadable institutional review worksheet.
+- `scripts/sync-source.mjs`: bounded, public-only snapshot import. It preserves the previous snapshot if fetching or validation fails. Update its pinned revision deliberately and review source changes before refreshing the website.
+
+The original Chinese source guides remain available alongside English orientation pages. Source links use the pinned public revision. A later product checkout can differ; its code, configuration and executable runbooks determine behavior.
+
+## Local development
+
+Use Node.js >=22.13.0 as required by the Sites starter. Install through the Sites `install-dependencies.mjs` helper or `npm run install:ci` after the lockfile is in place. Then build once to prepare the local D1 configuration:
 
 ```sh
-python3 -m http.server 4173 --directory dist --bind 127.0.0.1
+npm run build
+node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0000_keen_mother_askani.sql
+npm run dev -- --hostname 127.0.0.1 --port 4173
 ```
 
-## Content boundaries
+Apply an existing migration only to a database where it is pending. Local previews use a separate local database. The portable starter provides mock sign-in at `/signin-with-chatgpt?return_to=%2Fcontact%2F`; this mock is excluded from production. Hosted sign-in is owned by Sites.
 
-The product illustration does not execute code. Its input, solution and verdict are samples. Pilot availability and terms, the review-pack download, institutional references, partner logos and the pilot case study are explicitly marked as placeholders. HTML comments identify replacement locations. No certification, uptime, support-response or identity-provider compatibility is claimed.
+Run `npm test` for the focused Markdown and API security/failure tests and `npx tsc --noEmit` for types. Sites publication uses the plugin’s supported build, source, packaging and deployment helpers. Preserve its integration and the project ID. The owner has requested public, anonymous access to the website; changes to content never grant access to an institution’s product deployment.
 
-Public product descriptions and MIT license information were checked against the local UltiCode README. Technical documentation links point to its public repository; detailed product capabilities require separate deployment-specific review.
+## Contact and analytics
 
-## Next iteration
+The D1 binding is `DB`. Schema and generated migrations are in `db/schema.ts` and `drizzle/`.
 
-- Dedicated security, pricing and documentation pages backed by confirmed information.
-- A real contact form with a backend, agreed routing and a privacy notice.
-- Analytics on promotional calls to action, with the appropriate consent and data policy.
-- Approved evidence and final offer terms replacing the marked placeholders.
+- Contact requires a trusted Sites sign-in. Users can save, list and delete only their own enquiries. The site owner can review them through authorized Sites database tools. There is no automatic email forwarding or response-time promise.
+- Requests have actual UTF-8 byte limits, schema validation, same-origin checks and independent atomic per-user hourly limits. Deleting an enquiry does not reset the rate limit.
+- Enquiries remain until the user or owner deletes them. The separate rate counter also retains a site-specific user ID and hourly window; no timed retention job is configured. The website privacy page explains both.
+- Analytics are off by default. Explicit consent allows only daily aggregate counters for six named promotional events. The counter table stores no user identity, IP, referrer, query or enquiry data. These are approximate click totals, not unique visitors or adoption statistics.
+- For owner review, use the Sites database overview and table tools for this project. `enquiries` contains personal messages and must remain restricted; `cta_daily` contains aggregate counts; `contact_rate` contains anti-abuse state. Never expose these tables through a public listing endpoint.
 
-No visitor information is collected or sent by this version. The pilot checklist copies locally when browser permissions allow.
+## Evidence boundaries
+
+The homepage code walkthrough is illustrative and executes no code. Repository images are design/regression references with sample accounts and numbers, not production/customer evidence. No published GitHub Releases were returned at the dated snapshot check; no stable version, SLA, certification, institutional SSO compatibility or paid service is invented.
+
+The review worksheet is a real downloadable planning aid. Pilot commercial terms, testimonials, partner logos and case-study outcomes still require approved material; their dashed placeholders and replacement comments remain. No production judging environment is hosted by this marketing website.
+
+GitHub private vulnerability reporting was enabled for the public source repository and verified on 22 October 2026. The security page links to GitHub’s confidential reporting route and keeps vulnerabilities out of public Issues and ordinary enquiries. No security-response deadline or separate reporting email is promised. An operational support agreement, approved references, a custom domain, automatic email delivery and a live isolated product demo still require actual operator decisions and resources.

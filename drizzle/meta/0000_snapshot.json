@@ -1,0 +1,207 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "5a4a4f2d-a364-42d5-9955-18b35f165bd0",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "contact_rate": {
+      "name": "contact_rate",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "window_start": {
+          "name": "window_start",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "count": {
+          "name": "count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "contact_rate_count_check": {
+          "name": "contact_rate_count_check",
+          "value": "\"contact_rate\".\"count\" BETWEEN 1 AND 3"
+        }
+      }
+    },
+    "cta_daily": {
+      "name": "cta_daily",
+      "columns": {
+        "day": {
+          "name": "day",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "event": {
+          "name": "event",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "count": {
+          "name": "count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "cta_daily_day_event_pk": {
+          "columns": [
+            "day",
+            "event"
+          ],
+          "name": "cta_daily_day_event_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "cta_daily_event_check": {
+          "name": "cta_daily_event_check",
+          "value": "\"cta_daily\".\"event\" IN ('hero_get_started', 'hero_showcase', 'pilot_open', 'review_download', 'github', 'contact_saved')"
+        },
+        "cta_daily_count_check": {
+          "name": "cta_daily_count_check",
+          "value": "\"cta_daily\".\"count\" > 0"
+        }
+      }
+    },
+    "enquiries": {
+      "name": "enquiries",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "topic": {
+          "name": "topic",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "organization": {
+          "name": "organization",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
+        "message": {
+          "name": "message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "consent_at": {
+          "name": "consent_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "enquiries_user_created_idx": {
+          "name": "enquiries_user_created_idx",
+          "columns": [
+            "user_id",
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "enquiries_topic_check": {
+          "name": "enquiries_topic_check",
+          "value": "\"enquiries\".\"topic\" IN ('pilot', 'deployment', 'support', 'contribution')"
+        },
+        "enquiries_name_length": {
+          "name": "enquiries_name_length",
+          "value": "length(\"enquiries\".\"name\") BETWEEN 1 AND 100"
+        },
+        "enquiries_email_length": {
+          "name": "enquiries_email_length",
+          "value": "length(\"enquiries\".\"email\") BETWEEN 3 AND 254"
+        },
+        "enquiries_organization_length": {
+          "name": "enquiries_organization_length",
+          "value": "length(\"enquiries\".\"organization\") <= 160"
+        },
+        "enquiries_message_length": {
+          "name": "enquiries_message_length",
+          "value": "length(\"enquiries\".\"message\") BETWEEN 20 AND 4000"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}
