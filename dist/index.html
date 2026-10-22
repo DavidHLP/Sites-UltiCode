@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f5f3ec">
+  <meta name="description" content="Meet UltiCode, an open-source online judge for programming practice and contests. Explore the product and plan a considered institutional pilot.">
+  <meta property="og:title" content="UltiCode — Programming education. In your hands.">
+  <meta property="og:description" content="An open-source online judge. A thoughtful starting point for your institution.">
+  <meta property="og:type" content="website">
+  <title>UltiCode — Programming education. In your hands.</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="brand" href="#" aria-label="UltiCode home"><span class="brand-mark" aria-hidden="true">u<span>c</span></span>UltiCode<span class="brand-period">.</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#platform">The platform</a>
+      <a href="#institutions">For institutions</a>
+      <a href="#opportunities">Opportunities</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch color theme" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.8 8.8 0 0 1 9.5 3.5 9 9 0 1 0 20.5 14.5Z"/></svg><span id="theme-label">Dark mode</span></button>
+      <a class="github-link" href="https://github.com/DavidHLP/UltiCode">View GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="platform" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="intro-label"><span class="small-dot" aria-hidden="true"></span> An open-source online judge</p>
+        <h1 id="hero-title">Programming<br>education.<br><em>In your hands.</em></h1>
+        <p class="hero-description">Give programming practice a place at your institution. Bring problems, contests and code judging together, with the freedom of open source.</p>
+        <div class="hero-actions"><a class="button primary" href="#rollout">Plan your pilot <span aria-hidden="true">↗</span></a><a class="text-link" href="#institutions">Start with the right questions <span aria-hidden="true">↓</span></a></div>
+        <p class="hero-note">Built in the open. Released under the MIT license.</p>
+      </div>
+
+      <figure class="product-figure">
+        <div class="demo-caption"><span class="caption-rule" aria-hidden="true"></span> From a first attempt to a clear result</div>
+        <div class="product-demo" aria-label="Illustrative UltiCode problem and code judging walkthrough">
+          <div class="demo-toolbar"><span class="demo-brand"><span aria-hidden="true">{ }</span> UltiCode</span><span class="demo-breadcrumb">Workspace <span aria-hidden="true">/</span> Practice</span><span class="demo-avatar" aria-label="Sample student">S</span></div>
+          <div class="demo-columns">
+            <section class="problem-panel" aria-labelledby="problem-title">
+              <span class="demo-label">Problem</span><h2 id="problem-title">A small sum.<br>A good start.</h2>
+              <p>Read two integers and print their sum.</p>
+              <dl class="sample-data"><div><dt>Sample input</dt><dd><code>2 3</code></dd></div><div><dt>Expected output</dt><dd><code>5</code></dd></div></dl>
+              <div class="problem-foot"><span aria-hidden="true">◇</span> Every solution starts somewhere.</div>
+            </section>
+            <section class="editor-panel" aria-labelledby="editor-title">
+              <div class="editor-toolbar"><span id="editor-title">solution.py</span><span>Python 3</span></div>
+              <pre aria-label="Sample Python solution"><code><span class="code-comment"># A little practice,</span>
+<span class="code-comment"># a little progress.</span>
+
+a, b = <span class="code-function">map</span>(<span class="code-function">int</span>, <span class="code-function">input</span>().<span class="code-function">split</span>())
+
+<span class="code-function">print</span>(a + b)</code></pre>
+              <div class="editor-footer"><span>Sample code · read only</span><button id="run-sample" type="button" hidden><span aria-hidden="true">▷</span> Run sample</button></div>
+            </section>
+          </div>
+          <div class="verdict" id="sample-verdict" role="status" aria-live="polite"><span class="verdict-icon" id="verdict-icon" aria-hidden="true">○</span><div><strong id="verdict-title">A result you can learn from.</strong><span id="verdict-detail">Run the sample to see an illustrative verdict.</span></div><span class="verdict-tag">Sample</span></div>
+          <noscript><p class="no-script-note">Sample result: Accepted. The example prints 5 for the input 2 3.</p></noscript>
+        </div>
+        <figcaption>Interactive illustration, not a live product session. No code is executed.</figcaption>
+      </figure>
+    </section>
+
+    <div class="foundation wrap"><p>A common foundation.<br><strong>Room for your own approach.</strong></p><ul aria-label="Platform capabilities"><li>Problem practice</li><li>Contests</li><li>Online judging</li><li>Admin console</li></ul></div>
+
+    <section class="institution-section wrap section-space" id="institutions" aria-labelledby="institution-title">
+      <div class="section-heading"><p class="section-label">For the people making the decision</p><h2 id="institution-title">Good questions.<br><em>Before big commitments.</em></h2><p>A useful platform is only part of the decision. Start with the requirements your IT, procurement and academic teams need to agree on.</p></div>
+      <div class="review-list">
+        <details open><summary><span>Identity and access</span><span class="detail-mark" aria-hidden="true"></span></summary><div class="detail-content"><p>Map who needs access, who manages it, and which institutional sign-in requirements apply. Review the project’s authentication reference before choosing a pilot.</p><p class="review-note">To confirm: identity provider fit, roles and account lifecycle.</p><a href="https://github.com/DavidHLP/UltiCode/blob/main/docs/REFERENCE.md">Read the authentication reference <span aria-hidden="true">↗</span></a></div></details>
+        <details><summary><span>Data and institutional policies</span><span class="detail-mark" aria-hidden="true"></span></summary><div class="detail-content"><p>Agree where learner and submission data will live, who can access it, and when it should be retained or deleted. Evaluate your chosen deployment against your institution’s policies.</p><p class="review-note">To confirm: hosting location, retention, export and deletion procedures.</p></div></details>
+        <details><summary><span>Deployment and ownership</span><span class="detail-mark" aria-hidden="true"></span></summary><div class="detail-content"><p>Review the open-source project and its deployment guidance with the team that will run it. Production infrastructure, configuration and operational ownership belong in that plan.</p><p class="review-note">To confirm: environment fit, operating team and upgrade process.</p><a href="https://github.com/DavidHLP/UltiCode/blob/main/docs/OPERATIONS.md">Read the operations guide <span aria-hidden="true">↗</span></a></div></details>
+        <details><summary><span>Uptime and continuity</span><span class="detail-mark" aria-hidden="true"></span></summary><div class="detail-content"><p>Set service targets for teaching and assessment periods. Review monitoring, backups and recovery with your operating team before relying on a deployment.</p><p class="review-note">To confirm: availability targets, recovery procedures and incident ownership. No uptime SLA is offered on this site.</p></div></details>
+        <details><summary><span>Support and long-term fit</span><span class="detail-mark" aria-hidden="true"></span></summary><div class="detail-content"><p>Explore the documentation and public issue tracker, then decide what support your institution needs. Confirm responsibility for training, maintenance and incidents before rollout.</p><p class="review-note">To confirm: support arrangements and response expectations. No response-time commitment is offered here.</p><a href="https://github.com/DavidHLP/UltiCode/issues">Browse project issues <span aria-hidden="true">↗</span></a></div></details>
+      </div>
+      <aside class="policy-note"><span class="policy-symbol" aria-hidden="true">◇</span><p><strong>Your policies set the standard.</strong> Review access, data handling and operations for your deployment. No security or compliance certification is claimed here.</p></aside>
+    </section>
+
+    <section class="teaching-section" aria-labelledby="teaching-title"><div class="wrap teaching-layout"><div class="teaching-intro"><p class="section-label">For the people doing the work</p><h2 id="teaching-title">A place to teach.<br><em>A place to try.</em></h2><a class="text-link" href="https://github.com/DavidHLP/UltiCode#screenshots">See the product in the repository <span aria-hidden="true">↗</span></a></div><div class="teaching-stories"><article><span class="story-symbol" aria-hidden="true">{ }</span><div><h3>For instructors</h3><p>Bring problems and contests into your teaching. Use a shared place for practice, submissions and judging, then shape the learning experience around your course.</p></div></article><article><span class="story-symbol" aria-hidden="true">↳</span><div><h3>For students</h3><p>Find a problem, submit a solution and learn from the result. Keep practising, explore editorials and take part in contests.</p></div></article></div></div></section>
+
+    <section class="rollout-section wrap section-space" id="rollout" aria-labelledby="rollout-title"><div class="rollout-heading"><div><p class="section-label">A considered start</p><h2 id="rollout-title">Start small.<br><em>Decide with evidence.</em></h2></div><p>A pilot should answer your questions, with a clear owner and an agreed decision at the end. Set the pace that fits your institution.</p></div><ol class="rollout-steps"><li><span class="step-number" aria-hidden="true">01</span><h3>Define the scope</h3><p>Choose one course or cohort. Agree what you want to learn and what success would look like.</p></li><li><span class="step-number" aria-hidden="true">02</span><h3>Review the essentials</h3><p>Bring IT and academic owners together to review identity, data, hosting and support.</p></li><li><span class="step-number" aria-hidden="true">03</span><h3>Run a focused pilot</h3><p>Try a defined set of activities. Gather feedback from instructors, students and operators.</p></li><li><span class="step-number" aria-hidden="true">04</span><h3>Choose what comes next</h3><p>Review the evidence. Decide whether to expand, adjust the plan or close the pilot.</p></li></ol></section>
+
+    <section class="opportunities-section wrap section-space" id="opportunities" aria-labelledby="opportunities-title"><div class="opportunities-heading"><div><p class="section-label">Ways to take a closer look</p><h2 id="opportunities-title">An open invitation.</h2></div><p>Explore at your own pace.<br>Agree the details before you begin.</p></div><div class="offer-list"><article class="offer"><p class="offer-kind">Institutional pilot<span>Terms placeholder</span></p><div><h3>Begin with one cohort</h3><p>Use a practical checklist to frame a pilot around your institution’s needs.</p></div><button class="text-link" id="pilot-open" type="button" hidden>Plan a pilot <span aria-hidden="true">↗</span></button><noscript><a class="text-link" href="#rollout">Review pilot steps ↓</a></noscript></article><article class="offer"><p class="offer-kind">Evaluation resource<span>File placeholder</span></p><div><h3>Bring everyone into the review</h3><p>A proposed institutional review pack for IT, procurement and academic teams.</p></div><button class="text-link" id="resource-open" type="button" hidden>Preview pack contents <span aria-hidden="true">↗</span></button><noscript><span>File not yet available</span></noscript></article><article class="offer"><p class="offer-kind">Open-source project<span>MIT licensed</span></p><div><h3>Look under the hood</h3><p>Read the source, explore the documentation and join the project’s public discussions.</p></div><a class="text-link" href="https://github.com/DavidHLP/UltiCode">Explore on GitHub <span aria-hidden="true">↗</span></a></article></div><p class="terms-note">Pilot availability, scope, commercial terms and review materials are not final. No offer is reserved or application submitted through this page.</p></section>
+
+    <section class="evidence-section wrap section-space" aria-labelledby="evidence-title"><div class="evidence-heading"><p class="section-label">Evidence earns its place</p><h2 id="evidence-title">Real experience.<br><em>When it is ready to share.</em></h2><p>Institutional references will appear here once they are documented and approved for publication.</p></div><div class="evidence-layout">
+      <!-- Replace this 640 × 240 px testimonial placeholder with a real, approved quotation, name, role and institution. -->
+      <div class="placeholder testimonial-placeholder"><span class="placeholder-icon" aria-hidden="true">“</span><strong>Institutional testimonial</strong><p>640 × 240 px · Approved quote and attribution</p><span class="placeholder-status">Awaiting a real reference</span></div>
+      <!-- Replace this 480 × 240 px case-study placeholder with an approved pilot case study. Label any sample numbers as samples. -->
+      <div class="placeholder case-placeholder"><span class="placeholder-icon" aria-hidden="true">↗</span><strong>Pilot case study</strong><p>480 × 240 px · Context, method and documented outcomes</p><span class="placeholder-status">Awaiting a documented pilot</span></div>
+    </div>
+    <!-- Replace each 160 × 56 px box with an authorized partner logo and meaningful alt text. Do not add unconfirmed affiliations. -->
+    <div class="partner-placeholders"><p>Partner recognition<br><span>With permission, in time.</span></p><div class="placeholder">160 × 56 px<br><span>Approved partner logo</span></div><div class="placeholder">160 × 56 px<br><span>Approved partner logo</span></div><div class="placeholder">160 × 56 px<br><span>Approved partner logo</span></div></div></section>
+
+    <section class="closing-section"><div class="wrap closing-layout"><div><p class="section-label">A thoughtful next step</p><h2>Make it a conversation<br><em>worth having.</em></h2><p>Start with your institution’s questions.<br>Let a focused pilot help answer them.</p></div><a class="button light-button" href="#rollout">Explore the pilot process <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+
+  <footer class="site-footer wrap"><div><a class="brand" href="#"><span class="brand-mark" aria-hidden="true">u<span>c</span></span>UltiCode<span class="brand-period">.</span></a><p>Open source. Thoughtfully considered.</p></div><nav aria-label="Footer navigation"><a href="https://github.com/DavidHLP/UltiCode">Source code ↗</a><a href="https://github.com/DavidHLP/UltiCode/blob/main/docs/index.md">Project documentation ↗</a><a href="https://github.com/DavidHLP/UltiCode/issues">Project support ↗</a></nav><p class="footer-note">An introduction to the UltiCode project.<br>Project documentation is currently maintained in Chinese.</p></footer>
+
+  <dialog id="pilot-dialog" aria-labelledby="pilot-dialog-title"><div class="dialog-heading"><p class="section-label">Pilot planning preview</p><button class="dialog-close" type="button" aria-label="Close pilot planning">×</button></div><h2 id="pilot-dialog-title">Start with the<br><em>right brief.</em></h2><p>Bring these questions to your academic and IT owners before agreeing a pilot.</p><ul class="pilot-checklist"><li>Which course or cohort will take part?</li><li>What will the pilot help you decide?</li><li>Who owns identity, data and operations?</li><li>What support and review criteria are needed?</li></ul><p class="dialog-notice">Planning only. Availability and terms are placeholders. This page does not send a request or reserve a pilot.</p><button class="button primary" id="copy-pilot" type="button" hidden>Copy pilot checklist <span aria-hidden="true">↗</span></button><p class="copy-status" id="copy-status" role="status"></p></dialog>
+  <dialog id="resource-dialog" aria-labelledby="resource-dialog-title"><div class="dialog-heading"><p class="section-label">Resource preview</p><button class="dialog-close" type="button" aria-label="Close resource preview">×</button></div><h2 id="resource-dialog-title">A shared starting<br><em>point for review.</em></h2><p>The proposed pack will cover:</p><ul class="pilot-checklist"><li>Identity and access review</li><li>Data handling and retention questions</li><li>Deployment and continuity checklist</li><li>Pilot scope and decision criteria</li></ul><!-- Replace this file placeholder with the final, accessible review pack and its verified download link. --><div class="placeholder file-placeholder"><strong>Review pack · file placeholder</strong><p>Proposed PDF · final file, size and terms pending</p></div><p class="dialog-notice">No download is available yet. Use the project documentation for current technical information.</p><a class="button primary" href="https://github.com/DavidHLP/UltiCode/blob/main/docs/index.md">Read project documentation ↗</a></dialog>
+</body>
+</html>
