@@ -1,0 +1,60 @@
+tests/render-content.test.mjs
+  s_b25ac12e98c454::t_fed81acb0a9252 4,25-46
+public/site.css
+  s_b25ac12e98c454::t_50867096f76982 125
+scripts/render-content.mjs
+  s_b25ac12e98c454::t_50867096f76982 94-96
+  s_b25ac12e98c454::t_aed59dba0eb833 86-87
+content/locales/zh-ui.mjs
+  s_b25ac12e98c454::t_47f7dc9ff3868b 2
+  s_b25ac12e98c454::t_9c4a3e10f0edad 1,3-55
+scripts/i18n.mjs
+  s_b25ac12e98c454::t_9a51cc24a367d0 1,52-55,58-59,64
+  s_b25ac12e98c454::t_aed59dba0eb833 26
+  s_b25ac12e98c454::t_9c4a3e10f0edad 2-25,27-51,56,60-63,65-68
+  s_b25ac12e98c454::t_2d6d5a401c9f69 57
+content/locales/zh-extra.mjs
+  s_b25ac12e98c454::t_f35d98b523c934 1-11,13-14,28-30,32-48
+  s_b25ac12e98c454::t_2d6d5a401c9f69 12
+  s_b25ac12e98c454::t_366a4a356b8ed1 15-27,31
+app/[[...slug]]/route.ts
+  s_b25ac12e98c454::t_50867096f76982 9-12,15
+content/review-pack.zh-CN.md
+  s_b25ac12e98c454::t_717a4f5074d059 1-94
+README.md
+  s_b25ac12e98c454::t_b21717965684df 44-53
+scripts/build-content.mjs
+  s_b25ac12e98c454::t_aed59dba0eb833 31
+  s_b25ac12e98c454::t_5bbe3c9927d526 96
+  s_b25ac12e98c454::t_6038fc61f82baf 5-9,20,38,47-51,67-71,76,78-86,88-89,91-94,97
+content/locales/zh-project.mjs
+  s_b25ac12e98c454::t_805fc63f84773d 1-200,204-298,526
+  s_b25ac12e98c454::t_0834be89273cd1 201-203
+  s_b25ac12e98c454::t_b21717965684df 493
+  s_b25ac12e98c454::t_05f8befc0be840 299-492,494-525
+public/app.js
+  s_b25ac12e98c454::t_47f7dc9ff3868b 20-21,44-46,53,55,70,78-79,98,103,125,134,159,185,206,209-219,225,232,237,241,243,249,253,259-260,269,286,292,299-321
+  s_b25ac12e98c454::t_5bbe3c9927d526 16
+content/locales/zh-home-guides.mjs
+  s_b25ac12e98c454::t_a9608f655f765e 1-167,169-189,192,196-487,502
+  s_b25ac12e98c454::t_8fed23cafff018 488-501
+  s_b25ac12e98c454::t_b21717965684df 168,190-191,193-195
+.gitignore
+  s_b25ac12e98c454::t_50867096f76982 47-48,54-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3279b1ec32d98391d8ed6615e67a44ffe47ace54",
+  "prompts": {},
+  "sessions": {
+    "s_b25ac12e98c454": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1679c-4ea1-7730-bc49-21ac5212f34f",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
