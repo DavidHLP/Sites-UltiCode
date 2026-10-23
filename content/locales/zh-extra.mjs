@@ -6,6 +6,7 @@ const date = new Date(upstream.sourceDate).toLocaleDateString('zh-CN', { timeZon
 export default {
   'Language': '语言',
   'EN': 'EN',
+  'English': 'English',
   'UltiCode': 'UltiCode',
   'GitHub': 'GitHub',
   'Python 3': 'Python 3',

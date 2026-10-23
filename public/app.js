@@ -35,6 +35,17 @@ document.querySelectorAll('dialog').forEach(dialog => {
   dialog.querySelector('.dialog-close')?.addEventListener('click', () => dialog.close());
 });
 
+const languagePicker = document.querySelector('.language-switch');
+document.addEventListener('click', event => {
+  if (!languagePicker.contains(event.target)) languagePicker.open = false;
+});
+languagePicker.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && languagePicker.open) {
+    languagePicker.open = false;
+    languagePicker.querySelector('summary').focus();
+  }
+});
+
 const runButton = document.getElementById('run-sample');
 if (runButton) {
   runButton.hidden = false;
