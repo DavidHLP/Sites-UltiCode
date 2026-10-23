@@ -1,4 +1,4 @@
-import pages from '../../content/site-pages.json';
+import pages from '../../generated/site-pages.json';
 
 const renderedPages = pages as Record<string, string>;
 

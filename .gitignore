@@ -42,6 +42,8 @@ yarn-error.log*
 /work/
 
 # Deterministic content outputs, recreated before preview and build
+/generated/
+# Ignore the legacy output left in existing checkouts before the directory move.
 /content/site-pages.json
 /public/search-index.json
 /public/search-index.zh-CN.json

@@ -2,7 +2,7 @@ import { mkdir, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = fileURLToPath(new URL('../', import.meta.url));
+const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const REPOSITORY = 'DavidHLP/UltiCode';
 const SOURCE_COMMIT = 'db1c868a179c6b100df991bddec10b395a7cc7f3';
 const SOURCE_URL = `https://github.com/${REPOSITORY}`;

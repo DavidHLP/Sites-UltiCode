@@ -1,5 +1,5 @@
 import upstream from '../upstream.json' with { type: 'json' };
-import { sourceDate, sourceCommit } from '../../scripts/render-content.mjs';
+import { sourceDate, sourceCommit } from '../site-config.mjs';
 
 const date = new Date(upstream.sourceDate).toLocaleDateString('zh-CN', { timeZone:'UTC', year:'numeric', month:'long', day:'numeric' });
 

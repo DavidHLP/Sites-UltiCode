@@ -1,4 +1,4 @@
-import { repository, sourceCommit } from '../scripts/render-content.mjs';
+import { repository, sourceCommit } from './site-config.mjs';
 
 const snapshot = `${repository}/blob/${sourceCommit}`;
 const sourceNote = (files) => `<p class="source-note">Based on the public source snapshot, not a production deployment assessment. ${files.map(([name, path]) => `<a href="${snapshot}/${path}">${name}</a>`).join(' · ')}.</p>`;

@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {renderMarkdown, sourceCommit, tableOfContents} from '../scripts/render-content.mjs';
-import {localizeHtml, localizedUrl} from '../scripts/i18n.mjs';
+import {renderMarkdown, tableOfContents} from '../scripts/content/render-content.mjs';
+import {sourceCommit} from '../content/site-config.mjs';
+import {localizeHtml, localizedUrl} from '../scripts/content/i18n.mjs';
 
 test('source Markdown cannot create executable HTML or unsafe links', () => {
   const output = renderMarkdown('<script>alert(1)</script>\n\n<img src=x onerror=alert(1)>\n\n[unsafe](javascript:alert(1))\n\n![unsafe](data:image/svg+xml,test)', 'docs/PRODUCT.md');

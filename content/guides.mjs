@@ -1,4 +1,4 @@
-import { repository, sourceCommit } from '../scripts/render-content.mjs';
+import { repository, sourceCommit } from './site-config.mjs';
 
 const source = `${repository}/blob/${sourceCommit}`;
 

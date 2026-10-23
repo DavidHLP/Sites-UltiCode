@@ -1,4 +1,5 @@
-import { escapeHtml, origin } from './render-content.mjs';
+import { escapeHtml } from './render-content.mjs';
+import { origin } from '../../content/site-config.mjs';
 
 export const chinesePath = path => `/zh-CN${path}`;
 

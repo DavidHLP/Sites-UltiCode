@@ -7,14 +7,14 @@
   },
   "scripts": {
     "install:ci": "node scripts/install-ci.mjs",
-    "dev": "node scripts/build-content.mjs && node scripts/run-framework.mjs dev",
-    "build": "node scripts/build-content.mjs && node scripts/run-framework.mjs build",
+    "dev": "node scripts/content/build-content.mjs && node scripts/run-framework.mjs dev",
+    "build": "node scripts/content/build-content.mjs && node scripts/run-framework.mjs build",
     "start": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "test": "node --test tests/*.test.mjs",
-    "content:build": "node scripts/build-content.mjs",
-    "content:sync": "node scripts/sync-source.mjs"
+    "content:build": "node scripts/content/build-content.mjs",
+    "content:sync": "node scripts/content/sync-source.mjs"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",

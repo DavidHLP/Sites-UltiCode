@@ -1,16 +1,17 @@
 import {readFile, writeFile, mkdir} from 'node:fs/promises';
-import {guides} from '../content/guides.mjs';
-import {projectPages} from '../content/project.mjs';
-import {evaluationPages} from '../content/evaluation.mjs';
-import homeTranslations from '../content/locales/zh-home-guides.mjs';
-import projectTranslations from '../content/locales/zh-project.mjs';
-import uiTranslations from '../content/locales/zh-ui.mjs';
-import extraTranslations from '../content/locales/zh-extra.mjs';
+import {guides} from '../../content/guides.mjs';
+import {projectPages} from '../../content/project.mjs';
+import {evaluationPages} from '../../content/evaluation.mjs';
+import homeTranslations from '../../content/locales/zh-home-guides.mjs';
+import projectTranslations from '../../content/locales/zh-project.mjs';
+import uiTranslations from '../../content/locales/zh-ui.mjs';
+import extraTranslations from '../../content/locales/zh-extra.mjs';
+import {origin, repository, sourceCommit, sourceDate, sourceRoutes} from '../../content/site-config.mjs';
 import {chinesePath, localizeHtml} from './i18n.mjs';
-import {contentPage, escapeHtml, layout, origin, plainText, renderMarkdown, repository, sourceCommit, sourceDate, sourceRoutes} from './render-content.mjs';
+import {contentPage, escapeHtml, layout, plainText, renderMarkdown} from './render-content.mjs';
 
-const upstream = JSON.parse(await readFile(new URL('../content/upstream.json', import.meta.url), 'utf8'));
-const root = new URL('../', import.meta.url);
+const upstream = JSON.parse(await readFile(new URL('../../content/upstream.json', import.meta.url), 'utf8'));
+const root = new URL('../../', import.meta.url);
 const snapshotLink = `${repository}/tree/${sourceCommit}`;
 const sourceTitles = {'docs/index.md':'文档入口','docs/PRODUCT.md':'产品与领域','docs/ARCHITECTURE.md':'架构与系统边界','docs/DEVELOPMENT.md':'开发、测试与规则','docs/OPERATIONS.md':'运维、部署与恢复','docs/REFERENCE.md':'API、认证与内部契约','README.md':'UltiCode repository overview','README.zh-CN.md':'UltiCode 项目介绍'};
 const pages = [...guides, ...projectPages, ...evaluationPages];
@@ -87,7 +88,8 @@ for (const page of pages) {
 }
 const untranslated = [...missing].filter(text=>!/^([\da-f]{7,40}|solution\.py|[\d ×.,]+|\d{4}-\d{2}-\d{2})$/.test(text));
 if (untranslated.length) throw new Error(`Missing Chinese translations (${untranslated.length}):\n${untranslated.join('\n')}`);
-await writeFile(new URL('content/site-pages.json',root),JSON.stringify(output));
+await mkdir(new URL('generated/',root),{recursive:true});
+await writeFile(new URL('generated/site-pages.json',root),JSON.stringify(output));
 await writeFile(new URL('public/search-index.json',root),JSON.stringify(search.en));
 await writeFile(new URL('public/search-index.zh-CN.json',root),JSON.stringify(search['zh-CN']));
 await writeFile(new URL('public/i18n.js',root),`export const locale = document.documentElement.lang === 'zh-CN' ? 'zh-CN' : 'en';\nconst messages = ${JSON.stringify(uiTranslations)};\nexport function t(value, parameters = {}) { const template = locale === 'zh-CN' && Object.hasOwn(messages,value) ? messages[value] : value; return template.replace(/\\{(\\w+)\\}/g, (match,key) => Object.hasOwn(parameters,key) ? String(parameters[key]) : match); }\n`);
