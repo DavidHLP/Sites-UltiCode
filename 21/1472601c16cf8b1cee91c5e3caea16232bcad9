@@ -1,0 +1,49 @@
+docs/MAINTENANCE.md
+  s_69205ccd1411bd::t_42aa72d55773a7 1-91
+README.md
+  s_69205ccd1411bd::t_42aa72d55773a7 3,5,7,9-11,13,16,20,22,24-34,36,38
+.gitignore
+  s_69205ccd1411bd::t_4b50d7172bf304 45-46
+content/evaluation.mjs
+  s_69205ccd1411bd::t_4b50d7172bf304 1
+scripts/content/build-content.mjs
+  s_69205ccd1411bd::t_4b50d7172bf304 2-9,11,13-14,91-92
+scripts/content/sync-source.mjs
+  s_69205ccd1411bd::t_4b50d7172bf304 5
+content/guides.mjs
+  s_69205ccd1411bd::t_4b50d7172bf304 1
+content/locales/zh-extra.mjs
+  s_69205ccd1411bd::t_4b50d7172bf304 2
+scripts/content/i18n.mjs
+  s_69205ccd1411bd::t_4b50d7172bf304 1-2
+tests/render-content.test.mjs
+  s_69205ccd1411bd::t_4b50d7172bf304 3-5
+content/project.mjs
+  s_69205ccd1411bd::t_4b50d7172bf304 1
+docs/ARCHITECTURE.md
+  s_69205ccd1411bd::t_42aa72d55773a7 1-62
+content/site-config.mjs
+  s_69205ccd1411bd::t_4b50d7172bf304 1-16
+package.json
+  s_69205ccd1411bd::t_4b50d7172bf304 10-11,16-17
+app/[[...slug]]/route.ts
+  s_69205ccd1411bd::t_4b50d7172bf304 1
+scripts/content/render-content.mjs
+  s_69205ccd1411bd::t_4b50d7172bf304 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "211472601c16cf8b1cee91c5e3caea16232bcad9",
+  "prompts": {},
+  "sessions": {
+    "s_69205ccd1411bd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a167d4-d121-7ae2-b7f1-084f1af98494",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
