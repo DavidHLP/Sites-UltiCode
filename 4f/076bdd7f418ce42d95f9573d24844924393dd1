@@ -1,0 +1,24 @@
+README.md
+  s_69205ccd1411bd::t_2c9bbfe7956c43 13
+docs/ARCHITECTURE.md
+  s_69205ccd1411bd::t_2c9bbfe7956c43 3
+docs/MAINTENANCE.md
+  s_69205ccd1411bd::t_2c9bbfe7956c43 3,39
+  s_69205ccd1411bd::t_00c6046f29504e 40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4f076bdd7f418ce42d95f9573d24844924393dd1",
+  "prompts": {},
+  "sessions": {
+    "s_69205ccd1411bd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a167d4-d121-7ae2-b7f1-084f1af98494",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
