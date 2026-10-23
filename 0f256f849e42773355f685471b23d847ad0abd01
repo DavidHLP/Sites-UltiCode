@@ -1,0 +1,58 @@
+.gitignore
+  s_b25ac12e98c454::t_9f00e1efc568af 51
+scripts/render-content.mjs
+  s_b25ac12e98c454::t_9c7b7de50c3db7 3,6-7,79
+content/project.mjs
+  s_b25ac12e98c454::t_a1deba05d83ed2 143
+  s_b25ac12e98c454::t_9c7b7de50c3db7 1-3
+  s_b25ac12e98c454::t_138214b382ba1f 26-31,74
+  s_b25ac12e98c454::t_13c464320d519f 37
+scripts/build-content.mjs
+  s_b25ac12e98c454::t_f0393ca56e891d 4-5,11,14-15,37-39
+content/evaluation.mjs
+  s_b25ac12e98c454::t_08a3c71c401001 1-99
+scripts/sync-source.mjs
+  s_b25ac12e98c454::t_9c7b7de50c3db7 7
+content/guides.mjs
+  s_b25ac12e98c454::t_13c464320d519f 205,246
+  s_b25ac12e98c454::t_9c7b7de50c3db7 1,3-5,41
+public/site.css
+  s_b25ac12e98c454::t_13c464320d519f 124
+content/review-pack.md
+  s_b25ac12e98c454::t_08a3c71c401001 1-94
+public/app.js
+  s_b25ac12e98c454::t_f0393ca56e891d 69
+content/home.html
+  s_b25ac12e98c454::t_13c464320d519f 91-94
+  s_b25ac12e98c454::t_f0393ca56e891d 89,101
+README.md
+  s_b25ac12e98c454::t_138214b382ba1f 12-15,48,50-54
+content/upstream.json
+  s_b25ac12e98c454::t_9821ab655a99c3 6-9,15-18,21-24,27-30,33-36,39-42,45-48,70,74,78,82,86
+content/upstream/docs/ARCHITECTURE.md
+  s_b25ac12e98c454::t_e3f5eae216c4a6 68,82-83,359-360
+content/upstream/docs/DEVELOPMENT.md
+  s_b25ac12e98c454::t_4dab4fe1f1d3c2 22-27,98-99,102,110-118,133,140,156,160,165-168,171-172,174-379,454-474,594
+content/upstream/docs/OPERATIONS.md
+  s_b25ac12e98c454::t_d33d64802f0fc0 15,23,25,27,35,50,54-64
+content/upstream/docs/PRODUCT.md
+  s_b25ac12e98c454::t_999bc82da542be 22-27
+content/upstream/docs/REFERENCE.md
+  s_b25ac12e98c454::t_d9da2b642a4ad9 20-21,61-62,178,213-225
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0f256f849e42773355f685471b23d847ad0abd01",
+  "prompts": {},
+  "sessions": {
+    "s_b25ac12e98c454": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1679c-4ea1-7730-bc49-21ac5212f34f",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
