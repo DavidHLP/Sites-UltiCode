@@ -1,0 +1,31 @@
+content/site-config.mjs
+  s_69205ccd1411bd::t_a28e63d3dd1a2d 3
+scripts/content/sync-source.mjs
+  s_69205ccd1411bd::t_974f07a0bdb1aa 7
+README.md
+  s_69205ccd1411bd::t_a28e63d3dd1a2d 5-6
+docs/MAINTENANCE.md
+  s_69205ccd1411bd::t_974f07a0bdb1aa 14
+content/locales/zh-extra.mjs
+  s_69205ccd1411bd::t_f1aa8a7f93702c 33-34
+content/upstream.json
+  s_69205ccd1411bd::t_8d950855965e40 6-9,14-19,78
+content/upstream/docs/DEVELOPMENT.md
+  s_69205ccd1411bd::t_8f1f64499777d0 590-591
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "be018cf0548a75aa5f4dfb9944fdc3b174e71ea5",
+  "prompts": {},
+  "sessions": {
+    "s_69205ccd1411bd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a167d4-d121-7ae2-b7f1-084f1af98494",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
