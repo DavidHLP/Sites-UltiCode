@@ -355,7 +355,6 @@ export default {
   'a signed-in website enquiry': '登录后的网站咨询',
   'or a public GitHub Issue without private information. Include the revision, proposed workflow and the specific unresolved requirement.': '或不含私人信息的公开 GitHub Issue 提交。请包含版本、拟用工作流及尚未解决的具体需求。',
   'Read the support and data-handling policy': '阅读支持与数据处理政策',
-  'Operations source at db1c868': 'db1c868 版本的运维文档源码',
   'Dated local verification': '注明日期的本地验证',
   'What the local installation actually showed': '本地安装实际展示了什么',
   'Observed local service readiness, infrastructure and browser behavior, with explicit limits and reproduction steps.': '记录本地服务就绪、基础设施和浏览器行为，并明确限制与复核步骤。',

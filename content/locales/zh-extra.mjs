@@ -30,6 +30,8 @@ export default {
   [sourceDate]: date,
   [`${sourceDate} · ${sourceCommit.slice(0,7)} ↗`]: `${date} · ${sourceCommit.slice(0,7)} ↗`,
   [`${sourceCommit.slice(0,7)} · ${sourceDate}`]: `${sourceCommit.slice(0,7)} · ${date}`,
+  [`${sourceCommit.slice(0,7)} · source snapshot`]: `${sourceCommit.slice(0,7)} · 源码快照`,
+  [`Operations source at ${sourceCommit.slice(0,7)}`]: `${sourceCommit.slice(0,7)} 版本的运维文档源码`,
   [`Public repository documentation from ${sourceDate}. English source.`]: `公开仓库文档，版本日期：${date}。以下保留英文原文。`,
   [`Public repository documentation from ${sourceDate}. Original Chinese source; English orientation is available in the getting-started guide.`]: `公开仓库文档，版本日期：${date}。以下保留中文原文，也可阅读本站中英双语入门指南。`,
   'Source documentation': '源码文档原文',

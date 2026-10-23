@@ -292,7 +292,6 @@ export default {
   'Troubleshoot the evaluation': '排查评估中的问题',
   'Read operations and recovery': '阅读运维与恢复说明',
   'Based on the public repository at': '依据以下公开仓库版本编写：',
-  'db1c868 · source snapshot': 'db1c868 · 源码快照',
   '. The long-form source guides are maintained in Chinese. These instructions describe a development environment; they do not establish a production deployment or service guarantee.': '。详细源码指南以中文维护。这些说明描述开发环境，不证明已完成生产部署，也不构成服务保证。',
   'A path from evaluation to operation.': '从评估走向运营。',
   'A path from evaluation to operation. | UltiCode': '从评估走向运营。| UltiCode',

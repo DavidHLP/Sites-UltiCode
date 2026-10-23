@@ -3,14 +3,20 @@
   "description": "UltiCode — an open-source full-stack online judge platform for developers: problem library, algorithm contests, sandboxed judging, editorials, community, and admin console — ready out of the box. ",
   "defaultBranch": "main",
   "license": "MIT",
-  "sourceCommit": "db1c868a179c6b100df991bddec10b395a7cc7f3",
-  "sourceUrl": "https://github.com/DavidHLP/UltiCode/tree/db1c868a179c6b100df991bddec10b395a7cc7f3",
-  "sourceDate": "2026-10-23T05:45:00Z",
-  "checkedAt": "2026-10-23T07:24:34.378Z",
+  "sourceCommit": "ec4e9b135ac1404348e0b57d58b5b745301f7d5f",
+  "sourceUrl": "https://github.com/DavidHLP/UltiCode/tree/ec4e9b135ac1404348e0b57d58b5b745301f7d5f",
+  "sourceDate": "2026-10-23T08:14:27Z",
+  "checkedAt": "2026-10-23T08:50:06.164Z",
   "archived": false,
   "discussionsEnabled": false,
   "releases": [],
   "commits": [
+    {
+      "sha": "ec4e9b135ac1404348e0b57d58b5b745301f7d5f",
+      "title": "fix: restore safe formatting in Codex hooks (#318)",
+      "date": "2026-10-23T08:14:27Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/ec4e9b135ac1404348e0b57d58b5b745301f7d5f"
+    },
     {
       "sha": "db1c868a179c6b100df991bddec10b395a7cc7f3",
       "title": "fix(ci): isolate promotion contract writer identity (#317)",
@@ -40,12 +46,6 @@
       "title": "fix(docker): install pnpm without Corepack on Node 25",
       "date": "2026-10-23T04:50:05Z",
       "url": "https://github.com/DavidHLP/UltiCode/commit/6beb05ed0d722cf686453ef103e3f384af1d996a"
-    },
-    {
-      "sha": "200bb8cc68712f42547f1259bfbe02dab0f74f26",
-      "title": "Merge remote-tracking branch 'origin/dependabot/npm_and_yarn/production-23c26a6dc4' into chore/merge-all-branches-main",
-      "date": "2026-10-23T04:45:50Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/200bb8cc68712f42547f1259bfbe02dab0f74f26"
     }
   ],
   "documents": [
@@ -75,7 +75,7 @@
     },
     {
       "path": "docs/DEVELOPMENT.md",
-      "bytes": 76969
+      "bytes": 77428
     },
     {
       "path": "docs/OPERATIONS.md",

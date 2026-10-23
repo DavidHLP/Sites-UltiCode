@@ -11,7 +11,7 @@ The server uses the supported Sites Vinext starter. Content is generated into a 
 - `content/guides.mjs`: English getting started, first submission, troubleshooting and documentation paths.
 - `content/project.mjs`: product, institutions, deployment, security, contribution, licensing, costs and contact.
 - `content/home.html`: retained homepage source. The content builder supplies the current navigation, resource download and calls to action.
-- `content/upstream/` and `content/upstream.json`: public documentation, release status and provenance pinned at `db1c868a179c6b100df991bddec10b395a7cc7f3`, checked against GitHub main on 23 October 2026. Page links and snapshot dates derive from this metadata.
+- `content/upstream/` and `content/upstream.json`: public documentation, release status and provenance pinned at `ec4e9b135ac1404348e0b57d58b5b745301f7d5f`, checked against GitHub main on 23 October 2026. Page links and snapshot dates derive from this metadata. Dated local verification records retain the revision actually observed at that time.
 - `content/evaluation.mjs`: self-hosted evaluation protocol, dated local observations and current support/data-handling policy.
 - `content/review-pack.md`: authored technical review pack; the builder resolves its public source and website links.
 - `content/site-config.mjs`: canonical website origin, public product repository, snapshot revision/date and imported-document routes. Content modules read this metadata without importing the HTML renderer.

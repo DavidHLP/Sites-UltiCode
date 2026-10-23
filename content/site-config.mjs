@@ -1,6 +1,6 @@
 import upstream from './upstream.json' with { type: 'json' };
 
-export const origin = 'https://ulticode-institutions.bloomywren4096.chatgpt.site';
+export const origin = 'https://ulticode.bloomywren4096.chatgpt.site';
 export const sourceCommit = upstream.sourceCommit;
 export const sourceDate = new Date(upstream.sourceDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 export const repository = 'https://github.com/DavidHLP/UltiCode';
