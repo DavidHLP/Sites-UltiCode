@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a website vulnerability privately
+    url: https://github.com/DavidHLP/Sites-UltiCode/security/advisories/new
+    about: Login, enquiry-data, rendering or other website security concerns.
+  - name: UltiCode product issues and questions
+    url: https://github.com/DavidHLP/UltiCode/issues
+    about: Online judge, Console, Management, Agent and self-hosted deployment.
+  - name: Website contribution guide
+    url: https://github.com/DavidHLP/Sites-UltiCode/blob/main/CONTRIBUTING.md
+    about: Scope, local checks and pull request guidance.
