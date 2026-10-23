@@ -1,6 +1,6 @@
 # Website architecture
 
-This document describes the website repository, `ulticode-institutions/`. The UltiCode product has its own architecture in [the pinned public snapshot](../content/upstream/docs/ARCHITECTURE.md). The parent workspace is not the application's Git root.
+This document describes the website repository, `Sites-UltiCode/`. The application, package manifest and Git history live directly at this root. The UltiCode product has its own architecture in [the pinned public snapshot](../content/upstream/docs/ARCHITECTURE.md).
 
 ## Content and request flow
 

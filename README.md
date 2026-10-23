@@ -10,7 +10,7 @@ This website is a separate application from the UltiCode product. It does not ho
 - [Development, content updates, privacy and publication](docs/MAINTENANCE.md)
 - [Pinned product documentation](content/upstream/docs/index.md)
 
-Run commands from this repository, `ulticode-institutions/`. Use Node.js >=22.13.0 and npm with the checked-in lockfile:
+Run commands from the `Sites-UltiCode/` repository root. The application lives directly here, with no nested application repository. Use Node.js >=22.13.0 and npm with the checked-in lockfile:
 
 ```sh
 npm run install:ci

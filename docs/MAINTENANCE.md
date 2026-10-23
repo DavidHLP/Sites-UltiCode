@@ -1,6 +1,6 @@
 # Website maintenance
 
-Run the commands below from the `ulticode-institutions/` repository root. This guide covers this website; the product documentation in `content/upstream/` describes the separately operated UltiCode application. See [architecture](ARCHITECTURE.md) for directory responsibilities and build/runtime boundaries, or return to the [project overview](../README.md).
+Run the commands below from the `Sites-UltiCode/` repository root. This guide covers this website; the product documentation in `content/upstream/` describes the separately operated UltiCode application. See [architecture](ARCHITECTURE.md) for directory responsibilities and build/runtime boundaries, or return to the [project overview](../README.md).
 
 An institution-first project website for [UltiCode](https://github.com/DavidHLP/UltiCode), published with Sites. It retains the navy, ivory and oxblood design, product illustration, keyboard access and light/dark themes while adding documentation, getting started, project participation and operational information.
 
@@ -35,6 +35,8 @@ Apply an existing migration only to a database where it is pending. Local previe
 Run `npm test` for the focused Markdown and API security/failure tests and `npx tsc --noEmit` for types. Sites publication uses the plugin’s supported build, source, packaging and deployment helpers. Preserve its integration and the project ID. The owner has requested public, anonymous access to the website; changes to content never grant access to an institution’s product deployment.
 
 ### Commands and generated files
+
+The application previously lived in a nested `ulticode-institutions/` repository. It now lives directly at the `Sites-UltiCode/` root, retaining its Git history, Sites identity and local database state. Update terminal working directories and external preview configurations that still point to the old directory, and rebuild before previewing; npm command names and website URLs are unchanged.
 
 | Command | Purpose |
 | --- | --- |
