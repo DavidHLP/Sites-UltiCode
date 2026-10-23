@@ -66,7 +66,7 @@ if (pilotButton) {
   copyButton.hidden = false;
   copyButton.addEventListener('click', () => {
     const questions = [...document.querySelectorAll('#pilot-dialog .pilot-checklist li')].map(item => `• ${item.textContent}`).join('\n');
-    copyText(`UltiCode pilot planning checklist\n\n${questions}\n\nPlanning only. Availability and terms are not confirmed.`, document.getElementById('copy-status'));
+      copyText(`UltiCode self-hosted evaluation checklist\n\n${questions}\n\nYour team supplies the environment and operating owner. Planning does not reserve a service.`, document.getElementById('copy-status'));
   });
 }
 

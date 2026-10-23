@@ -1,5 +1,6 @@
-const repository = 'https://github.com/DavidHLP/UltiCode';
-const snapshot = `${repository}/blob/638483a96a0b1dbc102aba14065d98bcea76b2cd`;
+import { repository, sourceCommit } from '../scripts/render-content.mjs';
+
+const snapshot = `${repository}/blob/${sourceCommit}`;
 const sourceNote = (files) => `<p class="source-note">Based on the public source snapshot, not a production deployment assessment. ${files.map(([name, path]) => `<a href="${snapshot}/${path}">${name}</a>`).join(' · ')}.</p>`;
 
 export const projectPages = [
@@ -22,12 +23,18 @@ export const projectPages = [
         <p>The showcase includes repository screenshots of problem detail, contests, submissions, the management dashboard, user management and the forum. These are design and regression references, not evidence of a production rollout.</p>
         <p><a class="button primary" href="/showcase/">Explore the interface showcase</a></p>
       </section>
+      <section aria-labelledby="product-current"><h2 id="product-current">Current account and learning workflows</h2>
+        <p>The sidebar supports up to five signed-in accounts. Adding or switching an account validates its session; Management still requires an administrator role. Account switching does not grant new permissions, and saved refresh credentials remain in account-bound HttpOnly cookies.</p>
+        <p>The Agent workspace can bind an eligible completed practice submission, recover conversation history and continue a discussion. Opening a workspace or selecting a submission does not call a model. Saving a learning plan is a separate confirmed operation; a cancelled analysis does not erase history or undo a completed business write.</p>
+        <p>Conversations remain until the owner deletes them. Before enabling model use, review provider processing, source consent and actual cost controls. Loopback development can permit live calls without a shared cumulative budget ledger; per-request limits alone do not cap total spending.</p>
+        <p><a href="/verification/">Read dated local observations</a> · <a href="/evaluation/">Review data boundaries and acceptance criteria</a> · <a href="/docs/source/reference/">Read account and Agent contracts</a></p>
+      </section>
       <section aria-labelledby="product-boundaries"><h2 id="product-boundaries">Read the boundaries before adopting</h2>
         <ul class="check-list">
           <li><strong>You operate the deployment.</strong> The repository supplies code, configuration and verification paths; it does not supply a hosted service or establish production capacity.</li>
           <li><strong>Identity needs a fit check.</strong> Account, session, OAuth and role controls are documented. An institution-specific SAML, SCIM or single-sign-on integration requires separate verification.</li>
           <li><strong>Availability depends on the deployment.</strong> Active-active production operation, transparent failover and production recovery targets are not established project claims.</li>
-          <li><strong>Learning assistance is optional.</strong> The separate Agent service is not part of the default startup. Live model use requires runtime authorization and budget controls; external-provider, retention and student-consent requirements need review before enablement.</li>
+          <li><strong>Learning assistance has separate controls.</strong> Management controls Agent availability; the feature defaults to enabled when no setting exists. The Python service, model configuration, source consent and persistence permissions are still separate requirements. Operators must review external providers, retention and costs before learner use.</li>
         </ul>
         <p>Repository descriptions explain intended boundaries. Confirm behavior against the chosen revision, configuration and your own acceptance criteria.</p>
         <p><a class="text-link" href="/institutions/">Plan an institutional evaluation</a> · <a class="text-link" href="/deployment/">Review deployment responsibilities</a></p>
@@ -64,7 +71,7 @@ export const projectPages = [
       <section aria-labelledby="pilot-materials"><h2 id="pilot-materials">Bring the right material to the review</h2>
         <ul class="link-list"><li><a href="/security/">Security controls and their limits</a></li><li><a href="/deployment/">Deployment and operating responsibilities</a></li><li><a href="/licensing/">License and content rights</a></li><li><a href="/pricing/">Infrastructure and support costs to plan for</a></li></ul>
         <p><a class="button primary" href="/contact/">Start a pilot conversation</a></p>
-        <p class="source-note">A pilot conversation uses the public project channel. It is not a booking, service agreement or guaranteed project response.</p>
+        <p class="source-note">Choose a signed-in website enquiry or a public GitHub draft. It is not a booking, service agreement or guaranteed project response. <a href="/evaluation/">Read the self-hosted evaluation protocol</a>, download the <a href="/resources/institutional-review-pack.md" download>technical review pack</a> and review <a href="/support/">support and follow-up</a>.</p>
       </section>
       ${sourceNote([['Product source', 'docs/PRODUCT.md'], ['Operations source', 'docs/OPERATIONS.md'], ['Authentication reference', 'docs/REFERENCE.md']])}
     `,
@@ -133,7 +140,7 @@ export const projectPages = [
         <p><a class="text-link" href="/docs/source/reference/">Read the authentication and Agent reference</a> · <a class="text-link" href="/deployment/">Review operator responsibilities</a></p>
       </section>
       <section aria-labelledby="security-report"><h2 id="security-report">Report a concern without exposing it</h2>
-        <p>GitHub private vulnerability reporting was enabled and verified for the public repository on 22 October 2026. Use that channel to share a potential vulnerability privately with the repository’s maintainers.</p>
+        <p>GitHub private vulnerability reporting was enabled when checked for the public repository on 23 October 2026. Use that channel to share a potential vulnerability privately with the repository’s maintainers.</p>
         <p><strong>Keep exploit details and unpublished vulnerabilities out of public Issues and this website’s ordinary enquiry form.</strong> Include only the information needed to explain and reproduce the concern, and remove credentials, student data and unrelated private material.</p>
         <p><a class="button primary" href="${repository}/security/advisories/new">Report a vulnerability privately on GitHub</a></p>
         <p class="source-note">GitHub sign-in may be required. Opening the link sends nothing until you submit the report. The project does not publish a security-response deadline. <a href="https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately">Read GitHub’s private reporting guidance</a> or <a href="${repository}/security">check the repository’s current security page</a>.</p>

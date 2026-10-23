@@ -3,49 +3,49 @@
   "description": "UltiCode — an open-source full-stack online judge platform for developers: problem library, algorithm contests, sandboxed judging, editorials, community, and admin console — ready out of the box. ",
   "defaultBranch": "main",
   "license": "MIT",
-  "sourceCommit": "638483a96a0b1dbc102aba14065d98bcea76b2cd",
-  "sourceUrl": "https://github.com/DavidHLP/UltiCode/tree/638483a96a0b1dbc102aba14065d98bcea76b2cd",
-  "sourceDate": "2026-10-14T05:01:48Z",
-  "checkedAt": "2026-10-22T16:58:18.224Z",
+  "sourceCommit": "db1c868a179c6b100df991bddec10b395a7cc7f3",
+  "sourceUrl": "https://github.com/DavidHLP/UltiCode/tree/db1c868a179c6b100df991bddec10b395a7cc7f3",
+  "sourceDate": "2026-10-23T05:45:00Z",
+  "checkedAt": "2026-10-23T07:24:34.378Z",
   "archived": false,
   "discussionsEnabled": false,
   "releases": [],
   "commits": [
     {
-      "sha": "638483a96a0b1dbc102aba14065d98bcea76b2cd",
-      "title": "feat: add persistent Agent conversation workspace",
-      "date": "2026-10-14T05:01:48Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/638483a96a0b1dbc102aba14065d98bcea76b2cd"
+      "sha": "db1c868a179c6b100df991bddec10b395a7cc7f3",
+      "title": "fix(ci): isolate promotion contract writer identity (#317)",
+      "date": "2026-10-23T05:45:00Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/db1c868a179c6b100df991bddec10b395a7cc7f3"
     },
     {
-      "sha": "73a5299f8e77a7d431860df7c0036e20a4f28f65",
-      "title": "refactor: remove obsolete agent acceptance guards",
-      "date": "2026-10-13T05:09:23Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/73a5299f8e77a7d431860df7c0036e20a4f28f65"
+      "sha": "b12b60352940f2e0f47b6cccb9f8e3ea025febb2",
+      "title": "fix(ci): isolate promotion contract writer identity",
+      "date": "2026-10-23T05:31:49Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/b12b60352940f2e0f47b6cccb9f8e3ea025febb2"
     },
     {
-      "sha": "36cca09b1b3e4ce8d2c02088e0e623117e79c742",
-      "title": "feat: integrate agent reviews into submission workflows",
-      "date": "2026-10-13T03:05:20Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/36cca09b1b3e4ce8d2c02088e0e623117e79c742"
+      "sha": "34b6f6e271f2ff0cbed15ab18a7d4970458dd008",
+      "title": "Merge pull request #316 from DavidHLP/chore/merge-all-branches-main",
+      "date": "2026-10-23T05:04:14Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/34b6f6e271f2ff0cbed15ab18a7d4970458dd008"
     },
     {
-      "sha": "3b3a6439d40eacf27a06594cca91483488b8583f",
-      "title": "feat: add bounded local Agent smoke mode (#288)",
-      "date": "2026-10-12T12:36:24Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/3b3a6439d40eacf27a06594cca91483488b8583f"
+      "sha": "8fa1d4bb39f57109753d0d0d9f6a82e327dbb126",
+      "title": "chore(deps): reconcile merged lockfile",
+      "date": "2026-10-23T04:50:54Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/8fa1d4bb39f57109753d0d0d9f6a82e327dbb126"
     },
     {
-      "sha": "080e6f8e2c76fa50ea41b23fdc633f05cafb3bf0",
-      "title": "Merge pull request #287 from DavidHLP/codex/agent-demo-ui",
-      "date": "2026-10-12T04:32:35Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/080e6f8e2c76fa50ea41b23fdc633f05cafb3bf0"
+      "sha": "6beb05ed0d722cf686453ef103e3f384af1d996a",
+      "title": "fix(docker): install pnpm without Corepack on Node 25",
+      "date": "2026-10-23T04:50:05Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/6beb05ed0d722cf686453ef103e3f384af1d996a"
     },
     {
-      "sha": "be4c57760a43ff94d2a1bcd3174aef6aacc26968",
-      "title": "Merge remote-tracking branch 'origin/main' into HEAD",
-      "date": "2026-10-12T04:16:44Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/be4c57760a43ff94d2a1bcd3174aef6aacc26968"
+      "sha": "200bb8cc68712f42547f1259bfbe02dab0f74f26",
+      "title": "Merge remote-tracking branch 'origin/dependabot/npm_and_yarn/production-23c26a6dc4' into chore/merge-all-branches-main",
+      "date": "2026-10-23T04:45:50Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/200bb8cc68712f42547f1259bfbe02dab0f74f26"
     }
   ],
   "documents": [
@@ -67,23 +67,23 @@
     },
     {
       "path": "docs/PRODUCT.md",
-      "bytes": 9354
+      "bytes": 10190
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "bytes": 38056
+      "bytes": 39467
     },
     {
       "path": "docs/DEVELOPMENT.md",
-      "bytes": 32288
+      "bytes": 76969
     },
     {
       "path": "docs/OPERATIONS.md",
-      "bytes": 35853
+      "bytes": 39675
     },
     {
       "path": "docs/REFERENCE.md",
-      "bytes": 20433
+      "bytes": 22938
     },
     {
       "path": "assets/screenshots/README.md",

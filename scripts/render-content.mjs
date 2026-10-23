@@ -1,8 +1,10 @@
 import MarkdownIt from 'markdown-it';
 import path from 'node:path';
+import upstream from '../content/upstream.json' with { type: 'json' };
 
 export const origin = 'https://ulticode-institutions.bloomywren4096.chatgpt.site';
-export const sourceCommit = '638483a96a0b1dbc102aba14065d98bcea76b2cd';
+export const sourceCommit = upstream.sourceCommit;
+export const sourceDate = new Date(upstream.sourceDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 export const repository = 'https://github.com/DavidHLP/UltiCode';
 export const sourceRoutes = {
   'docs/index.md': '/docs/source/overview/',
@@ -74,7 +76,7 @@ export function header(current) {
 }
 
 export function footer() {
-  return `<footer class="site-footer wrap"><div>${brand}<p>Open source. Thoughtfully considered.</p><p class="footer-source">Public source snapshot<br><a href="${repository}/tree/${sourceCommit}">14 October 2026 · 638483a ↗</a></p></div><nav aria-label="Project resources"><a href="/get-started/">Get started</a><a href="/docs/">Documentation</a><a href="/showcase/">Interface showcase</a><a href="/updates/">Versions and updates</a><a href="/community/">Community and contribution</a></nav><nav aria-label="Institutional resources"><a href="/institutions/">Institutional evaluation</a><a href="/deployment/">Deployment</a><a href="/security/">Security</a><a href="/pricing/">Costs and availability</a><a href="/licensing/">MIT license and content rights</a><a href="/contact/">Contact the project</a><a href="/privacy/">Website privacy</a><button class="text-link" type="button" data-privacy-open hidden>Analytics preferences</button></nav></footer>`;
+  return `<footer class="site-footer wrap"><div>${brand}<p>Open source. Thoughtfully considered.</p><p class="footer-source">Public source snapshot<br><a href="${repository}/tree/${sourceCommit}">${sourceDate} · ${sourceCommit.slice(0,7)} ↗</a></p></div><nav aria-label="Project resources"><a href="/get-started/">Get started</a><a href="/docs/">Documentation</a><a href="/showcase/">Interface showcase</a><a href="/verification/">Local verification</a><a href="/updates/">Versions and updates</a><a href="/community/">Community and contribution</a></nav><nav aria-label="Institutional resources"><a href="/institutions/">Institutional evaluation</a><a href="/deployment/">Deployment</a><a href="/security/">Security</a><a href="/pricing/">Costs and availability</a><a href="/licensing/">MIT license and content rights</a><a href="/contact/">Contact the project</a><a href="/privacy/">Website privacy</a><button class="text-link" type="button" data-privacy-open hidden>Analytics preferences</button></nav></footer>`;
 }
 
 const sidebar = `<aside class="docs-sidebar"><nav aria-label="Documentation navigation"><p>Start here</p><a href="/get-started/">Getting started</a><a href="/docs/first-submission/">First submission</a><a href="/docs/troubleshooting/">Troubleshooting</a><p>Evaluate and operate</p><a href="/product/">Product and boundaries</a><a href="/institutions/">For institutions</a><a href="/deployment/">Deployment</a><a href="/security/">Security</a><a href="/pricing/">Costs</a><p>Source library · 中文</p><a href="/docs/source/product/">Product and domain</a><a href="/docs/source/architecture/">Architecture</a><a href="/docs/source/development/">Development</a><a href="/docs/source/operations/">Operations</a><a href="/docs/source/reference/">API and authentication</a><p>Open source</p><a href="/updates/">Updates</a><a href="/community/">Contribute</a><a href="/licensing/">License</a></nav></aside>`;

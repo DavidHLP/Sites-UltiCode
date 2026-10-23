@@ -9,8 +9,10 @@ The server uses the supported Sites Vinext starter. Content is generated into a 
 - `content/guides.mjs`: English getting started, first submission, troubleshooting and documentation paths.
 - `content/project.mjs`: product, institutions, deployment, security, contribution, licensing, costs and contact.
 - `content/home.html`: retained homepage source. The content builder supplies the current navigation, resource download and calls to action.
-- `content/upstream/` and `content/upstream.json`: public documentation, release status and provenance pinned at `638483a96a0b1dbc102aba14065d98bcea76b2cd`.
-- `scripts/build-content.mjs`: readable source documents, section search, metadata, sitemap, robots, `llms.txt`, update information and the downloadable institutional review worksheet.
+- `content/upstream/` and `content/upstream.json`: public documentation, release status and provenance pinned at `db1c868a179c6b100df991bddec10b395a7cc7f3`, checked against GitHub main on 23 October 2026. Page links and snapshot dates derive from this metadata.
+- `content/evaluation.mjs`: self-hosted evaluation protocol, dated local observations and current support/data-handling policy.
+- `content/review-pack.md`: authored technical review pack; the builder resolves its public source and website links.
+- `scripts/build-content.mjs`: readable source documents, section search, metadata, sitemap, robots, `llms.txt`, update information and the downloadable review pack and decision worksheet.
 - `scripts/sync-source.mjs`: bounded, public-only snapshot import. It preserves the previous snapshot if fetching or validation fails. Update its pinned revision deliberately and review source changes before refreshing the website.
 
 The original Chinese source guides remain available alongside English orientation pages. Source links use the pinned public revision. A later product checkout can differ; its code, configuration and executable runbooks determine behavior.
@@ -43,6 +45,10 @@ The D1 binding is `DB`. Schema and generated migrations are in `db/schema.ts` an
 
 The homepage code walkthrough is illustrative and executes no code. Repository images are design/regression references with sample accounts and numbers, not production/customer evidence. No published GitHub Releases were returned at the dated snapshot check; no stable version, SLA, certification, institutional SSO compatibility or paid service is invented.
 
-The review worksheet is a real downloadable planning aid. Pilot commercial terms, testimonials, partner logos and case-study outcomes still require approved material; their dashed placeholders and replacement comments remain. No production judging environment is hosted by this marketing website.
+The review pack and worksheet are real downloadable Markdown resources. The homepage's former testimonial, pilot-case and partner-logo placeholders have been replaced with linked local observations, interface references and technical evaluation material. No customer endorsement or institutional affiliation is asserted. The current evaluation model is self-hosted and community supported; no managed pilot, paid plan or support-response promise is offered. No production judging environment is hosted by this website.
 
-GitHub private vulnerability reporting was enabled for the public source repository and verified on 22 October 2026. The security page links to GitHub’s confidential reporting route and keeps vulnerabilities out of public Issues and ordinary enquiries. No security-response deadline or separate reporting email is promised. An operational support agreement, approved references, a custom domain, automatic email delivery and a live isolated product demo still require actual operator decisions and resources.
+The security page links to GitHub’s confidential reporting route and keeps vulnerabilities out of public Issues and ordinary enquiries. No security-response deadline or separate reporting email is promised. An operational support agreement, approved customer references, a custom domain, automatic email delivery and a public isolated product demo still require actual operator decisions and resources; they cannot be inferred from repository code.
+
+The local verification page records development readiness, process/container status and observed read interactions on 23 October 2026. It does not claim a new submission verdict, restore drill, load test, production provenance or model-quality evaluation. Process working directories and a clean checkout do not prove that running artifacts were built from that revision.
+
+The pinned Product source still contains an older frontend Agent flag paragraph. Preserve that imported document verbatim; its rendered page includes a correction pointing to the current Development guide and Admin/Agent implementation. Current Agent availability is controlled by Management, defaulting to enabled when unset, with separate model/persistence authorization. Loopback live calls may have per-request limits without a cumulative budget ledger; do not describe them as a total spending cap.

@@ -48,6 +48,7 @@ yarn-error.log*
 /public/robots.txt
 /public/llms.txt
 /public/resources/institutional-review-checklist.md
+/public/resources/institutional-review-pack.md
 
 # OS metadata
 .DS_Store

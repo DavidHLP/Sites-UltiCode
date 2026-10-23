@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const REPOSITORY = 'DavidHLP/UltiCode';
-const SOURCE_COMMIT = '638483a96a0b1dbc102aba14065d98bcea76b2cd';
+const SOURCE_COMMIT = 'db1c868a179c6b100df991bddec10b395a7cc7f3';
 const SOURCE_URL = `https://github.com/${REPOSITORY}`;
 const API_URL = `https://api.github.com/repos/${REPOSITORY}`;
 const RAW_URL = `https://raw.githubusercontent.com/${REPOSITORY}/${SOURCE_COMMIT}`;

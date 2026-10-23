@@ -1,6 +1,8 @@
-const source = 'https://github.com/DavidHLP/UltiCode/blob/638483a96a0b1dbc102aba14065d98bcea76b2cd';
+import { repository, sourceCommit } from '../scripts/render-content.mjs';
 
-const sourceNote = `<p class="source-note">Based on the public repository at <a href="${source}/README.md">638483a · source snapshot</a>. The long-form source guides are maintained in Chinese. These instructions describe a development environment; they do not establish a production deployment or service guarantee.</p>`;
+const source = `${repository}/blob/${sourceCommit}`;
+
+const sourceNote = `<p class="source-note">Based on the public repository at <a href="${source}/README.md">${sourceCommit.slice(0,7)} · source snapshot</a>. The long-form source guides are maintained in Chinese. These instructions describe a development environment; they do not establish a production deployment or service guarantee.</p>`;
 
 export const guides = [
   {
@@ -36,7 +38,7 @@ export const guides = [
         <p>For an evaluation matching the documents rendered on this website, check out this source snapshot:</p>
         <pre class="code-block"><code>git clone https://github.com/DavidHLP/UltiCode.git
 cd UltiCode
-git checkout 638483a96a0b1dbc102aba14065d98bcea76b2cd</code></pre>
+git checkout ${sourceCommit}</code></pre>
         <p>This creates a detached checkout of the documented revision. For ongoing development, use a task branch and read the guides in that checkout. <a href="https://github.com/DavidHLP/UltiCode">The repository's current default branch</a> may contain newer requirements.</p>
       </section>
 
@@ -200,7 +202,7 @@ git checkout 638483a96a0b1dbc102aba14065d98bcea76b2cd</code></pre>
 
       <section id="optional-analysis">
         <h2>Optional analysis is a separate capability</h2>
-        <p>Some installations may enable an Agent review workspace for an account's own completed ordinary-practice submissions. It is disabled by default, uses a separate service and is not part of the default development stack. Contests and submissions still being judged are outside its documented first-version scope.</p>
+        <p>The Agent review workspace uses a separate service for an account’s own completed ordinary-practice submissions. In this revision, availability is controlled by the administrator’s Agent feature setting and defaults to enabled when no setting exists. This does not start the service or authorize model use. Contests and submissions still being judged remain outside the supported source scope.</p>
         <p>Using an external model requires separate configuration and runtime authorization. Confirm the data scope and cost policy with the operator. Opening a submission or review workspace does not itself request a model analysis.</p>
         <p><a class="text-link" href="/docs/source/product/">Read the analysis feature boundaries</a> · <a class="text-link" href="/docs/troubleshooting/">Get help with a failed journey</a></p>
         ${sourceNote}
@@ -241,7 +243,7 @@ git checkout 638483a96a0b1dbc102aba14065d98bcea76b2cd</code></pre>
           <tr><th scope="row">Indexed search is unavailable</th><td><code>dev-lite</code> uses database search without the Search worker. For indexed search, select a documented search-enabled mode or scope and check MeiliSearch and worker readiness.</td></tr>
           <tr><th scope="row">A submission remains unfinished</th><td>Inspect the existing submission and the Submission, Judge, Redis and sandbox health. Preserve the queue state and identifier; use the worker runbook before replaying or discarding work.</td></tr>
           <tr><th scope="row">An old avatar or backup is unavailable after an upgrade</th><td>Read the object storage migration procedure. Startup rejects remaining legacy references for selected owners; the documented migration preserves old files and verifies objects before changing references.</td></tr>
-          <tr><th scope="row">Agent review is absent or unavailable</th><td>Review is an optional frontend capability backed by an independent Python service. Check its documented flag, authenticated capabilities and service configuration. Core problem solving and judging do not depend on enabling it.</td></tr>
+          <tr><th scope="row">Agent review is absent or unavailable</th><td>Check Management → System settings → Feature toggles → Agent, the separate Python service and authenticated capabilities. The old <code>VITE_AGENT_REVIEW_ENABLED</code> flag is no longer read. Feature-setting failures return 503; model and persistence permissions remain separate. Core judging does not require a model call.</td></tr>
           <tr><th scope="row">An unknown or retired startup mode is rejected</th><td>Choose a supported mode or scope. <code>legacy-rollback</code> is retired; it is not a recovery path for current binaries.</td></tr>
         </tbody></table></div>
       </section>
