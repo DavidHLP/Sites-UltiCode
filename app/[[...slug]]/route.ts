@@ -6,10 +6,13 @@ export function GET(request: Request) {
   const url = new URL(request.url);
   const pathname = url.pathname === '/' ? '/' : `${url.pathname.replace(/\/+$/, '')}/`;
   const page = renderedPages[pathname];
-  return new Response(page || renderedPages['/404/'], {
-    status: page && pathname !== '/404/' ? 200 : 404,
+  const language = pathname.startsWith('/zh-CN/') ? 'zh-CN' : 'en';
+  const missingPage = language === 'zh-CN' ? '/zh-CN/404/' : '/404/';
+  return new Response(page || renderedPages[missingPage], {
+    status: page && pathname !== missingPage ? 200 : 404,
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
+      'Content-Language': language,
       'Cache-Control': 'public, max-age=0, must-revalidate',
       'X-Content-Type-Options': 'nosniff',
       'Referrer-Policy': 'strict-origin-when-cross-origin',

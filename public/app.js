@@ -13,11 +13,12 @@ function stored(key, value) {
 
 const savedTheme = stored('ulticode-theme');
 if (savedTheme === 'dark' || savedTheme === 'light') root.dataset.theme = savedTheme;
+if (location.pathname === '/' && stored('ulticode-language') === 'zh-CN') location.replace(`/zh-CN/${location.search}${location.hash}`);
 
 function updateThemeLabel() {
   const dark = root.dataset.theme ? root.dataset.theme === 'dark' : preferredTheme.matches;
-  themeLabel.textContent = dark ? 'Light mode' : 'Dark mode';
-  themeButton.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} mode`);
+  themeLabel.textContent = t(dark ? 'Light mode' : 'Dark mode');
+  themeButton.setAttribute('aria-label', t(dark ? 'Switch to light mode' : 'Switch to dark mode'));
 }
 
 themeButton.hidden = false;
@@ -40,18 +41,18 @@ if (runButton) {
   runButton.addEventListener('click', () => {
     document.getElementById('sample-verdict').classList.add('is-complete');
     document.getElementById('verdict-icon').textContent = '✓';
-    document.getElementById('verdict-title').textContent = 'Accepted · sample result';
-    document.getElementById('verdict-detail').textContent = 'Input: 2 3 → Output: 5. Illustration only; no code executed.';
-    runButton.textContent = '↻ Run again';
+    document.getElementById('verdict-title').textContent = t('Accepted · sample result');
+    document.getElementById('verdict-detail').textContent = t('Input: 2 3 → Output: 5. Illustration only; no code executed.');
+    runButton.textContent = t('↻ Run again');
   });
 }
 
 async function copyText(text, status) {
   try {
     await navigator.clipboard.writeText(text);
-    status.textContent = 'Copied to clipboard.';
+    status.textContent = t('Copied to clipboard.');
   } catch {
-    status.textContent = 'Copy is unavailable. Select and copy the text directly.';
+    status.textContent = t('Copy is unavailable. Select and copy the text directly.');
   }
 }
 
@@ -66,7 +67,7 @@ if (pilotButton) {
   copyButton.hidden = false;
   copyButton.addEventListener('click', () => {
     const questions = [...document.querySelectorAll('#pilot-dialog .pilot-checklist li')].map(item => `• ${item.textContent}`).join('\n');
-      copyText(`UltiCode self-hosted evaluation checklist\n\n${questions}\n\nYour team supplies the environment and operating owner. Planning does not reserve a service.`, document.getElementById('copy-status'));
+    copyText(`${t('UltiCode self-hosted evaluation checklist')}\n\n${questions}\n\n${t('Your team supplies the environment and operating owner. Planning does not reserve a service.')}`, document.getElementById('copy-status'));
   });
 }
 
@@ -74,8 +75,8 @@ document.querySelectorAll('.prose pre').forEach(pre => {
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'code-copy';
-  button.textContent = 'Copy';
-  button.setAttribute('aria-label', 'Copy code or source text');
+  button.textContent = t('Copy');
+  button.setAttribute('aria-label', t('Copy code or source text'));
   const status = document.createElement('span');
   status.className = 'code-copy-status';
   status.setAttribute('role', 'status');
@@ -94,12 +95,12 @@ async function showSearch() {
   searchDialog.showModal();
   searchInput.focus();
   if (!searchRequest) {
-    searchRequest = fetch('/search-index.json').then(response => {
+    searchRequest = fetch(locale === 'zh-CN' ? '/search-index.zh-CN.json' : '/search-index.json').then(response => {
       if (!response.ok) throw new Error('Search index unavailable');
       return response.json();
     }).then(data => { searchIndex = data; }).catch(() => {
       searchRequest = undefined;
-      searchCount.textContent = 'Search could not load. Browse the documentation or try opening search again.';
+      searchCount.textContent = t('Search could not load. Browse the documentation or try opening search again.');
     });
   }
   await searchRequest;
@@ -121,7 +122,7 @@ function renderSearch() {
   const query = searchInput.value.normalize('NFKC').toLowerCase().trim();
   searchResults.replaceChildren();
   if (!query) {
-    searchCount.textContent = 'Search English guides or the original Chinese source documentation. Press Escape to close.';
+    searchCount.textContent = t('Search English guides or the original Chinese source documentation. Press Escape to close.');
     return;
   }
   const words = query.split(/\s+/);
@@ -130,7 +131,7 @@ function renderSearch() {
     const haystack = `${title} ${entry.section} ${entry.text}`.normalize('NFKC').toLowerCase();
     return {...entry, score:words.every(word => haystack.includes(word)) ? words.reduce((sum,word) => sum + (title.includes(word) ? 5 : 1), 0) : 0};
   }).filter(entry => entry.score).sort((a,b) => b.score-a.score).slice(0,20);
-  searchCount.textContent = matches.length ? `${matches.length} results shown. Queries stay in this browser.` : 'No matches. Try a shorter phrase, another language, or browse the documentation.';
+  searchCount.textContent = matches.length ? t('{count} results shown. Queries stay in this browser.', {count:matches.length}) : t('No matches. Try a shorter phrase, another language, or browse the documentation.');
   matches.forEach(entry => {
     const li = document.createElement('li');
     const link = document.createElement('a');
@@ -155,7 +156,7 @@ searchInput.addEventListener('keydown', event => {
 let analyticsChoice = stored('ulticode-analytics') || 'off';
 const privacyDialog = document.getElementById('privacy-dialog');
 function updateAnalyticsChoice() {
-  document.getElementById('analytics-choice').textContent = navigator.globalPrivacyControl ? 'Global Privacy Control is enabled. Analytics stay off.' : analyticsChoice === 'on' ? 'Aggregate click counts are enabled in this browser.' : 'Analytics are off in this browser.';
+  document.getElementById('analytics-choice').textContent = t(navigator.globalPrivacyControl ? 'Global Privacy Control is enabled. Analytics stay off.' : analyticsChoice === 'on' ? 'Aggregate click counts are enabled in this browser.' : 'Analytics are off in this browser.');
 }
 document.querySelectorAll('[data-privacy-open]').forEach(button => {
   button.hidden = false;
@@ -181,6 +182,7 @@ document.addEventListener('click', event => {
 });
 
 const contactForm = document.getElementById('contact-form');
+let contactIdentity = '';
 if (contactForm) {
   const status = document.getElementById('contact-status');
   const retry = document.getElementById('contact-retry');
@@ -201,49 +203,61 @@ if (contactForm) {
       retry.hidden = true;
       document.getElementById('contact-auth').hidden = true;
       contactForm.hidden = false;
+      contactIdentity = data.identity.email;
       if (!contactForm.elements.name.value) contactForm.elements.name.value = data.identity.name;
       if (!contactForm.elements.email.value) contactForm.elements.email.value = data.identity.email;
+      try {
+        const saved = sessionStorage.getItem('ulticode-language-draft');
+        sessionStorage.removeItem('ulticode-language-draft');
+        const draft = saved ? JSON.parse(saved) : null;
+        if (draft?.owner === contactIdentity) {
+          for (const field of ['topic','name','email','organization','message']) {
+            if (typeof draft.values?.[field] === 'string') contactForm.elements[field].value = draft.values[field];
+          }
+          contactForm.elements.consent.checked = draft.values?.consent === true;
+        }
+      } catch { /* A blocked or malformed session draft never prevents the form from loading. */ }
       const list = document.getElementById('enquiry-list');
       list.replaceChildren();
       document.getElementById('your-enquiries').hidden = false;
       if (!data.enquiries.length) {
         const empty = document.createElement('p');
-        empty.textContent = 'No saved enquiries for this account.';
+        empty.textContent = t('No saved enquiries for this account.');
         list.append(empty);
       }
       data.enquiries.forEach(enquiry => {
         const article = document.createElement('article');
         article.className = 'enquiry';
         const heading = document.createElement('h4');
-        heading.textContent = `${enquiry.topic} · ${enquiry.createdAt}`;
+        heading.textContent = `${t(enquiry.topic)} · ${new Date(enquiry.createdAt).toLocaleString(locale)}`;
         const message = document.createElement('p');
         message.textContent = enquiry.message;
         const receipt = document.createElement('p');
         receipt.className = 'enquiry-receipt';
-        receipt.textContent = `Reference: ${enquiry.id}`;
+        receipt.textContent = t('Reference: {id}', {id:enquiry.id});
         const remove = document.createElement('button');
         remove.type = 'button';
         remove.className = 'text-link';
-        remove.textContent = 'Delete enquiry';
+        remove.textContent = t('Delete enquiry');
         remove.addEventListener('click', async () => {
-          if (!window.confirm('Permanently delete this enquiry from the application database?')) return;
+          if (!window.confirm(t('Permanently delete this enquiry from the application database?'))) return;
           remove.disabled = true;
           try {
             const deletion = await fetch(`/api/contact/?id=${encodeURIComponent(enquiry.id)}`, {method:'DELETE'});
             const result = await deletion.json();
             if (!deletion.ok) throw new Error(result.error || 'The enquiry could not be deleted.');
-            status.textContent = 'Enquiry deleted from the application database.';
+            status.textContent = t('Enquiry deleted from the application database.');
             await loadEnquiries({preserveStatus:true});
             status.tabIndex = -1;
             status.focus();
-          } catch (error) { status.textContent = error.message; remove.disabled = false; }
+          } catch (error) { status.textContent = t(error.message); remove.disabled = false; }
         });
         article.append(heading,message,receipt,remove);
         list.append(article);
       });
     } catch (error) {
-      const warning = error.message || 'The enquiry history is temporarily unavailable.';
-      status.textContent = preserveStatus ? `${status.textContent} History could not refresh: ${warning}` : warning;
+      const warning = t(error.message || 'The enquiry history is temporarily unavailable.');
+      status.textContent = preserveStatus ? t('{status} History could not refresh: {warning}', {status:status.textContent,warning}) : warning;
       retry.hidden = false;
     }
   }
@@ -252,7 +266,7 @@ if (contactForm) {
     event.preventDefault();
     if (!contactForm.reportValidity()) return;
     formButton.disabled = true;
-    status.textContent = 'Saving your enquiry…';
+    status.textContent = t('Saving your enquiry…');
     const values = new FormData(contactForm);
     const payload = Object.fromEntries(values);
     payload.consent = values.has('consent');
@@ -269,16 +283,39 @@ if (contactForm) {
         throw new Error('Your session expired. Your draft remains here. Sign in in a new tab, then return and send it again.');
       }
       if (!response.ok) throw new Error(result.error || 'The enquiry could not be saved.');
-      status.textContent = `Enquiry saved for the site owner. Reference: ${result.id}. No automatic email has been sent.`;
+      status.textContent = t('Enquiry saved for the site owner. Reference: {id}. No automatic email has been sent.', {id:result.id});
       contactForm.elements.message.value = '';
       contactForm.elements.consent.checked = false;
       track('contact_saved');
       await loadEnquiries({preserveStatus:true});
     } catch (error) {
-      status.textContent = receivedResponse ? error.message : 'The save could not be confirmed. Refresh saved enquiries before sending again to avoid a duplicate.';
+      status.textContent = receivedResponse ? t(error.message) : t('The save could not be confirmed. Refresh saved enquiries before sending again to avoid a duplicate.');
       retry.hidden = false;
     }
     finally { formButton.disabled = false; }
   });
   loadEnquiries();
 }
+import { t, locale } from '/i18n.js';
+
+
+document.querySelectorAll('[data-language]').forEach(link => {
+  const destination = new URL(link.href);
+  destination.search = location.search;
+  destination.hash = location.hash;
+  link.href = destination.href;
+  link.addEventListener('click', event => {
+    if (contactForm && !contactForm.hidden && contactForm.elements.message.value.trim()) {
+      try {
+        const values = Object.fromEntries(new FormData(contactForm));
+        values.consent = contactForm.elements.consent.checked;
+        sessionStorage.setItem('ulticode-language-draft', JSON.stringify({owner:contactIdentity,values}));
+      } catch {
+        event.preventDefault();
+        document.getElementById('contact-status').textContent = t('Copy your unsent draft before switching languages; session storage is unavailable.');
+        return;
+      }
+    }
+    stored('ulticode-language', link.dataset.language);
+  });
+});

@@ -41,6 +41,16 @@ The D1 binding is `DB`. Schema and generated migrations are in `db/schema.ts` an
 - Analytics are off by default. Explicit consent allows only daily aggregate counters for six named promotional events. The counter table stores no user identity, IP, referrer, query or enquiry data. These are approximate click totals, not unique visitors or adoption statistics.
 - For owner review, use the Sites database overview and table tools for this project. `enquiries` contains personal messages and must remain restricted; `cta_daily` contains aggregate counts; `contact_rate` contains anti-abuse state. Never expose these tables through a public listing endpoint.
 
+## Chinese and English
+
+English URLs remain unchanged. Simplified Chinese pages use `/zh-CN/` followed by the same path, including localized 404 responses. The language control preserves the page, query and section anchor; a saved Chinese preference applies when returning through the root entry. Navigation, metadata, authored guides, forms, accessible labels, search and review downloads have both editions. No translation service or new dependency is used.
+
+`content/locales/zh-home-guides.mjs`, `zh-project.mjs`, `zh-ui.mjs` and `zh-extra.mjs` contain authored translations. `scripts/i18n.mjs` localizes generated HTML text and display attributes while preserving form values, code and original-source regions. The content build refuses missing authored translations. Each locale has its own search index and canonical URL; alternate-language links and the sitemap expose both versions.
+
+Original source documents, code examples, the MIT license and commit titles retain their published language and provenance. They are marked as original regions; switching the interface language does not rewrite their content. The Chinese review pack is maintained in `content/review-pack.zh-CN.md`.
+
+Switching language from a visible enquiry form keeps an unsent draft in this tab's session storage. The draft is restored only for the same signed-in identity and removed from storage after reading. It is never submitted by changing language. Blocked storage leaves the page and draft in place with an explanation. The privacy page documents the session draft and language preference; API validation, ownership, consent and event identifiers are unchanged.
+
 ## Evidence boundaries
 
 The homepage code walkthrough is illustrative and executes no code. Repository images are design/regression references with sample accounts and numbers, not production/customer evidence. No published GitHub Releases were returned at the dated snapshot check; no stable version, SLA, certification, institutional SSO compatibility or paid service is invented.

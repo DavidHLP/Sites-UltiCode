@@ -44,11 +44,15 @@ yarn-error.log*
 # Deterministic content outputs, recreated before preview and build
 /content/site-pages.json
 /public/search-index.json
+/public/search-index.zh-CN.json
+/public/i18n.js
 /public/sitemap.xml
 /public/robots.txt
 /public/llms.txt
 /public/resources/institutional-review-checklist.md
 /public/resources/institutional-review-pack.md
+/public/resources/institutional-review-pack.zh-CN.md
+/public/resources/institutional-review-checklist.zh-CN.md
 
 # OS metadata
 .DS_Store
