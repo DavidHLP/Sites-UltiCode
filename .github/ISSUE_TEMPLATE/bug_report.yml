@@ -1,0 +1,43 @@
+name: Website bug report
+description: Report a website, translation, link or rendering defect.
+title: "[Website bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This tracker covers the website. Report application/deployment issues at https://github.com/DavidHLP/UltiCode/issues.
+        For vulnerabilities, use https://github.com/DavidHLP/Sites-UltiCode/security/advisories/new. Never include credentials or private enquiry data here.
+  - type: input
+    id: revision
+    attributes:
+      label: Affected URL and revision
+      description: Include the source commit if known; for the hosted site, include the observation date.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser/version, operating system, language and hosted or local preview.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Provide the smallest reproduction using only public or synthetic data.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include only sanitized errors or screenshots.
+    validations:
+      required: true

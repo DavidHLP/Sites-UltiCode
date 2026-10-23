@@ -1,0 +1,27 @@
+name: Website improvement
+description: Propose a focused change to the website or its content.
+title: "[Website proposal]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing Issues first. Product feature requests belong at https://github.com/DavidHLP/UltiCode/issues.
+        Do not include confidential material. Discuss substantial scope before implementation.
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem and affected page or workflow
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Proposed outcome
+      description: Explain the smallest useful change and how to tell that it works.
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Alternatives and constraints
+      description: Include evidence or translation/accessibility considerations where relevant.

@@ -1,4 +1,4 @@
-import { repository, sourceCommit } from './site-config.mjs';
+import { repository, websiteRepository, sourceCommit } from './site-config.mjs';
 
 const snapshot = `${repository}/blob/${sourceCommit}`;
 const sourceNote = (files) => `<p class="source-note">Based on the public source snapshot, not a production deployment assessment. ${files.map(([name, path]) => `<a href="${snapshot}/${path}">${name}</a>`).join(' · ')}.</p>`;
@@ -140,10 +140,11 @@ export const projectPages = [
         <p><a class="text-link" href="/docs/source/reference/">Read the authentication and Agent reference</a> · <a class="text-link" href="/deployment/">Review operator responsibilities</a></p>
       </section>
       <section aria-labelledby="security-report"><h2 id="security-report">Report a concern without exposing it</h2>
-        <p>GitHub private vulnerability reporting was enabled when checked for the public repository on 23 October 2026. Use that channel to share a potential vulnerability privately with the repository’s maintainers.</p>
+        <p>Choose the repository that owns the affected application. Website login, enquiry-data and rendering concerns belong to the website owner; online judge and self-hosted application concerns belong to the product maintainers.</p>
         <p><strong>Keep exploit details and unpublished vulnerabilities out of public Issues and this website’s ordinary enquiry form.</strong> Include only the information needed to explain and reproduce the concern, and remove credentials, student data and unrelated private material.</p>
-        <p><a class="button primary" href="${repository}/security/advisories/new">Report a vulnerability privately on GitHub</a></p>
-        <p class="source-note">GitHub sign-in may be required. Opening the link sends nothing until you submit the report. The project does not publish a security-response deadline. <a href="https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately">Read GitHub’s private reporting guidance</a> or <a href="${repository}/security">check the repository’s current security page</a>.</p>
+        <p><a class="button primary" href="${websiteRepository}/security/advisories/new">Report a website vulnerability privately</a> · <a class="text-link" href="${repository}/security/advisories/new">Report a product vulnerability privately</a></p>
+        <p class="source-note">GitHub sign-in may be required. Opening a report sends nothing until you submit it. No security-response deadline is promised. If private reporting is unavailable, follow the website policy before sharing details.</p>
+        <p><a href="${websiteRepository}/blob/main/SECURITY.md">Read the website security policy</a> · <a href="https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately">Read GitHub’s private reporting guidance</a></p>
       </section>
       ${sourceNote([['Security architecture', 'docs/ARCHITECTURE.md'], ['Authentication reference', 'docs/REFERENCE.md'], ['Operations source', 'docs/OPERATIONS.md']])}
     `,
@@ -158,6 +159,10 @@ export const projectPages = [
         <p>UltiCode’s public repository is <a href="${repository}">DavidHLP/UltiCode</a>, maintained under the DavidHLP account and distributed under the MIT License. The repository is the place to inspect source, changes, Issues, pull requests and automated checks.</p>
         <p>Community participation is welcome. There is no published support-response guarantee or governing foundation claimed by this website.</p>
         <p><a class="button primary" href="${repository}">Explore the GitHub repository</a> · <a class="text-link" href="/licensing/">Read the license</a></p>
+      </section>
+      <section aria-labelledby="community-website"><h2 id="community-website">Contribute to this website</h2>
+        <p>Website text, translations, broken links, rendering and enquiry-flow issues belong in the separate Sites-UltiCode repository. Product features and self-hosted deployment issues remain in UltiCode.</p>
+        <p><a href="${websiteRepository}/issues">Report a website issue</a> · <a href="${websiteRepository}/blob/main/CONTRIBUTING.md">Read the website contribution guide</a> · <a href="${repository}/issues">Report a product issue</a></p>
       </section>
       <section aria-labelledby="community-channel"><h2 id="community-channel">Choose the right kind of Issue</h2>
         <div class="table-scroll"><table><thead><tr><th scope="col">You need to</th><th scope="col">Include</th></tr></thead><tbody>
@@ -194,6 +199,10 @@ export const projectPages = [
       <section aria-labelledby="license-summary"><h2 id="license-summary">The repository is MIT licensed</h2>
         <p>The MIT License permits use, modification and distribution, including commercial use, subject to retaining the copyright and permission notice in copies or substantial portions of the software. The source is provided without warranty under the terms below.</p>
         <p><a class="text-link" href="${snapshot}/LICENSE">Read the license in the pinned source</a> · <a class="text-link" href="${repository}/blob/main/LICENSE">Check the current repository license</a></p>
+      </section>
+      <section aria-labelledby="license-website"><h2 id="license-website">This website has its own license</h2>
+        <p>The website’s MIT license covers its own code, authored copy, translations and original assets. Imported product documents and screenshots retain the product’s license and copyright; third-party materials keep their own notices. Names and logos do not grant trademark rights or imply endorsement.</p>
+        <p><a href="${websiteRepository}/blob/main/LICENSE">Read the website MIT license</a> · <a href="${websiteRepository}/blob/main/README.md#license-and-materials">Review website material boundaries</a></p>
       </section>
       <section aria-labelledby="license-text"><h2 id="license-text">MIT License</h2>
         <pre class="license-text">Copyright (c) 2026 UltiCode
@@ -270,7 +279,7 @@ SOFTWARE.</pre>
       </section>
       <section aria-labelledby="contact-private"><h2 id="contact-private">Keep private material out of the public tracker</h2>
         <p>Do not include student records, private code, credentials, environment-file contents, confidential procurement material or complete logs. For a deployment problem, provide sanitized details and the smallest useful reproduction.</p>
-        <p>For a potential vulnerability, use the <a href="${repository}/security/advisories/new">private GitHub vulnerability-reporting channel</a>. Keep vulnerability details out of public Issues and this website’s ordinary enquiry form. <a href="/security/#security-report">Read the reporting guidance</a> before sharing details.</p>
+        <p>For a potential website or product vulnerability, <a href="/security/#security-report">choose the correct private reporting channel</a>. Keep vulnerability details out of public Issues and this website’s ordinary enquiry form.</p>
         <p>If you follow a GitHub link, any information you submit there is handled by GitHub and the public repository’s participants. Review where your message will be delivered before sending it.</p>
         <p><a class="text-link" href="/privacy/">Read this website’s privacy information</a> · <a class="text-link" href="/community/">Find help and contribution guidance</a></p>
       </section>

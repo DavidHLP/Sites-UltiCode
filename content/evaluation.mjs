@@ -1,4 +1,4 @@
-import { repository, sourceCommit, sourceDate } from './site-config.mjs';
+import { repository, websiteRepository, sourceCommit, sourceDate } from './site-config.mjs';
 
 const source = `${repository}/blob/${sourceCommit}`;
 
@@ -87,7 +87,8 @@ curl --fail http://127.0.0.1:9105/api/v1/notification/health/ready</code></pre>
         <div class="table-scroll"><table><thead><tr><th scope="col">Need</th><th scope="col">Channel</th><th scope="col">Handling</th></tr></thead><tbody>
           <tr><th scope="row">Ordinary project or evaluation question</th><td><a href="/contact/">Signed-in website enquiry</a></td><td>A saved record for the Site owner to review through Sites. You can read and delete your own records. No automatic email forwarding is configured.</td></tr>
           <tr><th scope="row">Reproducible repository defect or proposal</th><td><a href="${repository}/issues">GitHub Issues</a></td><td>Public project tracking. Search existing reports and include a minimal sanitized reproduction.</td></tr>
-          <tr><th scope="row">Potential vulnerability</th><td><a href="${repository}/security/advisories/new">Private GitHub vulnerability reporting</a></td><td>Keep exploit details out of public Issues and the ordinary website form. Check the repository security page if GitHub does not offer the reporting action.</td></tr>
+          <tr><th scope="row">Website text, translation or rendering defect</th><td><a href="${websiteRepository}/issues">Website Issues</a></td><td>Use the website bug form with the page URL, environment and reproduction.</td></tr>
+          <tr><th scope="row">Potential vulnerability</th><td><a href="/security/#security-report">Website and product private reporting</a></td><td>Choose the affected repository. Keep exploit details out of public Issues and the ordinary website form.</td></tr>
           <tr><th scope="row">An incident in your installation</th><td>Your institution’s operating contact</td><td>The deployment owner handles access, backups, availability and incident response; community tracking is not an emergency service.</td></tr>
         </tbody></table></div>
         <p>There is no staffed help desk, promised review schedule, paid support plan or response-time guarantee offered by this website. Saving an enquiry confirms storage, not assignment or a booked pilot. The public project account is <a href="https://github.com/DavidHLP">DavidHLP</a>; that identity does not imply a separate legal entity or contracting service.</p>
