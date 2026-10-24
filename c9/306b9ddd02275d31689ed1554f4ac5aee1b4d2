@@ -1,0 +1,21 @@
+content/evaluation.mjs
+  s_69205ccd1411bd::t_556f1e4e3ee883 89-90
+content/locales/zh-project.mjs
+  s_69205ccd1411bd::t_556f1e4e3ee883 413-414,542,544
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c9306b9ddd02275d31689ed1554f4ac5aee1b4d2",
+  "prompts": {},
+  "sessions": {
+    "s_69205ccd1411bd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a167d4-d121-7ae2-b7f1-084f1af98494",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
