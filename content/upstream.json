@@ -4,9 +4,10 @@
   "defaultBranch": "main",
   "license": "MIT",
   "sourceCommit": "ec4e9b135ac1404348e0b57d58b5b745301f7d5f",
+  "screenshotSourceCommit": "7d0eca225ce448d497bcb69af3a2e45ab0e9d1ba",
   "sourceUrl": "https://github.com/DavidHLP/UltiCode/tree/ec4e9b135ac1404348e0b57d58b5b745301f7d5f",
   "sourceDate": "2026-10-23T08:14:27Z",
-  "checkedAt": "2026-10-23T08:50:06.164Z",
+  "checkedAt": "2026-10-24T14:48:28.498Z",
   "archived": false,
   "discussionsEnabled": false,
   "releases": [],
@@ -87,28 +88,28 @@
     },
     {
       "path": "assets/screenshots/README.md",
-      "bytes": 3194
+      "bytes": 4008
     }
   ],
   "screenshots": [
     {
       "filename": "problem-detail-dark.png",
       "title": "Solve a problem",
-      "alt": "Sample problem statement beside a code editor and verdict, in dark mode",
+      "alt": "Sample problem statement beside a C++ code editor and test-case panel, in dark mode",
       "width": 1496,
       "height": 933
     },
     {
       "filename": "problem-set-dark.png",
       "title": "Browse the problem library",
-      "alt": "Sample problem library with difficulty filters and problem rows, in dark mode",
+      "alt": "Sample problem library with collections, filters and problem rows, in dark mode",
       "width": 1496,
       "height": 933
     },
     {
       "filename": "contests-dark.png",
       "title": "Find a contest",
-      "alt": "Sample contest listings and registration information, in dark mode",
+      "alt": "Sample contest listings, virtual-contest links and rankings, in dark mode",
       "width": 1496,
       "height": 933
     },

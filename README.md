@@ -52,6 +52,6 @@ The [CI workflow](.github/workflows/ci.yml) runs the existing installation helpe
 
 The root [MIT license](LICENSE) covers website-owned code, authored documentation/copy, translations and original website assets, including the custom styles, `public/favicon.svg` and `public/social-preview.jpg`.
 
-- Imported product documents in `content/upstream/` retain the [UltiCode MIT license and copyright](content/upstream/LICENSE). The copied images in `public/assets/screenshots/` come from that product snapshot; retain its notice when redistributing them. [Source metadata](content/upstream.json) records provenance. The root license does not replace upstream notices.
+- Imported product documents in `content/upstream/` retain the [UltiCode MIT license and copyright](content/upstream/LICENSE). The copied images in `public/assets/screenshots/` and their imported index use the separately pinned `screenshotSourceCommit` in [source metadata](content/upstream.json); retain the product notice when redistributing them. The root license does not replace upstream notices.
 - Third-party/runtime materials and dependencies keep their own terms, including the [Sites Vite plugin notice](scripts/vite/sites-vite-plugin.LICENSE) and [vendored shadcn stylesheet notice](vendor/shadcn-tailwind-4.13.0.LICENSE.md). Review dependency licenses for your distribution.
 - Names and logos identify the projects; no trademark rights, endorsement or rights to separately supplied problem content, datasets or student work are granted by the website license.
