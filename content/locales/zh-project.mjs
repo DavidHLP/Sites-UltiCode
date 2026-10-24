@@ -1,3 +1,8 @@
+import upstream from '../upstream.json' with { type: 'json' };
+
+const checkedDate = upstream.checkedAt.slice(0, 10);
+const sourceDate = upstream.sourceDate.slice(0, 10);
+
 export default {
   'Product': '产品',
   'One place for problems, submissions and contests': '题目、提交与比赛，集中一处',
@@ -440,7 +445,7 @@ export default {
   'See the work, from both sides.': '从使用与管理两侧了解产品。',
   'Explore the public repository’s learner and administration interface references.': '浏览公开仓库中的学习者与管理界面参考。',
   'Repository interfaces, with context': '了解仓库界面的使用背景',
-  'These unmodified images are the public project’s design and regression reference screenshots. All accounts, names, activity totals, rates, dates and results shown are development or sample data. They are not customer records, usage statistics or proof of production operation.': '这些未经修改的图片是公开项目的设计与回归参考截图。所示账号、姓名、活动总量、比率、日期与结果均为开发或样例数据，不是客户记录、使用统计或生产运营证明。',
+  'These unmodified images are the public project’s UI 2.0 design and regression reference screenshots. All accounts, names, activity totals, rates, dates and results shown are development or sample data. They are not customer records, usage statistics or proof of production operation.': '这些未经修改的图片是公开项目 UI 2.0 的设计与回归参考截图。所示账号、姓名、活动总量、比率、日期与结果均为开发或样例数据，不是客户记录、使用统计或生产运营证明。',
   'The reference viewport is 1496 × 933 pixels. Open an image to inspect it at full size. Interface behavior and available features depend on your installed revision and configuration.': '参考视口为 1496 × 933 像素。可打开图片查看原始尺寸。界面行为与可用功能取决于实际安装版本和配置。',
   'Read the screenshot index ↗': '阅读截图索引 ↗',
   'Prepare your own evaluation': '准备您自己的评估',
@@ -458,12 +463,13 @@ export default {
   'Follow the source. Understand the release.': '跟进源码，了解发布。',
   'Trace the source snapshot, public release status and recent default-branch changes.': '追溯源码快照、公开发布状态与默认分支近期变更。',
   'Release status': '发布状态',
-  'No published GitHub Releases were returned when this website’s source snapshot was checked on 2026-10-23. This website does not assign the project a stable release number, release stage or long-term support promise.': '2026-10-23 检查本网站源码快照时，没有返回已发布的 GitHub Release。本网站不会自行赋予项目稳定版本号、发布阶段或长期支持承诺。',
+  [`No published GitHub Releases were returned when this website’s source snapshot was checked on ${checkedDate}. This website does not assign the project a stable release number, release stage or long-term support promise.`]: `${checkedDate} 检查本网站源码快照时，没有返回已发布的 GitHub Release。本网站不会自行赋予项目稳定版本号、发布阶段或长期支持承诺。`,
   'Check current GitHub Releases ↗': '查看当前 GitHub Release ↗',
   'A traceable documentation snapshot': '可追溯的文档快照',
-  'The documentation and screenshots on this site come from the public default branch at': '本站文档与截图来自公开默认分支的以下版本：',
-  ', committed on 2026-10-23. A snapshot is a reference point, not a production acceptance result.': '，提交于 2026-10-23。快照是参考点，不是生产验收结果。',
-  'Repository status was checked on 2026-10-23. The repository was not archived. This page is a dated snapshot; the latest source, Issues and pull requests can change independently.': '仓库状态检查于 2026-10-23，当时未归档。本页是注明日期的快照；最新源码、Issue 与拉取请求可以独立变化。',
+  'The documentation on this site comes from the public default branch at': '本站文档来自公开默认分支的以下版本：',
+  'Interface screenshots are pinned separately at': '界面截图单独固定在以下版本：',
+  [`, committed on ${sourceDate}. A snapshot is a reference point, not a production acceptance result.`]: `，提交于 ${sourceDate}。快照是参考点，不是生产验收结果。`,
+  [`Repository status was checked on ${checkedDate}. The repository was not archived. This page is a dated snapshot; the latest source, Issues and pull requests can change independently.`]: `仓库状态检查于 ${checkedDate}，当时未归档。本页是注明日期的快照；最新源码、Issue 与拉取请求可以独立变化。`,
   'Recent source changes': '近期源码变更',
   'Source change ·': '源码变更 ·',
   'Commit titles describe source history. They are not feature acceptance, a release announcement or a promise that an optional service is enabled in your deployment.': '提交标题描述源码历史，不代表功能验收、发布公告，也不承诺您的部署已启用可选服务。',
@@ -514,9 +520,9 @@ export default {
   'Open Manage users reference image at full size': '以原始尺寸打开用户管理参考图',
   'Open Organize contests reference image at full size': '以原始尺寸打开比赛管理参考图',
   'Open Share a discussion reference image at full size': '以原始尺寸打开社区讨论参考图',
-  'Sample problem statement beside a code editor and verdict, in dark mode': '深色模式下的样例题面、代码编辑器与评测结果',
-  'Sample problem library with difficulty filters and problem rows, in dark mode': '深色模式下带难度筛选与题目列表的样例题库',
-  'Sample contest listings and registration information, in dark mode': '深色模式下的样例比赛列表与报名信息',
+  'Sample problem statement beside a C++ code editor and test-case panel, in dark mode': '深色模式下的样例题面、C++ 代码编辑器与测试用例面板',
+  'Sample problem library with collections, filters and problem rows, in dark mode': '深色模式下带题单、筛选与题目列表的样例题库',
+  'Sample contest listings, virtual-contest links and rankings, in dark mode': '深色模式下的样例比赛列表、虚拟赛入口与排名',
   'Sample submissions with verdicts, language and run details, in dark mode': '深色模式下展示评测结果、语言与运行详情的样例提交',
   'Sample administration dashboard with example activity numbers, in dark mode': '深色模式下带示例活动数字的管理仪表盘',
   'Sample user administration with example accounts, in dark mode': '深色模式下使用示例账号的用户管理',

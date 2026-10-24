@@ -5,9 +5,11 @@ import { fileURLToPath } from 'node:url';
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const REPOSITORY = 'DavidHLP/UltiCode';
 const SOURCE_COMMIT = 'ec4e9b135ac1404348e0b57d58b5b745301f7d5f';
+const SCREENSHOT_COMMIT = '7d0eca225ce448d497bcb69af3a2e45ab0e9d1ba';
 const SOURCE_URL = `https://github.com/${REPOSITORY}`;
 const API_URL = `https://api.github.com/repos/${REPOSITORY}`;
 const RAW_URL = `https://raw.githubusercontent.com/${REPOSITORY}/${SOURCE_COMMIT}`;
+const SCREENSHOT_RAW_URL = `https://raw.githubusercontent.com/${REPOSITORY}/${SCREENSHOT_COMMIT}`;
 const DOCUMENTS = [
   'README.md', 'README.zh-CN.md', 'LICENSE', 'docs/index.md',
   'docs/PRODUCT.md', 'docs/ARCHITECTURE.md', 'docs/DEVELOPMENT.md',
@@ -15,9 +17,9 @@ const DOCUMENTS = [
 ];
 // These public design/regression references are examples, not customer evidence.
 const SCREENSHOTS = [
-  ['problem-detail-dark.png', 'Solve a problem', 'Sample problem statement beside a code editor and verdict, in dark mode'],
-  ['problem-set-dark.png', 'Browse the problem library', 'Sample problem library with difficulty filters and problem rows, in dark mode'],
-  ['contests-dark.png', 'Find a contest', 'Sample contest listings and registration information, in dark mode'],
+  ['problem-detail-dark.png', 'Solve a problem', 'Sample problem statement beside a C++ code editor and test-case panel, in dark mode'],
+  ['problem-set-dark.png', 'Browse the problem library', 'Sample problem library with collections, filters and problem rows, in dark mode'],
+  ['contests-dark.png', 'Find a contest', 'Sample contest listings, virtual-contest links and rankings, in dark mode'],
   ['submissions-list-dark.png', 'Review submissions', 'Sample submissions with verdicts, language and run details, in dark mode'],
   ['admin-dashboard-dark.png', 'Manage the platform', 'Sample administration dashboard with example activity numbers, in dark mode'],
   ['user-management-dark.png', 'Manage users', 'Sample user administration with example accounts, in dark mode'],
@@ -72,9 +74,9 @@ async function sync() {
   const [repository, source, releases, commits, documents, screenshots] = await Promise.all([
     json(''), json(`/commits/${SOURCE_COMMIT}`), json('/releases?per_page=6'),
     json(`/commits?sha=${SOURCE_COMMIT}&per_page=6`),
-    Promise.all(DOCUMENTS.map(async path => ({ path, data: await download(`${RAW_URL}/${path}`) }))),
+    Promise.all(DOCUMENTS.map(async path => ({ path, data: await download(`${path === 'assets/screenshots/README.md' ? SCREENSHOT_RAW_URL : RAW_URL}/${path}`) }))),
     Promise.all(SCREENSHOTS.map(async ([filename, title, alt]) => {
-      const data = await download(`${RAW_URL}/assets/screenshots/${filename}`);
+      const data = await download(`${SCREENSHOT_RAW_URL}/assets/screenshots/${filename}`);
       if (data.length < 24 || !data.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) {
         throw new Error(`Invalid PNG: ${filename}`);
       }
@@ -97,6 +99,7 @@ async function sync() {
     defaultBranch: repository.default_branch,
     license: repository.license.spdx_id,
     sourceCommit: SOURCE_COMMIT,
+    screenshotSourceCommit: SCREENSHOT_COMMIT,
     sourceUrl: `${SOURCE_URL}/tree/${SOURCE_COMMIT}`,
     sourceDate: source.commit.committer.date,
     checkedAt: new Date().toISOString(),
@@ -117,7 +120,7 @@ async function sync() {
   for (const { path, data } of documents) await atomicWrite(join(ROOT, 'content/upstream', path), data);
   for (const { filename, data } of screenshots) await atomicWrite(join(ROOT, 'public/assets/screenshots', filename), data);
   await atomicWrite(join(ROOT, 'content/upstream.json'), `${JSON.stringify(snapshot, null, 2)}\n`);
-  console.log(`Updated ${documents.length} documents and ${screenshots.length} screenshots from ${REPOSITORY} at ${SOURCE_COMMIT}.`);
+  console.log(`Updated public documents at ${SOURCE_COMMIT} and ${screenshots.length} screenshots plus their index at ${SCREENSHOT_COMMIT} from ${REPOSITORY}.`);
   console.log(`${snapshot.releases.length} public releases; ${snapshot.commits.length} commits through ${snapshot.sourceDate}.`);
 }
 
