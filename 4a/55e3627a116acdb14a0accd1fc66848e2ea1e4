@@ -1,0 +1,14 @@
+tests/release-guidance.test.mjs
+  h_77173abe25c3ff 4,12-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4a55e3627a116acdb14a0accd1fc66848e2ea1e4",
+  "prompts": {},
+  "humans": {
+    "h_77173abe25c3ff": {
+      "author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
