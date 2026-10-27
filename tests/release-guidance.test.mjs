@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
 import { origin } from '../content/site-config.mjs';
 import { projectPages } from '../content/project.mjs';
 import { guides } from '../content/guides.mjs';
@@ -8,6 +9,10 @@ import { guides } from '../content/guides.mjs';
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('generated discovery resources use the confirmed official origin', async () => {
+  // CI runs tests before the production build; generate the resources under test.
+  execFileSync(process.execPath, ['scripts/content/build-content.mjs'], {
+    cwd: new URL('..', import.meta.url), stdio: 'pipe',
+  });
   assert.equal(origin, 'https://ulticode.davidhlp.dpdns.org');
   for (const path of ['public/robots.txt', 'public/sitemap.xml', 'public/llms.txt', 'public/resources/institutional-review-checklist.md']) {
     const text = await read(path);
