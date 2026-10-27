@@ -42,7 +42,7 @@ export default {
   'Availability depends on the deployment.': '可用性取决于实际部署。',
   'Active-active production operation, transparent failover and production recovery targets are not established project claims.': '项目没有确立生产双活、透明故障切换或生产恢复目标等承诺。',
   'Learning assistance has separate controls.': '学习辅助具有独立控制。',
-  'Management controls Agent availability; the feature defaults to enabled when no setting exists. The Python service, model configuration, source consent and persistence permissions are still separate requirements. Operators must review external providers, retention and costs before learner use.': '管理端控制 Agent 可用性；没有配置时默认开启。Python 服务、模型配置、源码授权与持久化权限仍是独立要求。面向学习者启用前，运维方必须审查外部提供方、保留规则和费用。',
+  'Keep the experimental Agent disabled for evaluation until an administrator explicitly authorizes availability. The pinned historical snapshot can enable it when unset, so configure it explicitly rather than relying on an absent setting. The Python service, model configuration, source consent and persistence permissions are still separate requirements. Operators must review external providers, retention and costs before learner use.': '评估时先明确关闭实验性 Agent，仅在管理员明确授权后开放。固定历史快照可能在未设置时开启，因此不能依赖缺省设置。Python 服务、模型配置、源码授权与持久化权限仍是独立要求。面向学习者启用前，运维方必须审查外部提供方、保留规则和费用。',
   'Repository descriptions explain intended boundaries. Confirm behavior against the chosen revision, configuration and your own acceptance criteria.': '仓库说明解释预期边界。请按选定版本、配置和您自己的验收标准确认行为。',
   'Plan an institutional evaluation': '规划机构评估',
   'Review deployment responsibilities': '查看部署责任',

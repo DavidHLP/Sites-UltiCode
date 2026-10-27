@@ -2,7 +2,7 @@
 
 An institution-first website for [UltiCode](https://github.com/DavidHLP/UltiCode), published with Sites using the Vinext runtime. It provides English and Simplified Chinese project pages, pinned public documentation, evaluation resources, browser search, signed-in enquiries and optional aggregate analytics.
 
-Published website: [ulticode.bloomywren4096.chatgpt.site](https://ulticode.bloomywren4096.chatgpt.site/).
+Published website: [ulticode.davidhlp.dpdns.org](https://ulticode.davidhlp.dpdns.org/).
 
 This website is a separate application from the UltiCode product. It does not host a judging environment or receive student submissions from self-hosted installations.
 

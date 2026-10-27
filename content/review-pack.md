@@ -30,7 +30,7 @@ No institution-specific SAML, SCIM or learning-management-system integration is 
 
 ## Current Agent behavior
 
-Management's Agent feature setting controls availability; a missing setting defaults to enabled. The former VITE_AGENT_REVIEW_ENABLED frontend flag is no longer read. A feature setting does not start the separate Python service, configure a model, authorize external calls or grant persistence.
+Keep the experimental Agent explicitly disabled for evaluation until administrator opt-in. The pinned historical snapshot can enable availability when unset; do not rely on an absent setting. The former VITE_AGENT_REVIEW_ENABLED frontend flag is no longer read. A feature setting does not start the separate Python service, configure a model, authorize external calls or grant persistence.
 
 Eligible sources are an account's own completed ordinary-practice submissions. Contest or unfinished submissions are excluded. Source-aware analysis requires explicit consent; the source read is bounded to 12,000 characters. Opening a workspace does not start analysis. Model calls and persistence have separate runtime controls.
 
