@@ -1,0 +1,175 @@
+README.md
+  s_eca4bc1dc8f1fb::t_849d23bc15db50 1,3,5,7-20,23-25,28-34,36-40,42,44,46
+  s_eca4bc1dc8f1fb::t_0e486aac77cad8 48
+lib/site-api.mjs
+  s_eca4bc1dc8f1fb::t_224354cc4d76ed 1-68,74-89,91-106,108-146
+  s_eca4bc1dc8f1fb::t_78233fabba5824 107
+  s_eca4bc1dc8f1fb::t_a99ee2c10c8146 69-71,73
+  s_eca4bc1dc8f1fb::t_5f2ebee9aac5b5 90
+  s_eca4bc1dc8f1fb::t_a1fb148045a63d 72
+public/site.css
+  s_eca4bc1dc8f1fb::t_c7037aa2a7daaa 1-112,114-123
+  s_eca4bc1dc8f1fb::t_22ab547a3d10ec 113
+.gitignore
+  s_eca4bc1dc8f1fb::t_849d23bc15db50 1-53
+app/api/contact/route.ts
+  s_eca4bc1dc8f1fb::t_224354cc4d76ed 1-11
+scripts/sync-source.mjs
+  s_eca4bc1dc8f1fb::t_d0eb744ca95259 1-127
+app/layout.tsx
+  s_eca4bc1dc8f1fb::t_8ea469a5ea7f6b 1-23
+scripts/render-content.mjs
+  s_eca4bc1dc8f1fb::t_8ea469a5ea7f6b 1-92
+db/schema.ts
+  s_eca4bc1dc8f1fb::t_224354cc4d76ed 1-40
+app/api/analytics/route.ts
+  s_eca4bc1dc8f1fb::t_224354cc4d76ed 1-6
+content/guides.mjs
+  s_eca4bc1dc8f1fb::t_cd04085cf1fa31 1-266
+tests/site-api.test.mjs
+  s_eca4bc1dc8f1fb::t_a99ee2c10c8146 1-72,74-95,97-139,141-149,151-161
+  s_eca4bc1dc8f1fb::t_78233fabba5824 73,96
+  s_eca4bc1dc8f1fb::t_9c47ebb51c70a4 140,150
+.openai/hosting.json
+  s_eca4bc1dc8f1fb::t_8ea469a5ea7f6b 3-4
+tests/render-content.test.mjs
+  s_eca4bc1dc8f1fb::t_59ef71e5577b2b 1-23
+app/[[...slug]]/route.ts
+  s_eca4bc1dc8f1fb::t_8ea469a5ea7f6b 1-20
+content/project.mjs
+  s_eca4bc1dc8f1fb::t_fdb3b0f5df889a 1-135,140-225,227-261,263-265,268-273
+  s_eca4bc1dc8f1fb::t_1293a457e2c6de 226,262,267
+  s_eca4bc1dc8f1fb::t_5fe2144ca4fd8a 136-139,266
+next.config.ts
+  s_eca4bc1dc8f1fb::t_bb4f64143b7082 1-7
+scripts/build-content.mjs
+  s_eca4bc1dc8f1fb::t_529f3cec586261 20
+  s_eca4bc1dc8f1fb::t_d9560b6e8a8b01 28-29,56,61-62
+  s_eca4bc1dc8f1fb::t_8ea469a5ea7f6b 1-19,21-24,26-27,30-55,57-60,63-69
+  s_eca4bc1dc8f1fb::t_22ab547a3d10ec 25
+public/app.js
+  s_eca4bc1dc8f1fb::t_22ab547a3d10ec 186,190,201,236-238,244-248,250,259,263-270,276-280
+  s_eca4bc1dc8f1fb::t_ec9e2267e4c266 1-150,154-175,177-185,187-189,191,193-200,202-231,233-235,239-243,249,251-258,260,262,271-275,281-284
+  s_eca4bc1dc8f1fb::t_bb4f64143b7082 151-153,176,192,232,261
+package.json
+  s_eca4bc1dc8f1fb::t_aa4130d5920cb6 1-20,22-54
+  s_eca4bc1dc8f1fb::t_e75735e250a7aa 21
+.npmrc
+  s_eca4bc1dc8f1fb::t_fb03424c692f20 1-3
+app/chatgpt-auth.ts
+  s_eca4bc1dc8f1fb::t_ccbc4c9e535956 1-90
+app/globals.css
+  s_eca4bc1dc8f1fb::t_daca132bcb46d4 1-137
+cloudflare-env.d.ts
+  s_eca4bc1dc8f1fb::t_443021738f2a5a 1-6
+content/upstream.json
+  s_eca4bc1dc8f1fb::t_b74286ab761e8c 1-151
+content/upstream/LICENSE
+  s_eca4bc1dc8f1fb::t_692728f673d9dd 1-21
+content/upstream/README.md
+  s_eca4bc1dc8f1fb::t_3fe1cd5c7dbaa6 1-165
+content/upstream/README.zh-CN.md
+  s_eca4bc1dc8f1fb::t_669ced774e3892 1-165
+content/upstream/assets/screenshots/README.md
+  s_eca4bc1dc8f1fb::t_ca37a99dc25a6c 1-57
+content/upstream/docs/ARCHITECTURE.md
+  s_eca4bc1dc8f1fb::t_d9c8f35d82409d 1-382
+content/upstream/docs/DEVELOPMENT.md
+  s_eca4bc1dc8f1fb::t_4e76e47c7cb313 1-386
+content/upstream/docs/OPERATIONS.md
+  s_eca4bc1dc8f1fb::t_c38f586fdb9efa 1-396
+content/upstream/docs/PRODUCT.md
+  s_eca4bc1dc8f1fb::t_834101e08c0e9c 1-87
+content/upstream/docs/REFERENCE.md
+  s_eca4bc1dc8f1fb::t_0b3ffd31425010 1-219
+content/upstream/docs/index.md
+  s_eca4bc1dc8f1fb::t_7b789a93dd277e 1-38
+db/index.ts
+  s_eca4bc1dc8f1fb::t_a9cb90ad549961 1-13
+drizzle.config.ts
+  s_eca4bc1dc8f1fb::t_9bca91b590b9b9 1-7
+drizzle/0000_keen_mother_askani.sql
+  s_eca4bc1dc8f1fb::t_92e5b3c25af939 1-34
+drizzle/meta/0000_snapshot.json
+  s_eca4bc1dc8f1fb::t_cee65060c3e5f3 1-207
+drizzle/meta/_journal.json
+  s_eca4bc1dc8f1fb::t_89e50da1f9ac2f 1-13
+eslint.config.mjs
+  s_eca4bc1dc8f1fb::t_c15e551dec6fae 1-28
+lib/connector-context.ts
+  s_eca4bc1dc8f1fb::t_38ceae39a4d288 1-17
+lib/connector-contract.mts
+  s_eca4bc1dc8f1fb::t_4e7a123bc53e66 1-173
+lib/connector-errors.mts
+  s_eca4bc1dc8f1fb::t_4a19ea6e7d2909 1-83
+lib/connector-preview.d.ts
+  s_eca4bc1dc8f1fb::t_c62d86ecd5faca 1-12
+lib/connectors.ts
+  s_eca4bc1dc8f1fb::t_a35ae33d61d7a3 1-13
+package-lock.json
+  s_eca4bc1dc8f1fb::t_6cae0a743c75b4 1-11518
+postcss.config.mjs
+  s_eca4bc1dc8f1fb::t_dcd639259ae4a4 1-7
+scripts/build-verified.sh
+  s_eca4bc1dc8f1fb::t_1d904463b5d500 1-26
+scripts/connector-preview/connector-preview-session.mjs
+  s_eca4bc1dc8f1fb::t_62e5ac6c8b914c 1-214
+scripts/connector-preview/host-binding.mjs
+  s_eca4bc1dc8f1fb::t_75e22abff64eec 1-217
+scripts/connector-preview/protocol.mjs
+  s_eca4bc1dc8f1fb::t_30f3c1b30d2863 1-60
+scripts/connector-preview/worker.mjs
+  s_eca4bc1dc8f1fb::t_e3b3d258ed1ced 1-17
+scripts/execution-profile.mjs
+  s_eca4bc1dc8f1fb::t_104e18473be99a 1-16
+scripts/install-ci.mjs
+  s_eca4bc1dc8f1fb::t_7bf5e7b4f767cb 1-49
+scripts/install-ci.sh
+  s_eca4bc1dc8f1fb::t_573fa082b23945 1-193
+scripts/install-pnpm.sh
+  s_eca4bc1dc8f1fb::t_8a8383ea80ce82 1-216
+scripts/npm-install.mjs
+  s_eca4bc1dc8f1fb::t_1149a8594261a9 1-231
+scripts/pnpm-install.mjs
+  s_eca4bc1dc8f1fb::t_c6eb3295c9641e 1-261
+scripts/run-framework.mjs
+  s_eca4bc1dc8f1fb::t_35d73e9f33b288 1-23
+scripts/sites-env.mjs
+  s_eca4bc1dc8f1fb::t_85d889c9d4f345 1-16
+scripts/sites-env.sh
+  s_eca4bc1dc8f1fb::t_a16b47a2ee8ba2 1-53
+scripts/tool-environment.mjs
+  s_eca4bc1dc8f1fb::t_578ff598cb9755 1-19
+scripts/vite/connector-preview-plugin.mjs
+  s_eca4bc1dc8f1fb::t_7324632e2fe86f 1-198
+scripts/vite/sites-vite-plugin.LICENSE
+  s_eca4bc1dc8f1fb::t_718ccf236b129a 1-21
+scripts/vite/sites-vite-plugin.ts
+  s_eca4bc1dc8f1fb::t_cf1f17b51d4cda 1-230
+tsconfig.json
+  s_eca4bc1dc8f1fb::t_44c16f1c792300 1-53
+vendor/shadcn-tailwind-4.13.0.LICENSE.md
+  s_eca4bc1dc8f1fb::t_52215d926fef6a 1-21
+vendor/shadcn-tailwind-4.13.0.css
+  s_eca4bc1dc8f1fb::t_c5b30f5cfa446b 1-629
+vite.config.ts
+  s_eca4bc1dc8f1fb::t_d5733352d042e4 1-92
+worker/index.ts
+  s_eca4bc1dc8f1fb::t_dca23047db54e9 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "195224fcc231a81ffbd37698e7ac9a32c3ed05b3",
+  "prompts": {},
+  "sessions": {
+    "s_eca4bc1dc8f1fb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1646e-dd61-7571-acba-b7e9e10e3ee6",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
