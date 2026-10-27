@@ -202,7 +202,7 @@ git checkout ${sourceCommit}</code></pre>
 
       <section id="optional-analysis">
         <h2>Optional analysis is a separate capability</h2>
-        <p>The Agent review workspace uses a separate service for an account’s own completed ordinary-practice submissions. In this revision, availability is controlled by the administrator’s Agent feature setting and defaults to enabled when no setting exists. This does not start the service or authorize model use. Contests and submissions still being judged remain outside the supported source scope.</p>
+        <p>The Agent review workspace uses a separate service for an account’s own completed ordinary-practice submissions. For evaluation, keep this experimental feature disabled until an administrator explicitly enables availability. The pinned snapshot can enable availability when unset, so use an explicit disabled setting. This does not start the service or authorize model use. Contests and submissions still being judged remain outside the supported source scope.</p>
         <p>Using an external model requires separate configuration and runtime authorization. Confirm the data scope and cost policy with the operator. Opening a submission or review workspace does not itself request a model analysis.</p>
         <p><a class="text-link" href="/docs/source/product/">Read the analysis feature boundaries</a> · <a class="text-link" href="/docs/troubleshooting/">Get help with a failed journey</a></p>
         ${sourceNote}
