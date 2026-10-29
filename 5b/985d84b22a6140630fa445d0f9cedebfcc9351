@@ -1,0 +1,29 @@
+content/home.html
+  s_46ffcb44007260::t_2b97ff37294c89 87-98
+content/locales/zh-extra.mjs
+  s_46ffcb44007260::t_5296c99fd2dcd7 7-44
+content/locales/zh-home-guides.mjs
+  s_46ffcb44007260::t_a8e444197e9c44 2-33
+public/styles.css
+  s_46ffcb44007260::t_191d729275d643 2
+scripts/content/build-content.mjs
+  s_46ffcb44007260::t_8f77ccb56311e0 34-39
+tests/release-guidance.test.mjs
+  s_46ffcb44007260::t_4089ebe4993c62 49-57,59-64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5b985d84b22a6140630fa445d0f9cedebfcc9351",
+  "prompts": {},
+  "sessions": {
+    "s_46ffcb44007260": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a182cb-e39c-7032-a3bb-090e8f2284ff",
+        "model": "gpt-6.1-terra"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
