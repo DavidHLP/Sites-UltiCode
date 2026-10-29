@@ -46,8 +46,22 @@ test('public workflows, reference images and downloads are available in both lan
     }
     const showcase = pages[`${prefix}/showcase/`];
     assert.equal((showcase.match(/<img data-public-reference /g) || []).length, upstream.screenshots.length);
-    assert.equal((showcase.match(/<img /g) || []).length, upstream.screenshots.length + 1);
+    assert.equal((showcase.match(/<img /g) || []).length, upstream.screenshots.length + 11);
+    for (const name of ['judge-cpp-accepted.jpg', 'agent-analysis-accepted.jpg', 'agent-analysis-ready.jpg', 'agent-analysis-result.jpg']) {
+      assert.ok(showcase.includes(`/assets/screenshots/${name}`), `${prefix}: ${name}`);
+    }
+    assert.match(showcase, /earlier Sandbox Error and a later Accepted result|修复前的 Sandbox Error 和修复后的 Accepted/);
+    assert.match(showcase, /earlier error analysis and a later Accepted result analysis|此前错误的分析和之后 Accepted 结果的分析/);
+    assert.match(showcase, /earlier attempt that did not complete|此前未完成的分析/);
+    assert.match(showcase, /submission source was not sent|提交源码未发送/);
+    assert.match(showcase, /not a verified diagnosis|并非经验证的诊断/);
     assert.match(showcase, /src="\/assets\/screenshots\/landing-light.jpg" width="1264" height="720"/);
+    assert.match(showcase, /src="\/assets\/screenshots\/management-problems.jpg" width="1280" height="720"/);
+    assert.match(showcase, /src="\/assets\/screenshots\/console-problem-list.jpg" width="1264" height="720"/);
+    for (const name of ['console-forum-detail.jpg', 'console-solutions.jpg', 'console-appearance.jpg', 'console-rankings.jpg']) {
+      assert.ok(showcase.includes(`/assets/screenshots/${name}`), `${prefix}: ${name}`);
+    }
+    assert.match(showcase, /local development interfaces and example data|本地开发界面和示例数据/);
     assert.match(showcase, /unverified UI wording, not product guarantees|未经验证的界面文案，不构成产品保证/);
     for (let number = 1; number <= upstream.screenshots.length; number++) {
       assert.ok(showcase.includes(`id="interface-${number}"`));
