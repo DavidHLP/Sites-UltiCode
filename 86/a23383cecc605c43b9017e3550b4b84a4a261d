@@ -1,0 +1,22 @@
+app/[[...slug]]/route.ts
+  s_f7d7e51bae9d12::t_fd50e6ebe03a70 8
+tests/release-guidance.test.mjs
+  s_f7d7e51bae9d12::t_fd50e6ebe03a70 47
+  s_f7d7e51bae9d12::t_92c58174cd095d 54-59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "86a23383cecc605c43b9017e3550b4b84a4a261d",
+  "prompts": {},
+  "sessions": {
+    "s_f7d7e51bae9d12": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a18862-03da-76f0-b451-1a005d5f3e60",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
