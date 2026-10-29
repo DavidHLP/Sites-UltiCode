@@ -71,7 +71,8 @@ flowchart LR
   Owners --> App[App 9103]
   Owners --> Notify[Notification 9105]
   App -->|Submission owner route| Submission[Submission 9106 / Dubbo 20886]
-  App -->|Judge Streams| Judge[Judge worker Dubbo 20884]
+  Submission -->|Judge Streams| Judge[Judge worker Dubbo 20884]
+  App -->|Public preview RPC| Judge
   App -->|SearchDocumentChanged| Search[Search worker]
   Owners --> MySQL[(MySQL owner schemas)]
   Owners --> Redis[(Redis ACL / Streams / cache)]
@@ -92,7 +93,7 @@ flowchart LR
 2. **单写者**：Submission 和 Notification 的持久化 writer 分别只在对应 Owner；App 只保留 Submission remote adapter、Notification intent 发布和 WebSocket relay。
 3. **单跳同步调用**：Admin 可调用 Auth/App/Notification 的一个 Provider；Provider 不为同一命令同步调用第三个 Provider。跨边界副作用使用 Outbox/Inbox/Streams。
 4. **本地事务**：强一致 invariant 留在一个 Owner 的 MySQL 事务内；Redis、SMTP、WebSocket、对象存储、搜索和审计使用 outbox、inbox、lease、fence 或补偿。
-5. **安全边界**：共享 `platform/web-security` 负责 JWT/JWKS、Cookie CSRF、委托断言和 replay guard；`platform/observability` 在 OTLP authorization 配置时 fail closed，拒绝非 HTTPS endpoint；各 Owner 只保留路由与策略包装。访问令牌只来自 HttpOnly cookie；WebSocket 只接受 `access_token` cookie。
+5. **安全边界**：共享 `platform/web-security` 负责 JWT/JWKS、Cookie CSRF、委托断言和 replay guard；`platform/observability` 在 OTLP authorization 配置时 fail closed，拒绝非 HTTPS endpoint；各 Owner 只保留路由与策略包装。访问令牌只来自 HttpOnly cookie；WebSocket 只接受 `access_token` cookie。Handshake 暂存凭据使用日志可安全呈现的 opaque wrapper；CONNECT 消费后移除凭据，session/debug 日志不输出原始 token。
 
 ### 查找入口
 
@@ -119,6 +120,8 @@ flowchart LR
 
 `services/platform/observability` 是所有 Owner/Worker 共用的 OTLP
 credential-to-endpoint security guard：配置 authorization 时只允许 HTTPS。
+Admin, Search, and Submission also share `SchedulerFactory` for scheduler
+shutdown policies and metrics; each owner retains its Bean names and pool settings.
 
 ### 服务边界
 
@@ -144,12 +147,16 @@ Submission 是唯一 mutation/fence owner。App 请求边界组装不可变 `Sub
 
 Notification 是 notifications、preferences、delivery ledger 和 email 的唯一持久化 owner。App 保留 intent 发布与 WebSocket relay，不保留 Notification SQL。Admin 通过 `NotificationReconciliationReadPort` 消费 500 行上限的 owner facts。
 
+App and Notification share the Submission-owned `SubmissionLifecycleEventContract`
+validation for required non-negative integer fields in `SubmissionJudged` payloads.
+Each consumer retains its own terminal-status checks and inbox retry boundary.
+
 #### Judge / Search
 
 Judge 通过 Redis Streams 异步接收 Submission outbox，使用 Problem facts 和沙箱控制执行，失败留在 PEL 或进入 DLQ。Search 只消费 allowlisted、版本化事件并更新 MeiliSearch；删除是 tombstone，业务写路径不得直写索引。
 #### Agent
 
-The Agent is a standalone consumer of existing Auth/App/LearningPlan HTTP contracts; it never connects to business databases or adds model-controlled write tools. The only bounded model/tool loop is `agent_service.graph`; `agent_loop.run_tool_loop` delegates to it. The checkpointed workflow graph dispatches server-validated actions and reuses that read-only loop for analysis. Offline scripted-model injection and guarded live-provider analysis use the same workflow and kernel. Live analysis requires an explicit runtime opt-in, an existing active budget period, shared guard, and authorized `u03_analysis` purpose; its citation judge uses the separate `u03_citation_judge` purpose. Historical acceptance artifacts and candidate source fingerprints are not runtime dependencies.
+The Agent is a standalone consumer of existing Auth/App/LearningPlan HTTP contracts; it never connects to business databases or adds model-controlled write tools. The only bounded model/tool loop is `agent_service.graph`; `agent_loop.run_tool_loop` delegates to it. The checkpointed workflow graph dispatches server-validated actions and reuses that read-only loop for analysis. Offline scripted-model injection and guarded live-provider analysis use the same workflow and kernel. Live analysis requires an explicit runtime opt-in and provider credentials. With a loopback `ULTICODE_AGENT_ORIGIN` and no selected `ULTICODE_AGENT_BUDGET_POLICY`, local development may run without the shared cumulative ledger; per-request token and attempt limits remain, but there is no cumulative cost ceiling. Non-loopback live deployments require an existing active budget period, shared guard and authorized `u03_analysis` purpose; their citation judge uses the separate `u03_citation_judge` purpose. Manual analysis-only mode retains its fixed budget and cannot enable persistence. Historical acceptance artifacts and candidate source fingerprints are not runtime dependencies.
 
 LearningPlan drafts and workflow events live in canonical private Agent SQLite state; their LangGraph checkpoints are resumable workflow control state. Multi-turn conversations and ordered turns use independent SQLite records and run/event fences; chat analysis does not write a LangGraph checkpoint. Confirming a draft is not a Java write; only explicit save can persist a LearningPlan through Java. Uncertain writes remain `unknown` and reconcile through the original idempotency key. `/auth/me` is the identity source; unsafe Agent requests require the access/CSRF pair and matching header. Confirm/save/recover require the explicit persistence deployment setting and remain absent in manual analysis-only mode; model calls independently require budget authorization. Nonempty citations are checked against same-run retrieval, document integrity, and support/derivability; answer text also passes bounded source-fact and tool-trace checks. These safeguards do not guarantee perfect semantic correctness. Runtime configuration and retained checks are documented in [Development and testing](DEVELOPMENT.md#agent-本地运行).
 

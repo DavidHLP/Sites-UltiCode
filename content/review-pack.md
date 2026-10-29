@@ -1,12 +1,14 @@
 # UltiCode technical and institutional review pack
 
-Prepared 23 October 2026. This document describes the public project and the website's current service model. It is a review aid, not a signed offer, certification, completed institutional assessment or production acceptance report.
+Updated 29 October 2026. This document describes the public project and the website's current service model. It is a review aid, not a signed offer, certification, completed institutional assessment or production acceptance report.
 
 ## Product and availability
 
 UltiCode is a self-hostable online judge for problems, practice submissions, judging, contests, editorials, community and administration. Console is the learner interface; Management is the privileged operating interface. Source is MIT licensed. Obtaining it requires no software subscription from this website; infrastructure, staff and optional model services are separate costs.
 
 The available evaluation model is self-hosted: your institution supplies an environment, operator and permitted evaluation data. No managed hosting plan, paid pilot slot, fixed cohort allowance, support response deadline or commercial contract is offered through this website.
+
+Practice includes problem discovery, problem lists, a multi-panel problem workspace and submission results. Contests include registration, rankings and virtual participation where available. Learners can review their own submissions, editorials and bookmarks; Management provides problem and contest administration, moderation, audit and operational views. These describe implemented workflows, not an end-to-end acceptance result for your deployment.
 
 ## Source and freshness
 
@@ -30,15 +32,17 @@ No institution-specific SAML, SCIM or learning-management-system integration is 
 
 ## Current Agent behavior
 
-Keep the experimental Agent explicitly disabled for evaluation until administrator opt-in. The pinned historical snapshot can enable availability when unset; do not rely on an absent setting. The former VITE_AGENT_REVIEW_ENABLED frontend flag is no longer read. A feature setting does not start the separate Python service, configure a model, authorize external calls or grant persistence.
+The experimental Agent is off by default, including when its availability setting is absent. An administrator must explicitly enable it. The former VITE_AGENT_REVIEW_ENABLED frontend flag is no longer read. A feature setting does not start the separate Python service, configure a model, authorize external calls or grant persistence.
 
 Eligible sources are an account's own completed ordinary-practice submissions. Contest or unfinished submissions are excluded. Source-aware analysis requires explicit consent; the source read is bounded to 12,000 characters. Opening a workspace does not start analysis. Model calls and persistence have separate runtime controls.
 
 Loopback development can enable live calls without a shared cumulative budget policy, while retaining per-request limits. Operators must account for real provider charges; per-run limits do not establish an overall spending cap. Non-loopback deployments require the documented active budget policy. This website does not initiate model calls.
 
-The pinned Product guide retains an older frontend-flag paragraph. The current behavior above was checked against the Development guide and the Admin/Agent implementation; the website's English guides follow those current controls.
+Review provider processing regions, permitted source disclosure and retention before enabling learner use. Conversation history remains until its owner deletes it; saved learning plans have a separate lifecycle. Cancelling analysis does not erase history or undo a completed business write.
 
 ## Deployment and recovery
+
+Choose the installation path before generating configuration. For published images, follow the selected release’s Operations installation entry and its asset, signature, TLS/Judge and approval requirements. For fresh local development, start with the empty-volume Development entry while `.env` is absent; do not run `init-env.sh` first. With existing configuration, databases or volumes, preserve them and use the upgrade/rollback entry; never recreate configuration with `--force` or substitute a marker change for migration. See {{ORIGIN}}/get-started/ and the pinned Operations/Development guides.
 
 Use the repository lifecycle entrypoints. The documented development prerequisites include Docker Compose v2, mise, the Maven wrapper with Zulu Java 17, the checkout's Node/pnpm versions, PM2, curl, timeout and OpenSSL. Object storage is required; there is no local uploads fallback.
 
@@ -79,7 +83,7 @@ Potential vulnerabilities belong in the repository's private GitHub reporting ro
 
 MIT permits use and redistribution under its terms; retain the required copyright and permission notice. Dependencies, images, problem content, editorials and student work have their own rights and policies. The source is provided without warranty under the license.
 
-The website's eight repository interface screenshots are design/regression references with sample accounts and numbers. Its homepage code walkthrough executes no code. No customer testimonial, partner endorsement, adoption count, SOC 2/ISO certification, production SLA or verified recovery target is asserted.
+The website's repository interface screenshots are design/regression references with sample accounts and numbers. Its homepage code walkthrough executes no code. No customer testimonial, partner endorsement, adoption count, SOC 2/ISO certification, production SLA or verified recovery target is asserted.
 
 ## Continue the review
 

@@ -19,22 +19,58 @@ export const projectPages = [
           <tr><th scope="row">Operators</th><td>Use repository runbooks for startup, migrations, health checks, backups and recovery.</td><td>Hosting capacity, isolation, monitoring, recovery evidence and an accountable support owner.</td></tr>
         </tbody></table></div>
       </section>
+      <section aria-labelledby="product-practice"><h2 id="product-practice">Find a problem, write code, review the result</h2>
+        <p>Browse and search the problem library, narrow the selection by category, and open a problem in the coding workspace. The workspace brings together the statement, editorials, submissions, code, test cases and results in adjustable panels.</p>
+        <p>Choose an available language, work in the editor, try test cases and submit for judging. Review the verdict and available judging details, then return to the code or submission history for another attempt. Available languages, limits and details depend on the problem and deployment.</p>
+        <p>A learner’s submissions and private source remain subject to sign-in, ownership and service authorization. Public interface screenshots illustrate the workflow; they do not demonstrate a live judging service.</p>
+        <p><a href="/docs/first-submission/">Walk through a first submission</a></p>
+      </section>
+      <section aria-labelledby="product-contests"><h2 id="product-contests">Join a contest or rehearse with virtual participation</h2>
+        <p>Browse upcoming, running and past contests. A contest brings its introduction, registration, problem set and standings together; the current contest state and your eligibility determine which actions are available.</p>
+        <p>Where a past contest permits virtual participation, start a timed attempt and follow its virtual participation rules. Read the configured scoring rules and standings context before comparing results; contest standings and global or regional rankings are distinct views.</p>
+        <p><a href="/docs/contests/">Read the contest guide</a></p>
+      </section>
+      <section aria-labelledby="product-collections"><h2 id="product-collections">Keep a practice collection and explain your solution</h2>
+        <p>Use problem lists to group a sequence of problems, review the list’s problems and analysis, and manage lists you own. Your personal area separates your lists from lists you have bookmarked; visibility and ownership govern access and editing.</p>
+        <p>Organize bookmarks in folders, search saved material and keep notes alongside problem practice. Read available editorials or write and manage your own solution explanations through the Markdown editor. Publishing an editorial is a content action, separate from submitting code for judging.</p>
+        <p><a href="/docs/practice-and-community/">Read the practice and community guide</a></p>
+      </section>
+      <section aria-labelledby="product-community"><h2 id="product-community">Discuss problems with community safeguards</h2>
+        <p>Browse forum communities and posts, read discussions and comments, and create or edit posts where your account has permission. The editor supports Markdown, tags and preview; personal pages collect your posts, editorials and notifications.</p>
+        <p>Reporting, moderation queues and appeals support content governance. Moderators can review reports and act on posts, comments and editorials under the configured permissions. A report or appeal is not a guaranteed response time, and the unfinished in-app feedback form is not presented as a working support channel.</p>
+        <p><a href="/support/">Find the appropriate support channel</a></p>
+      </section>
+      <section aria-labelledby="product-learning"><h2 id="product-learning">Review practice records and progress</h2>
+        <p>Personal views collect submission history, solved-problem progress, practice streaks, activity heatmaps and skill charts. Achievement categories show progress and unlocked items. Use these records to decide what to practice next, rather than treating them as evidence of learning outcomes.</p>
+        <p>The dashboard’s recent-activity feed is currently an empty placeholder; it is not a complete activity history. User-profile routes require sign-in in the reviewed implementation, so this website does not promise anonymous public profiles.</p>
+        <p><a href="/docs/practice-and-community/">Explore personal practice records</a></p>
+      </section>
+      <section aria-labelledby="product-management"><h2 id="product-management">Build content and operate the platform in Management</h2>
+        <p>Administrators can create, edit and publish problems, manage test data and problem history, curate problem lists and tags, organize contests and configure scoring rules. Submission management includes inspection and rejudging under administrator permissions. Hidden tests and private submission source belong in the authorized application.</p>
+        <p>Management also provides user administration, moderation, audit queries, announcements, analytics, settings, monitoring, backup and email interfaces. These are operational tools whose actions require service authorization and appropriate deployment configuration; screenshots and API-driven dashboards do not establish production usage or recovery success.</p>
+        <p><a href="/docs/administration/">Read the administration guide</a></p>
+      </section>
       <section aria-labelledby="product-evidence"><h2 id="product-evidence">Look at the actual interfaces</h2>
         <p>The showcase includes repository screenshots of problem detail, contests, submissions, the management dashboard, user management and the forum. These are design and regression references, not evidence of a production rollout.</p>
         <p><a class="button primary" href="/showcase/">Explore the interface showcase</a></p>
       </section>
       <section aria-labelledby="product-current"><h2 id="product-current">Current account and learning workflows</h2>
         <p>The sidebar supports up to five signed-in accounts. Adding or switching an account validates its session; Management still requires an administrator role. Account switching does not grant new permissions, and saved refresh credentials remain in account-bound HttpOnly cookies.</p>
-        <p>The Agent workspace can bind an eligible completed practice submission, recover conversation history and continue a discussion. Opening a workspace or selecting a submission does not call a model. Saving a learning plan is a separate confirmed operation; a cancelled analysis does not erase history or undo a completed business write.</p>
-        <p>Conversations remain until the owner deletes them. Before enabling model use, review provider processing, source consent and actual cost controls. Loopback development can permit live calls without a shared cumulative budget ledger; per-request limits alone do not cap total spending.</p>
         <p><a href="/verification/">Read dated local observations</a> · <a href="/evaluation/">Review data boundaries and acceptance criteria</a> · <a href="/docs/source/reference/">Read account and Agent contracts</a></p>
+      </section>
+      <section aria-labelledby="product-agent"><h2 id="product-agent">Experimental Agent: administrator opt-in, default off</h2>
+        <p>The Agent is an experimental feature, disabled when its setting is absent and enabled only by an administrator. Its initial scope is your own completed ordinary-practice submissions. Contest submissions, another user’s work, judging in progress and unknown eligibility are outside that scope.</p>
+        <p>An eligible submission can open a conversation workspace with history, references and tool activity. Opening the workspace or selecting a submission does not call a model. Conversation history remains until its owner deletes it; deleting a conversation does not delete a separately saved learning plan.</p>
+        <p>Administrator availability, Agent service readiness, model authorization and per-run source-code consent are separate controls. Saving a learning plan requires its own confirmation and persistence authorization. Cancelling a run does not erase history or undo a completed save; an already-sent model request may still incur usage.</p>
+        <p>Before learner use, review provider processing, retention and actual budget controls. Loopback development can permit live calls without a shared cumulative budget ledger; per-request limits alone do not cap total spending. No model-quality, learning-effectiveness or mobile acceptance result is claimed here.</p>
+        <p><a href="/docs/source/product/">Read the experimental Agent boundaries</a></p>
       </section>
       <section aria-labelledby="product-boundaries"><h2 id="product-boundaries">Read the boundaries before adopting</h2>
         <ul class="check-list">
           <li><strong>You operate the deployment.</strong> The repository supplies code, configuration and verification paths; it does not supply a hosted service or establish production capacity.</li>
           <li><strong>Identity needs a fit check.</strong> Account, session, OAuth and role controls are documented. An institution-specific SAML, SCIM or single-sign-on integration requires separate verification.</li>
           <li><strong>Availability depends on the deployment.</strong> Active-active production operation, transparent failover and production recovery targets are not established project claims.</li>
-          <li><strong>Learning assistance has separate controls.</strong> Keep the experimental Agent disabled for evaluation until an administrator explicitly authorizes availability. The pinned historical snapshot can enable it when unset, so configure it explicitly rather than relying on an absent setting. The Python service, model configuration, source consent and persistence permissions are still separate requirements. Operators must review external providers, retention and costs before learner use.</li>
+          <li><strong>Learning assistance has separate controls.</strong> The experimental Agent defaults to off and requires administrator opt-in. Service deployment, runtime authorization, source consent and persistence permissions remain separate requirements.</li>
         </ul>
         <p>Repository descriptions explain intended boundaries. Confirm behavior against the chosen revision, configuration and your own acceptance criteria.</p>
         <p><a class="text-link" href="/institutions/">Plan an institutional evaluation</a> · <a class="text-link" href="/deployment/">Review deployment responsibilities</a></p>
@@ -86,11 +122,17 @@ export const projectPages = [
         <p>UltiCode provides a repository and documented deployment paths. Your institution supplies the environment, credentials, security policy, data authority and people who operate it.</p>
         <aside class="callout"><p><strong>Development startup is not production acceptance.</strong> The operations guide states that the repository has no production environment. Production configuration and disposable verification do not establish real traffic capacity, availability or successful institutional operation.</p></aside>
       </section>
+      <section aria-labelledby="deployment-installation"><h2 id="deployment-installation">Choose an installation path before creating configuration</h2>
+        <p>For published-image installation, pin a release and use the Operations guide. Download its complete assets into a new directory, verify checksums and all nine images’ signature evidence, and prepare the host, TLS, Judge and deployment approvals before installation. A source-only plan or a single image is not a complete release input.</p>
+        <p>For fresh local development, start with the empty-volume installation guide while configuration is still absent. That entry owns configuration generation, migrations, backfill and parity checks, cutover and first startup. Do not run init-env.sh before it.</p>
+        <p>For an existing configuration, database or volume, preserve it and follow the upgrade and rollback entry. Keep the previous healthy release descriptor and database/object backups, check compatibility and follow the migration and health gates. Do not recreate configuration with --force, treat existing data as empty volumes or change only a cutover marker.</p>
+        <p><a href="/get-started/">Choose your getting-started path</a></p>
+      </section>
       <section aria-labelledby="deployment-prerequisites"><h2 id="deployment-prerequisites">Prepare the documented development environment</h2>
-        <p>The public quick start lists Docker Compose v2, mise, Node.js <code>^20.19.0 || &gt;=22.12.0</code>, pnpm 10+, PM2, curl, timeout and OpenSSL. Backend startup uses the repository Maven wrapper and mise-managed Zulu Java 17.</p>
+        <p>Source development requires Docker Compose v2, mise-managed Zulu Java 17, Node.js 22.x at least 22.22.2, pnpm 11.0.0, PM2, curl, timeout and OpenSSL. Backend startup uses the repository Maven wrapper. These are source-development prerequisites, not a hardware sizing recommendation.</p>
         <p>The platform uses MySQL, Redis, Nacos, object storage and, for the full development mode, MeiliSearch. Object storage is a required dependency; the documented path does not provide a local-disk fallback. Credentials must be supplied through the documented configuration process.</p>
         <p>Use the repository startup entrypoints so preparation, migrations, manifests and readiness checks stay together. A Dev Container or Codespace installs dependencies and runs its default gate; it does not automatically start the full stack.</p>
-        <p><a class="text-link" href="/get-started/">Follow the getting-started guide</a> · <a class="text-link" href="/docs/source/development/">Read the development source</a></p>
+        <p><a href="/docs/source/development/">Read the development source</a></p>
       </section>
       <section aria-labelledby="deployment-ownership"><h2 id="deployment-ownership">Assign these responsibilities</h2>
         <div class="table-scroll"><table><thead><tr><th scope="col">Area</th><th scope="col">Operator responsibility</th></tr></thead><tbody>

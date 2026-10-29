@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const REPOSITORY = 'DavidHLP/UltiCode';
-const SOURCE_COMMIT = 'ec4e9b135ac1404348e0b57d58b5b745301f7d5f';
+const SOURCE_COMMIT = '4a2ce8e3ce51856a65be66d92d5fbb4cbcfd187f';
 const SCREENSHOT_COMMIT = '7d0eca225ce448d497bcb69af3a2e45ab0e9d1ba';
 const SOURCE_URL = `https://github.com/${REPOSITORY}`;
 const API_URL = `https://api.github.com/repos/${REPOSITORY}`;
@@ -25,6 +25,13 @@ const SCREENSHOTS = [
   ['user-management-dark.png', 'Manage users', 'Sample user administration with example accounts, in dark mode'],
   ['contest-management-dark.png', 'Organize contests', 'Sample contest administration with example events and participation numbers, in dark mode'],
   ['forum-list-light.png', 'Share a discussion', 'Sample community discussion listings, in light mode'],
+  ['problem-list-dark.png', 'Organize a problem list', 'Sample problem list with its practice problems, in dark mode'],
+  ['contest-detail-dark.png', 'Review contest rules', 'Sample completed contest overview with rules and a virtual participation entry, in dark mode'],
+  ['personal-dashboard-dark.png', 'Review practice progress', 'Sample personal practice dashboard with progress, activity and skill charts, in dark mode'],
+  ['achievements-dark.png', 'Explore achievements', 'Sample achievement categories and the current account empty state, in dark mode'],
+  ['analytics-dashboard-dark.png', 'Inspect platform activity', 'Sample administration analytics with example registration and submission charts, in dark mode'],
+  ['moderation-dark.png', 'Review community moderation', 'Sample moderation statistics with report categories and processing states, in dark mode'],
+  ['submissions-audit-dark.png', 'Inspect judging operations', 'Sample administration submission list with verdicts and review actions, in dark mode'],
 ];
 
 async function download(url, maxBytes = 2_000_000) {

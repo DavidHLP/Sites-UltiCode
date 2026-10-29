@@ -3,60 +3,68 @@
   "description": "UltiCode — an open-source full-stack online judge platform for developers: problem library, algorithm contests, sandboxed judging, editorials, community, and admin console — ready out of the box. ",
   "defaultBranch": "main",
   "license": "MIT",
-  "sourceCommit": "ec4e9b135ac1404348e0b57d58b5b745301f7d5f",
+  "sourceCommit": "4a2ce8e3ce51856a65be66d92d5fbb4cbcfd187f",
   "screenshotSourceCommit": "7d0eca225ce448d497bcb69af3a2e45ab0e9d1ba",
-  "sourceUrl": "https://github.com/DavidHLP/UltiCode/tree/ec4e9b135ac1404348e0b57d58b5b745301f7d5f",
-  "sourceDate": "2026-10-23T08:14:27Z",
-  "checkedAt": "2026-10-24T14:48:28.498Z",
+  "sourceUrl": "https://github.com/DavidHLP/UltiCode/tree/4a2ce8e3ce51856a65be66d92d5fbb4cbcfd187f",
+  "sourceDate": "2026-10-27T15:36:11Z",
+  "checkedAt": "2026-10-29T09:08:35.093Z",
   "archived": false,
   "discussionsEnabled": false,
-  "releases": [],
+  "releases": [
+    {
+      "tag": "v1.0.4",
+      "name": "UltiCode v1.0.4",
+      "date": "2026-10-27T08:58:23Z",
+      "url": "https://github.com/DavidHLP/UltiCode/releases/tag/v1.0.4",
+      "prerelease": false
+    }
+  ],
   "commits": [
     {
-      "sha": "ec4e9b135ac1404348e0b57d58b5b745301f7d5f",
-      "title": "fix: restore safe formatting in Codex hooks (#318)",
-      "date": "2026-10-23T08:14:27Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/ec4e9b135ac1404348e0b57d58b5b745301f7d5f"
+      "sha": "4a2ce8e3ce51856a65be66d92d5fbb4cbcfd187f",
+      "title": "ci: automate release acceptance and clarify installation (#332)",
+      "date": "2026-10-27T15:36:11Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/4a2ce8e3ce51856a65be66d92d5fbb4cbcfd187f"
     },
     {
-      "sha": "db1c868a179c6b100df991bddec10b395a7cc7f3",
-      "title": "fix(ci): isolate promotion contract writer identity (#317)",
-      "date": "2026-10-23T05:45:00Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/db1c868a179c6b100df991bddec10b395a7cc7f3"
+      "sha": "465b9fd031f2c398f39f4696d8b33360f635ed5d",
+      "title": "Merge pull request #331 from DavidHLP/fix/release-readiness",
+      "date": "2026-10-27T07:49:16Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/465b9fd031f2c398f39f4696d8b33360f635ed5d"
     },
     {
-      "sha": "b12b60352940f2e0f47b6cccb9f8e3ea025febb2",
-      "title": "fix(ci): isolate promotion contract writer identity",
-      "date": "2026-10-23T05:31:49Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/b12b60352940f2e0f47b6cccb9f8e3ea025febb2"
+      "sha": "0d00bbe9995f81fa4d206bbaec241f286da86b32",
+      "title": "fix(install): align baseline with generated problem IDs",
+      "date": "2026-10-27T07:03:36Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/0d00bbe9995f81fa4d206bbaec241f286da86b32"
     },
     {
-      "sha": "34b6f6e271f2ff0cbed15ab18a7d4970458dd008",
-      "title": "Merge pull request #316 from DavidHLP/chore/merge-all-branches-main",
-      "date": "2026-10-23T05:04:14Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/34b6f6e271f2ff0cbed15ab18a7d4970458dd008"
+      "sha": "f3ce6e3a22c38554028640c49a4c76a408112991",
+      "title": "fix(problem): preserve complete owner writes and generated IDs",
+      "date": "2026-10-27T06:59:00Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/f3ce6e3a22c38554028640c49a4c76a408112991"
     },
     {
-      "sha": "8fa1d4bb39f57109753d0d0d9f6a82e327dbb126",
-      "title": "chore(deps): reconcile merged lockfile",
-      "date": "2026-10-23T04:50:54Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/8fa1d4bb39f57109753d0d0d9f6a82e327dbb126"
+      "sha": "3f1b0dc391e87d8dbc72ee3174f06824d2c8741d",
+      "title": "test(readiness): exercise business lifecycle and expose problem create blocker",
+      "date": "2026-10-27T06:26:59Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/3f1b0dc391e87d8dbc72ee3174f06824d2c8741d"
     },
     {
-      "sha": "6beb05ed0d722cf686453ef103e3f384af1d996a",
-      "title": "fix(docker): install pnpm without Corepack on Node 25",
-      "date": "2026-10-23T04:50:05Z",
-      "url": "https://github.com/DavidHLP/UltiCode/commit/6beb05ed0d722cf686453ef103e3f384af1d996a"
+      "sha": "b36428757c327234cd9349bc68d12991f9f8b226",
+      "title": "feat: add reproducible release acceptance and preparation",
+      "date": "2026-10-27T05:54:46Z",
+      "url": "https://github.com/DavidHLP/UltiCode/commit/b36428757c327234cd9349bc68d12991f9f8b226"
     }
   ],
   "documents": [
     {
       "path": "README.md",
-      "bytes": 7613
+      "bytes": 7294
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 6577
+      "bytes": 6310
     },
     {
       "path": "LICENSE",
@@ -68,23 +76,23 @@
     },
     {
       "path": "docs/PRODUCT.md",
-      "bytes": 10190
+      "bytes": 14719
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "bytes": 39467
+      "bytes": 40445
     },
     {
       "path": "docs/DEVELOPMENT.md",
-      "bytes": 77428
+      "bytes": 93991
     },
     {
       "path": "docs/OPERATIONS.md",
-      "bytes": 39675
+      "bytes": 47161
     },
     {
       "path": "docs/REFERENCE.md",
-      "bytes": 22938
+      "bytes": 24721
     },
     {
       "path": "assets/screenshots/README.md",
@@ -145,6 +153,55 @@
       "filename": "forum-list-light.png",
       "title": "Share a discussion",
       "alt": "Sample community discussion listings, in light mode",
+      "width": 1496,
+      "height": 933
+    },
+    {
+      "filename": "problem-list-dark.png",
+      "title": "Organize a problem list",
+      "alt": "Sample problem list with its practice problems, in dark mode",
+      "width": 1496,
+      "height": 933
+    },
+    {
+      "filename": "contest-detail-dark.png",
+      "title": "Review contest rules",
+      "alt": "Sample completed contest overview with rules and a virtual participation entry, in dark mode",
+      "width": 1496,
+      "height": 933
+    },
+    {
+      "filename": "personal-dashboard-dark.png",
+      "title": "Review practice progress",
+      "alt": "Sample personal practice dashboard with progress, activity and skill charts, in dark mode",
+      "width": 1496,
+      "height": 933
+    },
+    {
+      "filename": "achievements-dark.png",
+      "title": "Explore achievements",
+      "alt": "Sample achievement categories and the current account empty state, in dark mode",
+      "width": 1496,
+      "height": 933
+    },
+    {
+      "filename": "analytics-dashboard-dark.png",
+      "title": "Inspect platform activity",
+      "alt": "Sample administration analytics with example registration and submission charts, in dark mode",
+      "width": 1496,
+      "height": 933
+    },
+    {
+      "filename": "moderation-dark.png",
+      "title": "Review community moderation",
+      "alt": "Sample moderation statistics with report categories and processing states, in dark mode",
+      "width": 1496,
+      "height": 933
+    },
+    {
+      "filename": "submissions-audit-dark.png",
+      "title": "Inspect judging operations",
+      "alt": "Sample administration submission list with verdicts and review actions, in dark mode",
       "width": 1496,
       "height": 933
     }
