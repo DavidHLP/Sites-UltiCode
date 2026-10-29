@@ -5,6 +5,7 @@ const renderedPages = pages as Record<string, string>;
 export function GET(request: Request) {
   const url = new URL(request.url);
   const pathname = url.pathname === '/' ? '/' : `${url.pathname.replace(/\/+$/, '')}/`;
+  if (pathname === '/favicon.ico/') return Response.redirect(new URL('/favicon.svg', url), 308);
   const page = renderedPages[pathname];
   const language = pathname.startsWith('/zh-CN/') ? 'zh-CN' : 'en';
   const missingPage = language === 'zh-CN' ? '/zh-CN/404/' : '/404/';
