@@ -1,0 +1,25 @@
+public/site.css
+  s_3cbd1284cc039a::t_cbb50ad349b6fc 75-82
+content/locales/zh-extra.mjs
+  s_3cbd1284cc039a::t_cbb50ad349b6fc 7-17
+scripts/content/build-content.mjs
+  s_3cbd1284cc039a::t_cbb50ad349b6fc 24-32
+tests/release-guidance.test.mjs
+  s_3cbd1284cc039a::t_cbb50ad349b6fc 47-54
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c807a67074389a6119f5d6c5f58b7c43c9b913d0",
+  "prompts": {},
+  "sessions": {
+    "s_3cbd1284cc039a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a186d7-687a-76c2-9108-bce9a585f251",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
