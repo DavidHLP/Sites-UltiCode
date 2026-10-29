@@ -4,6 +4,17 @@ import { sourceDate, sourceCommit } from '../site-config.mjs';
 const date = new Date(upstream.sourceDate).toLocaleDateString('zh-CN', { timeZone:'UTC', year:'numeric', month:'long', day:'numeric' });
 
 export default {
+  'The 15 pinned references below are the public project’s UI 2.0 design and regression reference screenshots. All accounts, names, activity totals, rates, dates and results shown are development or sample data. They are not customer records, usage statistics or proof of production operation.': '下方 15 张固定版本参考图来自公开项目的 UI 2.0 设计与回归参考截图。图中所有账号、姓名、活动总数、比例、日期和结果均为开发或示例数据，不是客户记录、使用统计或生产运行证明。',
+  'Landing · local development capture': 'Landing · 本地开发截图',
+  'Captured locally on 29 October 2026 · light appearance · 1264 × 720. This additional image is separate from the 15 pinned public repository references below.': '2026 年 10 月 29 日本地拍摄 · 浅色外观 · 1264 × 720。此新增图片独立于下方 15 张固定版本的公开仓库参考图。',
+  'Open the local development Landing screenshot at full size': '查看本地开发 Landing 截图原图',
+  'Local development Landing page in light appearance, with Chinese promotional wording and a sample code window': '浅色外观的本地开发 Landing 页面，含中文宣传文案与示例代码窗口',
+  'Unverified UI wording:': '未经验证的界面文案：',
+  'the image’s “physical container isolation” and “every submission yields a reproducible conclusion” statements are unverified UI wording, not product guarantees.': '图中的“物理容器隔离”以及“每一次提交都得到清晰、可复现的工程结论”均为未经验证的界面文案，不构成产品保证。',
+  'Practice': '练习',
+  'Community and contests': '社区与比赛',
+  'Management interfaces': '管理界面',
+
   'Explore learner and administrator interfaces, from the problem library and personal progress to contests and community governance. Development and sample data are labelled throughout.': '查看学习者与管理员界面，从题库、个人进度到比赛和社区治理。所有开发与示例数据均明确标注。',
   'Product boundaries:': '产品边界：',
   'Open Organize a problem list reference image at full size': '查看组织题单参考图原图',
