@@ -44,7 +44,14 @@ test('public workflows, reference images and downloads are available in both lan
       assert.ok(pages[`${prefix}/docs/${guide}/`], `${prefix}/${guide}`);
       assert.ok(pages[`${prefix}/docs/`].includes(`${prefix}/docs/${guide}/`));
     }
-    assert.equal((pages[`${prefix}/showcase/`].match(/<img /g) || []).length, upstream.screenshots.length);
+    const showcase = pages[`${prefix}/showcase/`];
+    assert.equal((showcase.match(/<img data-public-reference /g) || []).length, upstream.screenshots.length);
+    assert.equal((showcase.match(/<img /g) || []).length, upstream.screenshots.length + 1);
+    assert.match(showcase, /src="\/assets\/screenshots\/landing-light.jpg" width="1264" height="720"/);
+    assert.match(showcase, /unverified UI wording, not product guarantees|未经验证的界面文案，不构成产品保证/);
+    for (let number = 1; number <= upstream.screenshots.length; number++) {
+      assert.ok(showcase.includes(`id="interface-${number}"`));
+    }
     assert.ok(pages[`${prefix}/updates/`].includes(upstream.releases[0].url));
   }
   for (const screenshot of upstream.screenshots) {
