@@ -7,7 +7,7 @@
 ### 前置条件
 
 - Docker + Compose v2：MySQL、Redis、Nacos 和可选 MeiliSearch。
-- mise 管理的 Zulu Java 17、Node.js `>=22.12.0`、pnpm 10+、PM2、Docker Compose v2，以及 `curl`、`timeout`、`openssl`。
+- mise 管理的 Zulu Java 17、Node.js 22.x（当前锁定前端依赖要求该系列至少 22.22.2）、pnpm 11.0.0、PM2、Docker Compose v2，以及 `curl`、`timeout`、`openssl`。应用 manifest 的 `>=22.12.0` 是声明下限，不代表全部锁定依赖支持该版本。
 - 后端使用仓库内的 `services/mvnw`；不要用裸 Maven/Java 绕过启动入口。
 - 从仓库根目录执行脚本。`.env` 由 `scripts/dev/init-env.sh` 生成，不能提交。
 
@@ -16,8 +16,10 @@
 
 仓库提供 `.devcontainer/devcontainer.json`，固定 Java 17、Node 22、pnpm、
 mise、PM2、Maven wrapper 和 Docker-in-Docker。创建容器时只安装依赖和
-Maven 离线缓存，不启动全栈；容器启动后的默认检查仅执行
+Maven 离线缓存，不启动全栈；Node Feature 的 `22` 与前端 CI 的 `22.x` 均选择 Node 22 系列，postCreateCommand 固定启用 pnpm 11.0.0，与 CI 一致。当前锁定依赖要求 Node 22 系列至少为 22.22.2；两端均未固定相同 patch，已创建的容器需重建才能更新 Node Feature，并重新执行创建阶段以启用新的 pnpm 版本。容器启动后的默认检查仅执行
 `./scripts/dev/test.sh unit`。运行真实 journey 必须显式选择 scope。
+
+创建阶段显式通过 mise 安装 unit 入口要求的 `java@zulu-17.68.203.0`，并用同一 JDK 执行 Maven 依赖预热；Java Feature 提供的通用 JDK 17 不代替该工具链。Zulu 安装请求使用有界的 `MISE_HTTP_TIMEOUT=5m`，避免大型 JDK 下载被默认 30 秒超时中断。创建阶段失败时先查看具体命令日志；再次启动可能只运行 postStart，不能据此认定依赖预热已完成。
 
 mise Feature 使用 `ghcr.io/devcontainers-extra/features/mise:1`，配置与锁文件
 保持一致；旧的 `devcontainers-contrib` 地址会导致 OCI 拉取失败。已有本地
@@ -36,7 +38,149 @@ mise Feature 使用 `ghcr.io/devcontainers-extra/features/mise:1`，配置与锁
 `host` 配置只接受 `scope` 和 `observability` 两个无密钥键；启动和
 生命周期逻辑仍由 `scripts/dev/*` 与 `devstack-manifest.sh` 所有。
 
-### 推荐启动
+### 干净卷首次安装（仅本机 disposable 开发环境）
+
+首次安装与已有数据库升级是两个入口。以下流程只用于新 checkout、全新
+Compose project 和空卷；不得对已有环境执行，也不删除或重置任何卷。
+已有环境继续使用 [Operations](OPERATIONS.md#数据库迁移与-owner-收敛) 的备份、
+writer drain、增量 backfill 和 cutover 流程。先安装上面的工具链及锁定依赖；
+默认端口必须空闲，独立 PM2 home 不会隔离 TCP 端口。
+
+```bash
+set -euo pipefail
+test ! -e .env                       # 已有配置应走升级入口，不能 --force
+export COMPOSE_PROJECT_NAME=ulticode-fresh
+export PM2_HOME="$PWD/.local/fresh-pm2"
+test -z "$(docker ps -aq --filter label=com.docker.compose.project=$COMPOSE_PROJECT_NAME)"
+test -z "$(docker volume ls -q --filter name=${COMPOSE_PROJECT_NAME}_)"
+./scripts/dev/init-env.sh
+pnpm install --frozen-lockfile
+./scripts/dev/up.sh --scope full-stack --prepare-submission-owner --skip-install
+```
+
+`--prepare-submission-owner` 只准备基础设施、canonical migrations、owner 账号和
+grant，不启动业务 writer。空卷不意味着迁移后没有数据：不可改写的历史共享迁移
+包含 sample submissions，仍必须经过 insert-only backfill 和完整 parity 检查。
+不要跳过这些检查，也不要先手工设置 `SUBMISSION_CUTOVER_COMPLETE=true`。
+
+在同一个 shell 中、所有业务 writer 仍未启动时执行：
+
+```bash
+set -a
+source .env
+set +a
+export MIGRATION_MYSQL_CONTAINER="$(docker compose --project-directory . --env-file .env \
+  -f docker/docker-compose.yml -f docker/docker-compose.dev.yml ps -q mysql)"
+export MYSQL_CONTAINER="$MIGRATION_MYSQL_CONTAINER"
+export MIGRATION_DB_USER=root MIGRATION_DB_PASSWORD="$MYSQL_ROOT_PASSWORD"
+./scripts/runbooks/submission-schema-cutover.sh backfill
+SUBMISSION_BACKFILL_CONFIRM=I_UNDERSTAND_SUBMISSION_BACKFILL \
+SUBMISSION_BACKFILL_QUIESCE_CONFIRM=I_UNDERSTAND_SUBMISSION_BACKFILL_QUIESCE_ALL_WRITERS \
+  ./scripts/runbooks/submission-schema-cutover.sh backfill --execute
+./scripts/runbooks/submission-schema-cutover.sh verify
+SUBMISSION_CUTOVER_CONFIRM=I_UNDERSTAND_SUBMISSION_CUTOVER \
+SUBMISSION_CUTOVER_QUIESCE_CONFIRM=I_UNDERSTAND_SUBMISSION_QUIESCE_ALL_WRITERS \
+  ./scripts/runbooks/submission-schema-cutover.sh cutover --execute
+./scripts/runbooks/submission-schema-cutover.sh verify
+export SUBMISSION_CUTOVER_COMPLETE=true
+./scripts/dev/up.sh --scope full-stack --skip-infra --skip-install --rebuild
+./scripts/dev/up.sh health --scope full-stack
+```
+
+只有最终 parity 和 writer checks 成功才导出完成标记。已隔离的 App 账号再次 cutover
+仍检查 schema、parity、权限和 source 稳定性，但不重复 REVOKE，也不恢复 legacy grant。
+此处的 root migration 身份、生成的 dev-admin 和示例数据仅属于这个 disposable project，
+不能复用于生产。生成的 `.env`、PM2 state、ACL、日志和数据库都不能提交。
+中断时保留卷并检查日志及正在运行的进程；不要重跑首次安装检查或删除卷来掩盖失败。
+恢复迁移可显式传入上述 `MIGRATION_MYSQL_CONTAINER`，无需安装 host mysql CLI。
+若本地 Maven 编译进程触发已有 PM2 1 GiB memory restart，可在 disposable `.env`
+设置 `JAVA_TOOL_OPTIONS="-Xms128m -Xmx512m"` 后通过支持的 launcher 刷新进程；
+本次验收使用该本地 heap 上限，未提高或关闭 PM2 memory gate。
+
+health 通过只证明 readiness。发布前仍须用真实 Auth/App/Submission/Judge 验证浏览器
+登录、题目、提交和 terminal verdict，以及 Management/contest 权限与业务操作；
+mock API、sample verdict、容器 healthy 和截图均不能替代这项验收。Agent 默认关闭，
+不属于这个基础安装的模型验收。
+
+### 真实服务浏览器验收
+
+`scripts/test/browser-acceptance.mjs` 只允许 loopback origins，并要求
+`ACCEPTANCE_DISPOSABLE=true`。准备上述 disposable stack、`two-sum` 示例、可用
+Python Judge sandbox 和已授权的测试账号后，通过安全环境提供
+`ACCEPTANCE_USERNAME` / `ACCEPTANCE_PASSWORD`。Management 可独立提供
+`ACCEPTANCE_MANAGEMENT_USERNAME` / `ACCEPTANCE_MANAGEMENT_PASSWORD`；账号必须具有
+READ:PROBLEM、READ:CONTEST、CREATE:CONTEST 及评分规则读取所需权限。缺少权限应失败，
+不得修改全局角色策略或在测试中伪造授权。只在 disposable fixture 上显式准备所需权限。
+
+```bash
+ACCEPTANCE_DISPOSABLE=true node scripts/test/browser-acceptance.mjs
+```
+
+默认使用 Playwright 的 Chromium；可通过 `ACCEPTANCE_CHROMIUM` 选择已安装的浏览器。
+脚本使用真实登录、Monaco model、提交按钮、Submission readback、Judge terminal
+Accepted、Management 数据读取与未发布 contest 的创建/readback，不拦截 API。
+报告在 `.local/browser-acceptance/report.json`，不保存 cookies、凭据或源码。提交与
+未发布 contest fixture 保留用于诊断，不自动删除数据。此检查不是生产、性能或模型验收。
+
+### 扩展业务验收与当前阻塞
+
+基础报告通过后，`scripts/test/browser-business-acceptance.mjs` 使用同一组已有测试账号，
+验证真实 Wrong Answer、Management problem create/edit/readback、重判与 contest
+注册、提交、live ranking、结束和最终 ranking。额外需要 CREATE/UPDATE:PROBLEM 与
+UPDATE:CONTEST 权限；不得修改全局角色策略。它会发布并结束基础脚本创建的 disposable
+contest，因此完整重跑前应先运行基础脚本创建新 fixture。可用 `ACCEPTANCE_CHECKS`
+逗号分隔选择检查；报告只代表实际选中的检查，不代表整个验收通过。
+
+```bash
+ACCEPTANCE_DISPOSABLE=true node scripts/test/browser-business-acceptance.mjs
+```
+
+当前实测：真实 Python Wrong Answer、重判 Pending → Judging → Accepted，以及
+contest 从注册到 FINISHED 最终排名通过。Management 创建、编辑、完整字段持久化
+readback、发布后 Console 可见性，以及非法子项创建/更新的事务回滚均已通过。
+Management 表单 difficulty 在传输层转换为后端接受的 Easy/Medium/Hard。
+Problem create/update 通过完整的类型化 Owner payload 传递详情、例子、语言与标签；
+partial update 保留未提供字段，原有 optimistic version 与授权约束不变。
+新增 Owner migration `V20261027070000` 恢复 `problems.id` 的数据库生成策略，保留
+已有 ID 与引用，并重新验证相同的 test_cases 外键；不关闭 foreign_key_checks。
+新建详情在初始版本快照前保存，API 可选 summary 按存储契约初始化为空字符串。
+RPC 返回失败值前显式标记写事务回滚，避免子项拒绝后留下部分创建或覆盖已有内容。
+Admin description readback 映射 nested detail，不能把读取已存在题目或单独 Judge
+验收当成创建/编辑验收。fresh/upgrade ID 与外键保持检查属于真实 MySQL migration drill。
+
+### CI 真实安装与业务门禁
+
+`Real acceptance` 是 `ci-ok` 的必需选择门禁：runtime/frontend/安装工具变化与所有
+release-selected/full runs 都必须成功，不能把 skipped/cancelled 当成通过。文档元数据
+变化不会误触发镜像发布。工作流先运行现有 MySQL fresh/upgrade/FK、backfill、backup
+和权限隔离 drill，然后在独立 runner 顺序运行 `scripts/ci/business-acceptance.sh`。
+
+业务入口只接受没有 `.env`、默认端口空闲、本机 Unix Docker endpoint 的新 checkout，
+并要求 `ACCEPTANCE_DISPOSABLE=true`。它创建唯一 Compose project 和独立 PM2 home，
+通过现有 launcher 准备 canonical migrations，执行全部 backfill/parity/cutover 检查后
+才导出完成标记。每个 JVM 有 heap 上限；不会并行启动多个本机 acceptance stack。
+不使用生产 secret、生产数据、mock API 或付费模型。
+
+HTTP 存活不代表 Dubbo 接口已被消费者发现。Admin readiness 额外检查 ProblemAdminReadPort
+与 TestCaseOwnerPort 的实际 consumer invoker；缺失时返回 503。Submission 在两分钟的
+有界发现期限内检查 ProblemFactsPort 与 SubmissionUserReadPort，成功后才输出 launcher
+使用的就绪标记；超时则启动失败。检查只读取发现状态，不调用业务 RPC 或重试写入。
+launcher 记录本次启动前日志偏移，旧标记不会被当成本次成功。
+
+测试账号仅由 disposable dev bootstrap 与 Auth registration 创建。Manager 的直接权限
+通过真实 Auth API 临时授予并过期，不改全局 role policy；Console participant 保持 USER。
+随后执行基础与扩展 browser scripts，覆盖 AC/WA、重判、完整 admin create/edit/readback、
+非法子项事务回滚、contest 提交及最终排名。只上传排除凭据的 JSON 报告，不上传 `.env`、
+cookies、源码、PM2 state 或原始服务日志。退出时仅停止该测试 project/home，保留本机卷供
+诊断；GitHub hosted runner 生命周期负责回收其临时磁盘。
+
+本机重现需在新 checkout 安装锁定依赖、PM2 与 Playwright Chromium，然后运行：
+
+```bash
+ACCEPTANCE_DISPOSABLE=true bash scripts/ci/business-acceptance.sh
+```
+
+### 已准备环境启动
 
 ```bash
 ./scripts/dev/init-env.sh
@@ -95,13 +239,21 @@ Origin 必须与浏览器地址完全一致。默认不调用外部模型，不�
 
 ### Agent 工作流与业务入口
 
-The `/agent` workspace offers eligible entries from the latest three submissions after checking their detail responses against the existing review policy. Selecting an entry binds the submission without starting analysis. The empty state hides the composer; the bound state shares one content column across its header, transcript, and composer. Source notices appear in the content area, while retention information stays in the conversation navigation.
+The desktop Console header links to `/agent` beside Problem Set, Platform and Contest; existing personal-navigation and submission-context entries remain available. Opening the workspace does not start analysis. The workspace offers eligible entries from the latest three submissions after checking their detail responses against the existing review policy. Selecting an entry binds the submission without starting analysis. The empty state hides the composer; the bound state shares one content column across its header, transcript, and composer. Source notices appear in the content area, while retention information stays in the conversation navigation.
 
-Console 的入口是共享提交详情中的可收起复盘面板，用于 `/submissions/:id` 和题目页选中的提交。“我的提交”直接进入对应结果；旧 `/personal/agent?threadId=...` 只负责验证线程归属并跳转，无线程时返回个人提交列表。
+On desktop, the composer combines selected references, the full visible source-consent statement and input in one themed surface; source consent remains explicit and fresh for each message. Answer source previews, citation controls and analysis activity stay compact, with full evidence available by expanding them. The “Back to latest” control floats within the transcript without changing transcript or composer geometry. Mobile layout changes and mobile verification remain deferred.
 
-Agent 对话默认开启，不再读取 `VITE_AGENT_REVIEW_ENABLED`。管理员通过 Management“系统设置 → 功能开关 → Agent 智能体”统一控制，沿用该页的保存流程和管理权限。设置持久化在 Admin 的既有 features 配置中，旧配置缺少字段时默认开启。用户端不提供开关。Agent 每次请求从 Admin 的 `/api/v1/public/features/agent` 读取可用状态；关闭后拒绝新的对话、分析及保存操作，保留已有数据和正在执行的分析。配置读取失败返回 503，不继续调用模型。独立部署可通过 `ULTICODE_ADMIN_BASE` 配置 Admin 地址，默认 `http://127.0.0.1:9102`。此设置不替代模型及持久化授权。仅本人、已知终态、明确 `contestSubmission: false` 的普通练习提交可用；旧 Java provider 缺少字段时不开放。Agent 服务再次核对来源资格。
+The context picker pages through the authenticated user's submissions via `/problems/{problemId}/submissions`; it does not rely on a `problemId` filter on the general submission-history endpoint. Submission details are checked again against the selected problem and review eligibility before binding.
 
-打开面板后，认证的 `GET /agent/capabilities` 返回分析、持久化和来源模式。查询失败不影响原提交查看；打开、收起和恢复线程均不自动分析。`metadata` 模式使用提交元数据与授权参考资料；`owner_source` 模式要求用户明确同意源码外发，只读取当前线程绑定的本人源码，限制为 12,000 字符，不持久化源码正文或引用摘录。
+Authorized source is also supplied with server-generated line numbers for analysis and verification; citation excerpts retain the original text for exact integrity checks. The source prompt states the existing one-to-three citation limit. A confirmed terminal run response clears obsolete stream-disconnection or run-replacement warnings; it does not clear the turn's actual verification failure.
+
+During a retry, an old run's terminal event cannot release the pending run request's busy state. Run requests require `expectedRunId`, checked before locking and again under the execution lock before any retry or model call. Lock conflicts re-read the current run: stale requests return HTTP 409 with `run_replaced`, while duplicates of the active run retain `turn_active`. The Console subscribes with an explicit `runId`, so a delayed old subscription closes with `run_replaced` instead of consuming a newer run's events. Each execution advances the frontend observation generation, fencing old events, POST settlements and history reads, including successive retries of the same turn. Once a saved turn starts running, the composer follows canonical busy state; a completed SSE result unlocks fresh consent without waiting for the old POST, whose settlement cannot clear a new draft. A confirmed HTTP 409 `run_replaced` uses the replacement warning and clears when the canonical observed run reaches a terminal state. Stream recovery follows the canonical current run; an uncertain POST outcome retains observation. Source-diagnosis rejections display the evidence-verification failure message, while invalid model-answer JSON, bounds or citation shape display the model-response-format message. These labels do not change server verification or permit a failed response to be shown as an answer.
+
+Console 的提交场景入口是共享提交详情中的可收起复盘面板，用于 `/submissions/:id` 和题目页选中的提交。“我的提交”直接进入对应结果；旧 `/personal/agent?threadId=...` 只负责验证线程归属并跳转，无线程时返回个人提交列表。
+
+Agent 对话是实验功能，默认关闭，不再读取 `VITE_AGENT_REVIEW_ENABLED`。管理员通过 Management“系统设置 → 功能开关 → Agent 智能体”统一控制，沿用该页的保存流程和管理权限。设置持久化在 Admin 的既有 features 配置中，旧配置缺少字段时默认关闭。用户端不提供开关。Agent 每次请求从 Admin 的 `/api/v1/public/features/agent` 读取可用状态；关闭后拒绝新的对话、分析及保存操作，保留已有数据和正在执行的分析。配置读取失败返回 503，不继续调用模型。独立部署可通过 `ULTICODE_ADMIN_BASE` 配置 Admin 地址，默认 `http://127.0.0.1:9102`。此设置不替代模型及持久化授权。仅本人、已知终态、明确 `contestSubmission: false` 的普通练习提交可用；旧 Java provider 缺少字段时不开放。Agent 服务再次核对来源资格。
+
+打开面板后，认证的 `GET /agent/capabilities` 返回分析、持久化和来源模式。查询失败不影响原提交查看；打开、收起和恢复线程均不自动分析。`metadata` 模式使用提交元数据与授权参考资料；`owner_source` 模式要求用户明确同意源码外发，只读取当前线程绑定的本人源码，限制为 12,000 字符，不持久化源码正文或引用摘录。 授权源码的会话由后端先调用 `get_submission_source`，将返回内容作为当前轮的不可信证据传给模型，并记录实际读取轨迹，再依据返回证据回答。源码专用预算日志中的连接失败仅可在官方用量统计与既有回执完整吻合后，按零额外计费核账；保留失败原因、原始备份、证据摘要和调用保留额度，恢复日志区分核账凭据与模型响应回执。
 
 `useAgentWorkflow` 管理草稿、事件和恢复。SQLite 是工作流状态与草稿的权威，LangGraph checkpoint 仅用于控制流。编辑使旧确认失效；确认绑定 owner、版本、内容摘要和有效期，确认本身不写 Java。保存使用原幂等键，未知结果先核对原操作，不自动换 key 或重发。保存后按 `receipt.planId` 读取 Java 记录；读回失败不等于写入失败。已保存内容的读取不依赖当前模型是否可用。
 
@@ -113,7 +265,11 @@ The prompt guard runs before every model decision, including decisions after too
 
 对话取消先设置持久取消栅栏；`cancelled` 不保证远端模型已经停止。旧运行仍持有文件锁时，新轮次、旧轮次重试和会话删除均返回 `409`；接纳或启动另一轮前，在同一 SQLite 写事务内检查活动轮次与取消锁。锁释放后才可继续，进程退出释放锁，现有恢复流程仍适用；不增加状态或存储字段。前端遇到运行 POST 响应丢失时保留观察，包括暂时读到 `queued`；只有重新读取确认终态或收到终态事件才清理，不自动重发分析。SSE 瞬时断线保留浏览器重连，服务端流超时后读回状态并重建观察；同一观察累计最多 5 次错误、总时限 2 分钟，耗尽后停止自动观察但不推断成功或失败，保留忙碌栅栏并通过“重新载入”核对原轮次。打开运行中会话时，恢复查询失败同样保留忙碌栅栏；切换会话或卸载时停止旧观察。
 
-Queued turns expose an explicit cancel action, allowing recovery of legacy conversations with multiple queued turns without deleting history. Both database activity checks and execution-lock conflicts return HTTP 409 with `turn_active`. A `conversation_deleted` stream closure clears the selection and stops observation; `stream_timeout` and `run_replaced` still reload canonical state. Both Agent SSE consumers listen for `terminal` events.
+Queued turns expose an explicit cancel action, allowing recovery of legacy conversations with multiple queued turns without deleting history. Both database activity checks and execution-lock conflicts return HTTP 409 with `turn_active`. A `conversation_deleted` stream closure clears the selection and stops observation; `stream_timeout` and `run_replaced` still reload canonical state. Both Agent SSE consumers listen for `terminal` events. Cancellation does not cancel the task carrying an already dispatched provider request: it lets that request settle usage, then the persisted cancellation fence rejects subsequent events, tools, verification calls and answer storage. The response may still incur provider usage; cancellation does not imply a refund. The execution lock remains held until the request unwinds.
+
+In consented source conversations, the prompt explicitly requires a citation from the current authorized source hits. Its structured `text` excerpt is copied exactly for verification and removed before persistence; source lines remain prohibited in visible answer text and citation claims. Selected problem text and comments remain untrusted references and cannot substitute for source evidence. Source refusal markers must refer to the same clause as the source statement; limitations of unrelated comments cannot deny source access elsewhere in the answer. With authorized source evidence, generic causal wording is allowed to explain implementation behavior, while specific failure claims still require matching citation evidence. Citation integrity and independent semantic verification remain required.
+
+The server explicitly selects source-aware citation judging only after verifying current source provenance and adding the exact cited excerpt to the facts. That judge may use standard program semantics and algorithmic reasoning for derivability, including justified invariants and complexity bounds; unsupported assumptions, inputs and runtime outcomes still fail. The same judge call receives the entire proposed answer and verified citation excerpts with their source positions: a true short citation claim cannot authorize unsupported implementation conclusions or incorrect source line references elsewhere in the answer. Both `supports` and `derivable` must independently be true. Metadata-only judging retains its existing contract. Rejection diagnostics log only these two boolean verdicts, never the claim, source excerpt, model answer or credentials. Historical rejection records without those verdicts cannot establish which individual check failed.
 
 只读模型工具循环仍由 `agent_service.graph` 实现，`agent_loop.run_tool_loop(...)` 作为兼容入口；不允许模型选择身份、工作流节点或任意写工具。`max_rounds` 限制模型决策次数，包含最终回答；最后一次决策仍可直接回答，但若继续请求工具则在执行前停止，不增加模型调用额度，也不执行无法交回模型的工具。可选 MCP 只读工具桥通过 `ULTICODE_AGENT_MCP_TOOLS=1` 开启，不改变访问范围，详见 [Agent guide](../services/agent/README.md#optional-mcp-read-only-bridge)。
 
@@ -184,8 +340,12 @@ dependabot-core 当作 support file 丢弃，PR 只改 manifest，会被 CI 的
 共享 UI 升级范围包括 `apps/console/`、`apps/management/` 及其消费的 `packages/`。独立 `apps/landing/` 保留原有页面布局、字体、配色、插画、动效和响应式设计；页面、样式、双语文案与素材只由 Landing 应用持有，不接入共享设计系统、主题 bootstrap 或外观设置。未经用户明确要求，不得以平台 UI 统一或主题升级为由修改 Landing 设计。生产仍由现有 Console Nginx 在 `/landing/` 提供，应用入口和路由保持独立。
 沿用 Vue 3、TypeScript、Vite、Pinia、Vue Router、Tailwind CSS；通用组件统一使用 shadcn-vue；
 依赖的精确版本由根 `pnpm-lock.yaml` 固定，不另建 v2 应用、第二份 lock 或平行共享层。
-安装使用根目录 `pnpm install --frozen-lockfile`，Node.js 满足 `>=22.12.0`；
-与当前前端 CI 对齐的环境为 Node 22.x、pnpm 11。
+安装使用根目录 `pnpm install --frozen-lockfile`；前端 CI 选择 Node 22.x、固定 pnpm 11.0.0。
+当前锁定依赖在 Node 22 系列要求至少 22.22.2；应用 manifest 的 `>=22.12.0` 下限不能代替依赖引擎要求。Dev Container 使用相同的 Node 22 系列与 pnpm 11.0.0，环境更新方式见前置环境说明。
+
+Management forms use patched Zod 4 through `src/lib/toTypedSchema.ts`, which preserves the
+vee-validate 4 form contract for parsed values, defaults, field errors and required metadata.
+The published Zod 3 adapter is not used; production dependency audits retain the high-severity gate.
 
 后续变更必须保留以下基线契约：
 
@@ -200,7 +360,7 @@ dependabot-core 当作 support file 丢弃，PR 只改 manifest，会被 CI 的
 - 中文/英文文案同步，保留键盘操作、焦点管理和窄屏可用性。UI 行为变化需要对应回归测试，
   关键用户旅程需要单独的浏览器验证，不能用构建成功代替。
 - 保留 Agent 工作区、提交复盘与学习计划的既有资格、授权及降级行为；
-  Agent 对话默认开启，仅管理员通过系统设置中的功能开关关闭；它不代表分析或保存授权。
+  Agent 对话是实验功能，默认关闭，仅管理员通过系统设置中的功能开关显式启用；它不代表分析或保存授权。
 
 复现前端基线时运行只读门禁，避免 `lint --fix` 或全树格式化改变对照源码：
 
@@ -236,6 +396,8 @@ The Console problemset uses a flat search and filter toolbar above the results. 
 Console and Management compose the official sidebar-07 hierarchy through `packages/sidebar-menu`'s `SidebarBranch`: parent rows expand indented child navigation, including problem categories, list collections, and administration groups. Only navigation destinations receive active styling; expansion-only directories stay neutral even when they contain the current destination. A parent that also links to a page is active only on its own page. Icon mode keeps parent buttons accessible and expands the sidebar when a branch is selected; mobile drawers retain their child navigation. List creation and collection management keep their existing handlers and permissions.
 
 Both sidebar headers use `packages/auth-ui`'s `AccountSwitcher` over the Auth account-session endpoints, following the official sidebar-07 top switcher layout. Footer menus contain the current user's personal actions. Adding an account keeps the previous session available, switching reloads app state, and Management filters the menu to administrator accounts. Backend role checks remain authoritative. Shared Web Locks serialize account changes with refresh within one origin; apps sharing credential cookies across different origins require server coordination for atomic concurrent switching.
+
+Management consolidates quick actions, System links (settings, help, and search), appearance, and language into the sidebar footer account menu. System links keep their permission predicates; quick actions retain their existing problem/contest destinations and require the destination's read permission. The header retains the sidebar toggle, breadcrumb, and global search; account and notification entries remain in the footer menu.
 
 Both apps enrich the authenticated identity with the App-owned avatar from `GET /users/me` during login and session restoration. A profile lookup failure preserves the authenticated identity. Shared `auth-ui` avatar resolution prefers the stored image URL and generates a deterministic local SVG when no avatar exists; image load failures retain the avatar component's initials fallback.
 
@@ -351,7 +513,7 @@ pnpm --dir packages/design-system test
 
 CLI 的版本与 `shadcn-vue/tailwind.css` 运行样式保持一致。该官方样式桥接 Reka 的 `data-state` / `data-orientation` 与 Nova 的状态变体，不能当作闲置 CLI 依赖删除。生成组件的内部 import 必须使用共享包公开子路径，不能绑定某个应用的 `@` 别名。仅集成的 Nova 组件风格和 Lucide 通用图标对外提供，不开放未集成风格；OAuth 等品牌标记保留其品牌图形。Monaco、ECharts、Unovis 通过共享语义 token 做最小适配。Monaco 按需加载已安装的 ESM 包与本地 Worker，不要求浏览器从外部 CDN 取得编辑器运行时。 题目工作台顶栏仅在宽桌面使用绝对居中的单行操作区，平板保留正常文档流与换行，避免英文导航、运行/提交和账户操作重叠。题目代码面板的命令组按容器宽度换行，保持自然高度，不把工具栏撑出边界或覆盖编辑器。 共享快捷键弹窗仅在 sm 以上扩大最大宽度，手机保留默认视口边距和整框滚动。
 
-外观状态、白名单解析、持久化与 DOM 应用归属 `packages/theme`，设置弹窗归属 `packages/design-system/AppearanceSettings.vue`。最终用户通过界面调整主题色、基础色、图表配色、原生字体栈、圆角、密度、菜单样式及明暗模式，无需 CLI 或构建。预览更新当前界面及 Portal；应用成功才保存，取消或关闭恢复已保存外观，恢复默认直接保存默认值。存储不可用时显示失败，不把内存回退当作持久化成功。状态语义色独立于主题色，设置不能输入任意 CSS、HTML、脚本或布局。
+外观状态、白名单解析、持久化与 DOM 应用归属 `packages/theme`，设置弹窗归属 `packages/design-system/src/components/appearance/AppearanceSettings.vue`。最终用户通过界面调整主题色、基础色、图表配色、原生字体栈、圆角、密度、菜单样式及明暗模式，无需 CLI 或构建。预览更新当前界面及 Portal；应用成功才保存，取消或关闭恢复已保存外观，恢复默认直接保存默认值。存储不可用时显示失败，不把内存回退当作持久化成功。状态语义色独立于主题色，设置不能输入任意 CSS、HTML、脚本或布局。
 
 偏好保存在当前浏览器、当前 origin 的 `ulticode-appearance:v1:` 命名空间中，并按经过认证的用户 ID 分区；访客使用独立分区。账号切换关闭预览并加载对应分区。`ulticode-appearance-account` 只用于首屏外观提示，不是认证凭证或授权来源。同源标签页通过 `storage` 事件同步；预览期间不覆盖草稿，取消时恢复最新已保存值。Landing 不读取或应用平台外观偏好，即使通过 Console 的同源 `/landing/` 入口访问，也保持独立设计；独立开发端口或跨域部署不能共享 localStorage。当前没有服务端偏好接口，不提供跨设备账户同步。
 
