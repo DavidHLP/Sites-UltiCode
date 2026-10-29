@@ -1,0 +1,72 @@
+scripts/content/render-content.mjs
+  s_3cbd1284cc039a::t_5a6bf4bae84825 67
+content/home.html
+  s_3cbd1284cc039a::t_73b2360ece7876 93
+content/upstream/docs/ARCHITECTURE.md
+  s_3cbd1284cc039a::t_736d5b6ec516f0 74-75,96,123-124,150-153,159
+content/locales/zh-extra.mjs
+  s_3cbd1284cc039a::t_dfe1e17055977e 9-15
+  s_3cbd1284cc039a::t_8dd01563852791 8,16-40
+  s_3cbd1284cc039a::t_73b2360ece7876 7
+  s_3cbd1284cc039a::t_8a1b9dd73eba6e 41
+content/upstream/docs/REFERENCE.md
+  s_3cbd1284cc039a::t_7bac40683950a0 42-43,46,90-103
+content/locales/zh-home-guides.mjs
+  s_3cbd1284cc039a::t_acad188c0980aa 554-556
+  s_3cbd1284cc039a::t_29f15509daaabf 501-553
+  s_3cbd1284cc039a::t_971bbfd8ce114c 557
+scripts/content/build-content.mjs
+  s_3cbd1284cc039a::t_0cbbba0d974d39 24
+  s_3cbd1284cc039a::t_2ddc8b61836c52 20
+  s_3cbd1284cc039a::t_47c001e9e860d5 26
+content/project.mjs
+  s_3cbd1284cc039a::t_b6262dde067240 22-52,61-67,73,125-130,132,135
+content/upstream.json
+  s_3cbd1284cc039a::t_cb0f870560d805 6,8-10,13-21,24-27,30-33,36-39,42-45,48-51,54-57,63,67,79,83,87,91,95,158-206
+content/locales/zh-project.mjs
+  s_3cbd1284cc039a::t_b6262dde067240 7-44
+content/upstream/README.zh-CN.md
+  s_3cbd1284cc039a::t_429d94b91baf2f 53,57,59-60,62-64,66,68
+content/upstream/docs/PRODUCT.md
+  s_3cbd1284cc039a::t_e10e426e2385a9 46,65-79
+content/upstream/docs/OPERATIONS.md
+  s_3cbd1284cc039a::t_988fb276be6153 11-58,69-79,81,83-110,149-156
+  s_3cbd1284cc039a::t_d6d70bb6379cfb 157
+content/evaluation.mjs
+  s_3cbd1284cc039a::t_8a1b9dd73eba6e 36
+content/review-pack.zh-CN.md
+  s_3cbd1284cc039a::t_8a1b9dd73eba6e 3,11-12,35,41,45-46,86
+content/review-pack.md
+  s_3cbd1284cc039a::t_8a1b9dd73eba6e 3,11-12,35,41,45-46,86
+scripts/content/sync-source.mjs
+  s_3cbd1284cc039a::t_dc3bdf17202e11 7,28-34
+docs/MAINTENANCE.md
+  s_3cbd1284cc039a::t_8a1b9dd73eba6e 14,63,87,97
+content/upstream/README.md
+  s_3cbd1284cc039a::t_acf4c0a89a5fd5 53,57,59-60,62-64,66,68
+content/upstream/docs/DEVELOPMENT.md
+  s_3cbd1284cc039a::t_05cdadec6a3116 10,19,22-23,41-183,242,244,246,248-256,268-272,343-348,363,400-401,516
+content/guides.mjs
+  s_3cbd1284cc039a::t_29f15509daaabf 8-36,46,55,74,142,144-147,233
+  s_3cbd1284cc039a::t_971bbfd8ce114c 65
+tests/release-guidance.test.mjs
+  s_3cbd1284cc039a::t_cf9c3446dfeddb 8,25,27,35-36,39-60
+  s_3cbd1284cc039a::t_2fb6180b606441 30,33
+  s_3cbd1284cc039a::t_626390cb48536a 61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6221c10a05fb931bd9dd7db8b260018b6e03604f",
+  "prompts": {},
+  "sessions": {
+    "s_3cbd1284cc039a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a186d7-687a-76c2-9108-bce9a585f251",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
