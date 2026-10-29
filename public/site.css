@@ -52,6 +52,9 @@
 .prose pre.license-text{white-space:pre-wrap;overflow-wrap:anywhere}
 .prose table{width:100%;border-collapse:collapse;font-size:12px;line-height:1.8;margin:22px 0;text-align:left;display:block;overflow:auto}
 .prose th,.prose td{vertical-align:top;padding:13px 15px;border-bottom:1px solid var(--line);min-width:125px;overflow-wrap:normal}
+.prose .align-left{text-align:left}
+.prose .align-center{text-align:center}
+.prose .align-right{text-align:right}
 .prose th{font-weight:500;color:var(--ink)}
 .prose td{color:var(--muted)}
 .prose thead{background:var(--wash)}

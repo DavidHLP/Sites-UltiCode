@@ -10,6 +10,17 @@ test('source Markdown cannot create executable HTML or unsafe links', () => {
   assert.match(output, /&lt;script&gt;/);
 });
 
+test('Markdown table alignment uses external CSS classes without inline styles', () => {
+  const output = renderMarkdown('| Left | Center | Right | Default |\n| :--- | :---: | ---: | --- |\n| L | C | R | D |', 'README.md');
+  for (const [alignment, heading, value] of [['left', 'Left', 'L'], ['center', 'Center', 'C'], ['right', 'Right', 'R']]) {
+    assert.ok(output.includes(`<th class="align-${alignment}">${heading}</th>`));
+    assert.ok(output.includes(`<td class="align-${alignment}">${value}</td>`));
+  }
+  assert.match(output, /<th>Default<\/th>/);
+  assert.match(output, /<td>D<\/td>/);
+  assert.doesNotMatch(output, /\bstyle\s*=|<style\b/i);
+});
+
 test('source links remain tied to the rendered library or pinned public revision', () => {
   const output = renderMarkdown('[Operations](OPERATIONS.md#备份与恢复)\n\n[Source](../services/README.md)', 'docs/PRODUCT.md');
   assert.match(output, /href="\/docs\/source\/operations\/#/);

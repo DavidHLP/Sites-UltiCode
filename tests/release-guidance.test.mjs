@@ -23,6 +23,27 @@ test('generated discovery resources use the confirmed official origin', async ()
   }
 });
 
+test('previously cached screenshot failures use versioned image and full-size URLs', async () => {
+  const pages = JSON.parse(await read('generated/site-pages.json'));
+  const names = ['management-problems.jpg', 'console-problem-list.jpg', 'console-solutions.jpg', 'console-rankings.jpg', 'agent-analysis-accepted.jpg'];
+  for (const prefix of ['', '/zh-CN']) {
+    const showcase = pages[`${prefix}/showcase/`];
+    for (const name of names) {
+      const url = `/assets/screenshots/${name}?v=20261029`;
+      assert.ok(showcase.includes(`src="${url}"`), `${prefix}: versioned image ${name}`);
+      assert.ok(showcase.includes(`href="${url}"`), `${prefix}: versioned full-size link ${name}`);
+    }
+    for (const name of names.slice(0, 2)) {
+      assert.ok(pages[`${prefix}/`].includes(`src="/assets/screenshots/${name}?v=20261029"`), `${prefix}: homepage ${name}`);
+    }
+  }
+  for (const [path, html] of Object.entries(pages)) {
+    for (const name of names) {
+      assert.ok(!html.includes(`/assets/screenshots/${name}"`), `${path}: unversioned ${name}`);
+    }
+  }
+});
+
 test('HTML responses provide fresh CSP nonces for Cloudflare script injection', async () => {
   const source = (await read('app/[[...slug]]/route.ts')).replace(
     "'../../generated/site-pages.json'",
@@ -83,8 +104,8 @@ test('public workflows, reference images and downloads are available in both lan
     assert.match(showcase, /submission source was not sent|提交源码未发送/);
     assert.match(showcase, /not a verified diagnosis|并非经验证的诊断/);
     assert.match(showcase, /src="\/assets\/screenshots\/landing-light.jpg" width="1264" height="720"/);
-    assert.match(showcase, /src="\/assets\/screenshots\/management-problems.jpg" width="1280" height="720"/);
-    assert.match(showcase, /src="\/assets\/screenshots\/console-problem-list.jpg" width="1264" height="720"/);
+    assert.match(showcase, /src="\/assets\/screenshots\/management-problems\.jpg\?v=20261029" width="1280" height="720"/);
+    assert.match(showcase, /src="\/assets\/screenshots\/console-problem-list\.jpg\?v=20261029" width="1264" height="720"/);
     for (const name of ['console-forum-detail.jpg', 'console-solutions.jpg', 'console-appearance.jpg', 'console-rankings.jpg']) {
       assert.ok(showcase.includes(`/assets/screenshots/${name}`), `${prefix}: ${name}`);
     }
