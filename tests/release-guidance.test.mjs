@@ -44,13 +44,19 @@ test('previously cached screenshot failures use versioned image and full-size UR
   }
 });
 
-test('HTML responses provide fresh CSP nonces for Cloudflare script injection', async () => {
+test('HTML routing reuses the favicon and provides fresh strict CSP nonces', async () => {
   const source = (await read('app/[[...slug]]/route.ts')).replace(
     "'../../generated/site-pages.json'",
     `'${new URL('../generated/site-pages.json', import.meta.url).href}' with { type: 'json' }`,
   );
   const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext } });
   const { GET } = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
+  for (const path of ['/favicon.ico', '/favicon.ico/', '/favicon.ico?probe=1']) {
+    const response = GET(new Request(`${origin}${path}`));
+    assert.equal(response.status, 308);
+    assert.equal(response.headers.get('location'), `${origin}/favicon.svg`);
+    assert.equal(await response.text(), '');
+  }
   const nonces = new Set();
   for (const path of ['/showcase/', '/zh-CN/showcase/', '/missing/', '/zh-CN/missing/']) {
     for (let attempt = 0; attempt < 2; attempt++) {
