@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
+import ts from 'typescript';
 import { origin } from '../content/site-config.mjs';
 import { projectPages } from '../content/project.mjs';
 import { guides } from '../content/guides.mjs';
@@ -19,6 +20,32 @@ test('generated discovery resources use the confirmed official origin', async ()
     const text = await read(path);
     assert.ok(text.includes(origin), path);
     assert.ok(!text.includes('ulticode.bloomywren4096.chatgpt.site'), path);
+  }
+});
+
+test('HTML responses provide fresh CSP nonces for Cloudflare script injection', async () => {
+  const source = (await read('app/[[...slug]]/route.ts')).replace(
+    "'../../generated/site-pages.json'",
+    `'${new URL('../generated/site-pages.json', import.meta.url).href}' with { type: 'json' }`,
+  );
+  const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext } });
+  const { GET } = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
+  const nonces = new Set();
+  for (const path of ['/showcase/', '/zh-CN/showcase/', '/missing/', '/zh-CN/missing/']) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const response = GET(new Request(`${origin}${path}`));
+      assert.equal(response.status, path.includes('missing') ? 404 : 200);
+      assert.equal(response.headers.get('content-language'), path.startsWith('/zh-CN/') ? 'zh-CN' : 'en');
+      const csp = response.headers.get('content-security-policy');
+      const nonce = csp.match(/script-src 'self' 'nonce-([A-Za-z0-9+/=]+)'/);
+      assert.ok(nonce, 'response header must supply a nonce for Cloudflare');
+      assert.equal(Buffer.from(nonce[1], 'base64').length, 16);
+      assert.ok(!nonces.has(nonce[1]), 'each response needs a new nonce');
+      nonces.add(nonce[1]);
+      assert.match(csp, /object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'/);
+      assert.doesNotMatch(csp, /unsafe-inline|unsafe-eval/);
+      assert.equal(response.headers.get('cache-control'), 'public, max-age=0, must-revalidate');
+    }
   }
 });
 
