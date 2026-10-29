@@ -21,6 +21,13 @@ export function renderMarkdown(input, file) {
   const seen = new Map();
   for (let index = 0; index < tokens.length; index++) {
     const token = tokens[index];
+    if (token.type === 'th_open' || token.type === 'td_open') {
+      const alignment = /^text-align:(left|center|right)$/.exec(token.attrGet('style') || '')?.[1];
+      if (alignment) {
+        token.attrs = token.attrs.filter(([name]) => name !== 'style');
+        token.attrJoin('class', `align-${alignment}`);
+      }
+    }
     if (token.type === 'heading_open') {
       const title = tokens[index + 1].content;
       const base = slug(title);
@@ -78,5 +85,5 @@ export function layout(page, main, extra = '') {
   const title = page.path === '/' ? 'UltiCode — Programming education. In your hands.' : `${page.title} | UltiCode`;
   const languages = `<details class="language-switch"><summary aria-label="Language" title="Language"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg></summary><nav class="language-menu" aria-label="Language"><a data-language="en" lang="en" hreflang="en" href="${page.path}" aria-current="page">English</a><a data-language="zh-CN" lang="zh-CN" hreflang="zh-CN" href="/zh-CN${page.path}">简体中文</a></nav></details>`;
   const siteHeader = header(page.path).replace('<div class="header-actions">', `<div class="header-actions">${languages}`);
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f5f3ec"><meta name="description" content="${escapeHtml(page.description)}"><link rel="canonical" href="${origin}${page.path}"><link rel="alternate" hreflang="en" href="${origin}${page.path}"><link rel="alternate" hreflang="zh-CN" href="${origin}/zh-CN${page.path}"><link rel="alternate" hreflang="x-default" href="${origin}${page.path}"><meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(page.description)}"><meta property="og:type" content="website"><meta property="og:url" content="${origin}${page.path}"><meta property="og:image" content="${origin}/social-preview.jpg?v=20261024"><meta property="og:image:width" content="1585"><meta property="og:image:height" content="832"><meta name="twitter:card" content="summary_large_image"><title>${escapeHtml(title)}</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/site.css"><script type="module" src="/app.js"></script></head><body>${siteHeader}${main}${footer()}${extra}${dialogs}</body></html>`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f5f3ec"><meta name="description" content="${escapeHtml(page.description)}"><link rel="canonical" href="${origin}${page.path}"><link rel="alternate" hreflang="en" href="${origin}${page.path}"><link rel="alternate" hreflang="zh-CN" href="${origin}/zh-CN${page.path}"><link rel="alternate" hreflang="x-default" href="${origin}${page.path}"><meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(page.description)}"><meta property="og:type" content="website"><meta property="og:url" content="${origin}${page.path}"><meta property="og:image" content="${origin}/social-preview.jpg?v=20261024"><meta property="og:image:width" content="1585"><meta property="og:image:height" content="832"><meta name="twitter:card" content="summary_large_image"><title>${escapeHtml(title)}</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/site.css?v=20261029"><script type="module" src="/app.js"></script></head><body>${siteHeader}${main}${footer()}${extra}${dialogs}</body></html>`;
 }
