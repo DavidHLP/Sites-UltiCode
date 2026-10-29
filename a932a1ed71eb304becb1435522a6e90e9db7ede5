@@ -1,0 +1,32 @@
+content/guides.mjs
+  h_77173abe25c3ff 205
+content/locales/zh-extra.mjs
+  h_77173abe25c3ff 43-45
+content/locales/zh-home-guides.mjs
+  h_77173abe25c3ff 376,494-496
+content/locales/zh-project.mjs
+  h_77173abe25c3ff 45
+content/project.mjs
+  h_77173abe25c3ff 37
+content/review-pack.md
+  h_77173abe25c3ff 33
+content/review-pack.zh-CN.md
+  h_77173abe25c3ff 33
+content/site-config.mjs
+  h_77173abe25c3ff 3
+scripts/content/build-content.mjs
+  h_77173abe25c3ff 20
+tests/release-guidance.test.mjs
+  h_77173abe25c3ff 1-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a932a1ed71eb304becb1435522a6e90e9db7ede5",
+  "prompts": {},
+  "humans": {
+    "h_77173abe25c3ff": {
+      "author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}

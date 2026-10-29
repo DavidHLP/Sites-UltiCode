@@ -1,0 +1,16 @@
+README.md
+  h_77173abe25c3ff 5
+docs/MAINTENANCE.md
+  h_77173abe25c3ff 97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9f0bb588e766cde43728ff6e33e2d1e200ba6f5f",
+  "prompts": {},
+  "humans": {
+    "h_77173abe25c3ff": {
+      "author": "DavidHLP <lysf15520112973@163.com>"
+    }
+  }
+}
