@@ -132,5 +132,134 @@ textarea{resize:vertical;line-height:1.7}
 @media(max-width:800px){.docs-layout{grid-template-columns:minmax(0,1fr);padding-top:7px}.docs-sidebar{display:none}.document-heading h1{font-size:42px}.document-heading{margin-bottom:30px}.prose{font-size:14px;line-height:1.9}.document-main{padding-bottom:50px}.project-paths{grid-template-columns:1fr;gap:30px;padding-block:50px}.site-header>nav{justify-content:space-between;gap:12px;padding-top:8px;padding-bottom:0}.site-header{padding-block:20px}.site-footer{grid-template-columns:1fr 1fr;gap:30px}.site-footer>div{grid-column:1/-1}.site-footer .footer-source{margin-top:10px}.footer-source br{display:none}.project-status{font-size:10px;gap:20px}.document-heading>p:last-child{font-size:13px}.prose h2{font-size:28px}.prose pre{font-size:11px}.prose .update-list li{gap:18px}.contact-panel{padding:22px}}
 @media(max-width:480px){.site-header.wrap{padding-block:18px;gap:12px}.site-header.wrap .header-actions{gap:9px}.site-header.wrap .github-link{font-size:10px;padding:7px 9px}.site-header.wrap .search-open{font-size:0;padding:8px;width:30px;height:33px;justify-content:center;gap:0}.site-header .theme-toggle{min-width:22px}.site-header>nav{flex-wrap:wrap;gap:11px 20px;justify-content:flex-start;font-size:11px;padding-top:4px}.site-header>nav>a{white-space:nowrap}.site-header.wrap>.brand{font-size:21px}.site-header.wrap .brand-mark{width:25px;height:28px;font-size:17px;margin-right:7px}.project-status{flex-direction:column;gap:5px;padding-block:13px}.project-paths h2{font-size:34px}.project-paths{padding-block:40px}.path-list a{font-size:15px}.breadcrumbs{font-size:10px;padding-block:20px;gap:9px}.document-heading h1{font-size:36px}.document-heading .section-label{font-size:11px}.document-heading>p:last-child{font-size:12px;margin-top:18px}.prose{font-size:13px}.prose h2{font-size:26px;margin-top:35px}.prose h3{font-size:17px}.prose table{font-size:11px}.prose th,.prose td{padding:11px;min-width:130px}.prose .button{font-size:11px;gap:15px}.prose .text-link{font-size:11px}.prose pre{font-size:10px;padding-inline:13px}.callout{padding:15px}.callout p{font-size:11px}.document-end{font-size:10px}.site-footer{grid-template-columns:1fr;gap:25px}.site-footer nav{font-size:12px}.site-footer>div{grid-column:auto}.search-results a{font-size:14px}.search-results p{font-size:10px}#search-dialog h2,#privacy-dialog h2{font-size:29px}.update-list li{flex-direction:column;gap:5px!important}.update-list li a{font-size:12px}.contact-panel{padding:17px}.pilot-contact{margin:15px 0 0;display:block}dialog{max-height:calc(100dvh - 30px)}}
 .evidence-record{padding:30px 0;border-top:1px solid var(--line);min-width:0}.evidence-record h3{margin-bottom:16px}.evidence-record p:not(.section-label){color:var(--muted);margin-bottom:20px}.evidence-context{margin-top:30px;color:var(--muted)}.evidence-links{display:flex;flex-wrap:wrap;gap:14px 32px;list-style:none;padding:22px 0 0;margin:0;font-size:13px}.evidence-links a{display:inline-block;padding-block:8px}
-.language-switch{position:relative;flex-shrink:0}.language-switch summary{display:grid;place-items:center;width:34px;height:34px;cursor:pointer;list-style:none;border:1px solid transparent;border-radius:3px}.language-switch summary::-webkit-details-marker{display:none}.language-switch summary:hover,.language-switch[open] summary{background:var(--wash);border-color:var(--line)}.language-switch svg{width:18px;height:18px}.language-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:20;min-width:156px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:5px;box-shadow:0 8px 24px #0002;font-size:13px}.language-menu a{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:9px 12px;white-space:nowrap;border-radius:3px}.language-menu a:hover,.language-menu [aria-current=page]{background:var(--wash);text-decoration:none!important}.language-menu [aria-current=page]::after{content:'✓';color:var(--accent)}html[lang=zh-CN]{--serif:'Noto Serif CJK SC','Source Han Serif SC','Songti SC',serif;--sans:'Noto Sans CJK SC','Microsoft YaHei',Arial,sans-serif}html[lang=zh-CN] h1,html[lang=zh-CN] h2{letter-spacing:-.025em;line-height:1.25}html[lang=zh-CN] .hero h1{font-size:clamp(42px,5vw,68px)}@media(max-width:480px){.header-actions{gap:8px}html[lang=zh-CN] .hero h1{font-size:44px}.site-header>.brand{font-size:22px}}
+.language-switch{position:relative;flex-shrink:0}.language-switch summary{display:grid;place-items:center;width:34px;height:34px;cursor:pointer;list-style:none;border:1px solid transparent;border-radius:3px}.language-switch summary::-webkit-details-marker{display:none}.language-switch summary:hover,.language-switch[open] summary{background:var(--wash);border-color:var(--line)}.language-switch svg{width:18px;height:18px}.language-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:20;min-width:156px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:5px;box-shadow:0 8px 24px #0002;font-size:13px}.language-menu a{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:9px 12px;white-space:nowrap;border-radius:3px}.language-menu a:hover,.language-menu [aria-current=page]{background:var(--wash);text-decoration:none!important}.language-menu [aria-current=page]::after{content:'✓';color:var(--accent)}html[lang=zh-CN]{--serif:'Noto Serif CJK SC','Source Han Serif SC','Songti SC',serif;--sans:'Noto Sans CJK SC','Microsoft YaHei',Arial,sans-serif}@media(max-width:480px){.header-actions{gap:8px}.site-header>.brand{font-size:22px}}
 .language-switch summary{min-height:34px;padding:0;gap:0;justify-content:center}
+
+/* Locale tokens inherit into authored copy and reset at original-source lang boundaries.
+   Keep the existing font stacks, layout, controls and monospace examples. */
+[lang|="en"] {
+  --copy-size: 15px;
+  --copy-leading: 1.8;
+  --copy-tracking: .005em;
+  --lead-size: 15px;
+  --lead-gap: 28px;
+  --paragraph-gap: 1.1em;
+  --heading-weight: 400;
+  --heading-tracking: -.035em;
+  --heading-leading: 1.12;
+  --subheading-weight: 500;
+  --subheading-tracking: -.02em;
+  --hero-size: clamp(49px, 5.25vw, 74px);
+  --section-size: clamp(34px, 3.6vw, 50px);
+  --document-title-size: clamp(37px, 3.5vw, 52px);
+  --prose-heading-size: 29px;
+}
+
+[lang|="zh"] {
+  --copy-size: 14px;
+  --copy-leading: 1.65;
+  --copy-tracking: 0em;
+  --lead-size: 14px;
+  --lead-gap: 22px;
+  --paragraph-gap: .8em;
+  --heading-weight: 500;
+  --heading-tracking: 0em;
+  --heading-leading: 1.2;
+  --subheading-weight: 600;
+  --subheading-tracking: 0em;
+  --hero-size: clamp(40px, 4.5vw, 62px);
+  --section-size: clamp(30px, 3.2vw, 44px);
+  --document-title-size: clamp(34px, 3.2vw, 46px);
+  --prose-heading-size: 27px;
+}
+
+body, .prose, [data-original-source] {
+  font-size: var(--copy-size);
+  line-height: var(--copy-leading);
+  letter-spacing: var(--copy-tracking);
+}
+
+h1, h2, .document-heading h1, .prose h2, .problem-panel h2 {
+  font-weight: var(--heading-weight);
+  line-height: var(--heading-leading);
+  letter-spacing: var(--heading-tracking);
+}
+
+h3, .rollout-steps h3, .offer h3 {
+  font-weight: var(--subheading-weight);
+  letter-spacing: var(--subheading-tracking);
+}
+
+:is(h1, h2, h3) em { font-weight: inherit; }
+.hero.wrap h1 {
+  font-size: var(--hero-size);
+  line-height: var(--heading-leading);
+}
+.document-heading h1 { font-size: var(--document-title-size); }
+.prose h2 { font-size: var(--prose-heading-size); }
+
+:is(.section-heading, .rollout-heading, .opportunities-heading,
+    .evidence-heading, .product-views-heading, .project-paths, .closing-section) h2 {
+  font-size: var(--section-size);
+}
+
+.hero-description, .document-heading > p:last-child {
+  font-size: var(--lead-size);
+  line-height: var(--copy-leading);
+  margin-top: var(--lead-gap);
+}
+
+.section-heading > p:last-child, .teaching-stories p, .rollout-heading > p,
+.rollout-steps p, .opportunities-heading > p, .offer > div > p,
+.evidence-heading > p:last-child, .product-views-heading > p,
+.closing-section p:last-child, .path-list p, .detail-content {
+  line-height: var(--copy-leading);
+}
+
+.section-heading > p:last-child { margin-top: var(--lead-gap); }
+.prose p { margin-block: var(--paragraph-gap); }
+.prose p:first-child { margin-top: 0; }
+.prose li p { margin-block: calc(var(--paragraph-gap) / 2); }
+.callout p:last-child { margin-bottom: 0; }
+
+/* Preserve code alignment even when the surrounding language changes. */
+pre, code, kbd, samp { letter-spacing: normal; }
+
+@media (max-width: 1100px) {
+  [lang|="en"] { --hero-size: clamp(44px, 5.35vw, 60px); }
+  [lang|="zh"] { --hero-size: clamp(38px, 4.5vw, 54px); }
+}
+
+@media (max-width: 800px) {
+  [lang|="en"] {
+    --hero-size: 64px;
+    --document-title-size: 42px;
+    --prose-heading-size: 28px;
+  }
+  [lang|="zh"] {
+    --hero-size: 54px;
+    --document-title-size: 38px;
+    --prose-heading-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  [lang|="en"] {
+    --copy-size: 14px;
+    --lead-size: 14px;
+    --lead-gap: 24px;
+    --hero-size: clamp(44px, 13vw, 53px);
+    --section-size: 36px;
+    --document-title-size: 36px;
+    --prose-heading-size: 26px;
+  }
+  [lang|="zh"] {
+    --copy-size: 13px;
+    --lead-size: 13px;
+    --lead-gap: 18px;
+    --hero-size: clamp(36px, 10vw, 42px);
+    --section-size: 32px;
+    --document-title-size: 32px;
+    --prose-heading-size: 24px;
+  }
+}
